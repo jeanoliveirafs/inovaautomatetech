@@ -1,0 +1,2437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>html, body { overflow-x: hidden; max-width: 100%; }</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoShine Studio — Estética Automotiva Premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* =====================================================
+     RESET & BASE
+  ===================================================== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: #080808;
+    color: #e0e0e0;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  img { display: block; width: 100%; object-fit: cover; }
+
+  /* =====================================================
+     CSS VARIABLES
+  ===================================================== */
+  :root {
+    --orange: #ff6b00;
+    --orange-light: #ff8c33;
+    --amber: #f59e0b;
+    --black: #080808;
+    --card: #111111;
+    --card-hover: #161616;
+    --border: rgba(255,107,0,0.2);
+    --border-hover: rgba(255,107,0,0.7);
+    --silver: #c0c0c0;
+    --chrome: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 30%, #a0a0a0 60%, #d0d0d0 100%);
+    --glow: 0 0 30px rgba(255,107,0,0.4);
+    --glow-sm: 0 0 15px rgba(255,107,0,0.25);
+  }
+
+  /* =====================================================
+     TYPOGRAPHY
+  ===================================================== */
+  .font-raj { font-family: 'Rajdhani', sans-serif; }
+  h1, h2, h3 { font-family: 'Rajdhani', sans-serif; font-weight: 700; }
+  .section-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--orange);
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    color: #fff;
+  }
+  .section-title span { color: var(--orange); }
+  .section-sub {
+    font-size: 1rem;
+    color: #888;
+    max-width: 560px;
+    line-height: 1.7;
+    margin-top: 0.75rem;
+  }
+
+  /* =====================================================
+     UTILITY
+  ===================================================== */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .text-center { text-align: center; }
+  .text-orange { color: var(--orange); }
+  .mt-1 { margin-top: 0.5rem; }
+  .mt-2 { margin-top: 1rem; }
+  .mt-3 { margin-top: 1.5rem; }
+  .mt-4 { margin-top: 2rem; }
+  .mb-1 { margin-bottom: 0.5rem; }
+  .mb-2 { margin-bottom: 1rem; }
+  .divider {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--orange), var(--amber));
+    border-radius: 2px;
+  }
+  .divider.center { margin: 0 auto; }
+
+  /* =====================================================
+     BUTTONS
+  ===================================================== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+  .btn-orange {
+    background: var(--orange);
+    color: #fff;
+    border-color: var(--orange);
+  }
+  .btn-orange:hover {
+    background: var(--orange-light);
+    border-color: var(--orange-light);
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
+  }
+  .btn-outline {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255,255,255,0.4);
+  }
+  .btn-outline:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+    box-shadow: var(--glow-sm);
+    transform: translateY(-2px);
+  }
+  .btn-sm {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.85rem;
+  }
+
+  /* =====================================================
+     REVEAL ANIMATION
+  ===================================================== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+  .reveal-delay-6 { transition-delay: 0.6s; }
+
+  /* =====================================================
+     NAVBAR
+  ===================================================== */
+  #navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 1.25rem 0;
+    transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+  }
+  #navbar.solid {
+    background: rgba(8,8,8,0.97);
+    padding: 0.85rem 0;
+    box-shadow: 0 2px 30px rgba(0,0,0,0.8);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+  .nav-logo {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 900;
+    font-size: 1.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #fff;
+  }
+  .nav-logo span { color: var(--orange); }
+  .nav-logo .logo-dot {
+    color: var(--silver);
+    font-size: 0.6em;
+    vertical-align: middle;
+    margin: 0 0.1em;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .nav-links a {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ccc;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .nav-phone {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #888;
+    letter-spacing: 0.05em;
+  }
+  .nav-phone span { color: var(--orange); }
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-phone { display: none; }
+  }
+
+  /* =====================================================
+     HERO
+  ===================================================== */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1600&h=900&fit=crop&auto=format&q=80');
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.05);
+    transition: transform 8s ease;
+  }
+  #hero.loaded .hero-bg { transform: scale(1); }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(8,8,8,0.92) 0%,
+      rgba(8,8,8,0.78) 50%,
+      rgba(8,8,8,0.65) 100%
+    );
+  }
+  .hero-overlay-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 200px;
+    background: linear-gradient(to top, #080808 0%, transparent 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 8rem 0 4rem;
+    max-width: 720px;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 1rem;
+    background: rgba(255,107,0,0.12);
+    border: 1px solid rgba(255,107,0,0.4);
+    border-radius: 2px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 7vw, 5rem);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.0;
+    color: #fff;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  }
+  .hero-title strong {
+    color: var(--orange);
+    font-weight: 900;
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: #bbb;
+    max-width: 500px;
+    margin-top: 1.25rem;
+    line-height: 1.7;
+  }
+  .hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .hero-stat {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .hero-stat-num {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 900;
+    font-size: 1.6rem;
+    color: var(--orange);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.8rem;
+    color: #888;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hero-stat-divider {
+    width: 1px;
+    height: 30px;
+    background: rgba(255,255,255,0.15);
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #555;
+    animation: bounce 2s infinite;
+  }
+  .hero-scroll-arrow {
+    width: 20px; height: 20px;
+    border-right: 2px solid #555;
+    border-bottom: 2px solid #555;
+    transform: rotate(45deg);
+    margin-top: -4px;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* =====================================================
+     SECTION SPACING
+  ===================================================== */
+  section { padding: 6rem 0; }
+  section.tight { padding: 4rem 0; }
+
+  /* =====================================================
+     BRAND STRIP
+  ===================================================== */
+  #brand-strip {
+    background: #0d0d0d;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 1.5rem 0;
+    overflow: hidden;
+  }
+  .strip-inner {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+  }
+  .strip-item {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+  .strip-item.highlight { color: var(--orange); }
+  .strip-dot { color: var(--orange); font-size: 0.5rem; }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* =====================================================
+     SERVICES
+  ===================================================== */
+  #services { background: #080808; }
+  .services-header { margin-bottom: 3.5rem; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  @media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .services-grid { grid-template-columns: 1fr; } }
+  .service-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.35s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .service-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--glow-sm), 0 8px 32px rgba(0,0,0,0.4);
+    transform: translateY(-4px);
+    background: var(--card-hover);
+  }
+  .service-card-img {
+    height: 190px;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .service-card:hover .service-card-img img { transform: scale(1.08); }
+  .service-card-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8,8,8,0.7) 0%, transparent 60%);
+  }
+  .service-card-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .service-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .service-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .service-desc {
+    font-size: 0.875rem;
+    color: #888;
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 1.25rem;
+  }
+  .service-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .service-price {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .service-price strong {
+    display: block;
+    font-size: 1.3rem;
+    color: var(--orange);
+    line-height: 1.1;
+  }
+  .service-tag {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    background: rgba(255,107,0,0.1);
+    border: 1px solid rgba(255,107,0,0.25);
+    border-radius: 2px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+
+  /* =====================================================
+     BEFORE & AFTER
+  ===================================================== */
+  #before-after {
+    background: #0a0a0a;
+    position: relative;
+  }
+  #before-after::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--orange), transparent);
+  }
+  .ba-header { margin-bottom: 3.5rem; }
+  .ba-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  @media (max-width: 800px) { .ba-grid { grid-template-columns: 1fr; } }
+  .ba-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .ba-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--glow-sm);
+    transform: translateY(-3px);
+  }
+  .ba-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .ba-img-wrap {
+    position: relative;
+    height: 160px;
+    overflow: hidden;
+  }
+  .ba-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.3);
+    transition: filter 0.3s;
+  }
+  .ba-card:hover .ba-img-wrap img { filter: grayscale(0); }
+  .ba-label {
+    position: absolute;
+    top: 0.6rem; left: 0.6rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+  .ba-label.before {
+    background: rgba(80,80,80,0.85);
+    color: #ccc;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .ba-label.after {
+    background: rgba(255,107,0,0.85);
+    color: #fff;
+  }
+  .ba-separator {
+    width: 3px;
+    background: var(--orange);
+    position: relative;
+  }
+  .ba-separator::after {
+    content: '→';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--orange);
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 0.2rem;
+    border-radius: 50%;
+  }
+  .ba-info {
+    padding: 1.25rem;
+  }
+  .ba-info-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #fff;
+    margin-bottom: 0.3rem;
+  }
+  .ba-info-desc { font-size: 0.8rem; color: #777; }
+  .ba-result {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+
+  /* =====================================================
+     WHY US
+  ===================================================== */
+  #why-us { background: #080808; }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  @media (max-width: 700px) { .why-grid { grid-template-columns: 1fr; } }
+  .why-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+  }
+  .why-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--glow-sm);
+    background: var(--card-hover);
+  }
+  .why-icon-wrap {
+    width: 56px; height: 56px;
+    flex-shrink: 0;
+    background: rgba(255,107,0,0.1);
+    border: 1px solid rgba(255,107,0,0.3);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+  .why-card-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #fff;
+    margin-bottom: 0.4rem;
+  }
+  .why-card-desc { font-size: 0.875rem; color: #777; line-height: 1.65; }
+
+  /* =====================================================
+     NUMBERS / STATS
+  ===================================================== */
+  #numbers {
+    background: linear-gradient(135deg, #0d0d0d 0%, #111 100%);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  #numbers::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(255,107,0,0.04) 0%, transparent 70%);
+  }
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 700px) { .numbers-grid { grid-template-columns: repeat(2, 1fr); } }
+  .number-item { text-align: center; }
+  .number-val {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--orange);
+    line-height: 1;
+    display: block;
+  }
+  .number-label {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 0.4rem;
+  }
+  .number-divider {
+    width: 1px;
+    background: rgba(255,255,255,0.06);
+    align-self: stretch;
+    display: none;
+  }
+
+  /* =====================================================
+     LUXURY BRANDS
+  ===================================================== */
+  #brands { background: #080808; }
+  .brands-label { margin-bottom: 3rem; }
+  .brands-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem 3rem;
+    margin-top: 2rem;
+  }
+  .brand-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    background: var(--chrome);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid rgba(192,192,192,0.1);
+    border-radius: 3px;
+    cursor: default;
+  }
+  .brand-name:hover { opacity: 1; }
+  .brands-note {
+    text-align: center;
+    margin-top: 2.5rem;
+    font-size: 0.8rem;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  /* =====================================================
+     TESTIMONIALS
+  ===================================================== */
+  #testimonials {
+    background: #0a0a0a;
+    position: relative;
+  }
+  #testimonials::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,107,0,0.5), transparent);
+  }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+  @media (max-width: 900px) { .testi-grid { grid-template-columns: 1fr; } }
+  .testi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+    position: relative;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+  .testi-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--glow-sm);
+    transform: translateY(-3px);
+  }
+  .testi-quote-icon {
+    font-size: 3rem;
+    color: rgba(255,107,0,0.15);
+    font-family: Georgia, serif;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .testi-stars {
+    color: var(--amber);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+  .testi-text {
+    font-size: 0.9rem;
+    color: #999;
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .testi-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--orange), var(--amber));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .testi-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #ddd;
+  }
+  .testi-car { font-size: 0.78rem; color: var(--orange); }
+
+  /* =====================================================
+     PROCESS
+  ===================================================== */
+  #process { background: #080808; }
+  .process-header { margin-bottom: 4rem; }
+  .process-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+  .process-row::before {
+    content: '';
+    position: absolute;
+    top: 40px; left: 12%;
+    width: 76%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--orange), var(--amber), var(--orange));
+    z-index: 0;
+  }
+  @media (max-width: 800px) {
+    .process-row { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .process-row::before { display: none; }
+  }
+  @media (max-width: 500px) { .process-row { grid-template-columns: 1fr; } }
+  .process-step {
+    text-align: center;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  .process-num-wrap {
+    width: 80px; height: 80px;
+    background: var(--card);
+    border: 2px solid var(--orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  .process-step:hover .process-num-wrap {
+    background: var(--orange);
+    box-shadow: var(--glow);
+  }
+  .process-num {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    color: var(--orange);
+    transition: color 0.3s;
+  }
+  .process-step:hover .process-num { color: #fff; }
+  .process-icon {
+    font-size: 1.1rem;
+    position: absolute;
+    top: -6px; right: -6px;
+    background: var(--card);
+    border-radius: 50%;
+    width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    border: 1px solid var(--border);
+  }
+  .process-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .process-desc { font-size: 0.8rem; color: #666; line-height: 1.6; }
+
+  /* =====================================================
+     GALLERY STRIP
+  ===================================================== */
+  #gallery-strip {
+    padding: 4rem 0;
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+  .gallery-track {
+    display: flex;
+    gap: 1rem;
+    animation: slideGallery 30s linear infinite;
+  }
+  .gallery-track:hover { animation-play-state: paused; }
+  .gallery-img {
+    width: 280px;
+    height: 180px;
+    border-radius: 4px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+  .gallery-img:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--glow-sm);
+    transform: scale(1.03);
+  }
+  .gallery-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @keyframes slideGallery {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* =====================================================
+     CTA FORM
+  ===================================================== */
+  #cta-form {
+    background: #111111;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  #cta-form::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,107,0,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  #cta-form::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; right: -100px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-inner {
+    position: relative;
+    z-index: 1;
+  }
+  .cta-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+  .cta-title span { color: var(--orange); }
+  .cta-sub { font-size: 0.95rem; color: #666; margin-bottom: 2.5rem; }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group.full-width { grid-column: 1 / -1; }
+  .form-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+  }
+  .form-input, .form-select {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    color: #ddd;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+    outline: none;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+  .form-input::placeholder { color: #444; }
+  .form-input:focus, .form-select:focus {
+    border-color: var(--orange);
+    background: rgba(255,107,0,0.05);
+    box-shadow: 0 0 0 3px rgba(255,107,0,0.1);
+  }
+  .form-select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    background-color: rgba(255,255,255,0.04);
+  }
+  .form-select option { background: #111; color: #ddd; }
+  .form-submit-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .form-note {
+    font-size: 0.78rem;
+    color: #444;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  /* =====================================================
+     FAQ STRIP
+  ===================================================== */
+  #faq { background: #080808; }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+  @media (max-width: 700px) { .faq-grid { grid-template-columns: 1fr; } }
+  .faq-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .faq-q {
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #ccc;
+    gap: 1rem;
+    user-select: none;
+    transition: color 0.2s;
+  }
+  .faq-q:hover { color: var(--orange); }
+  .faq-toggle {
+    color: var(--orange);
+    font-size: 1.2rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+  .faq-item.open .faq-toggle { transform: rotate(45deg); }
+  .faq-a {
+    display: none;
+    padding: 0 1.5rem 1.25rem;
+    font-size: 0.875rem;
+    color: #666;
+    line-height: 1.7;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .faq-item.open .faq-a { display: block; }
+
+  /* =====================================================
+     FOOTER
+  ===================================================== */
+  #footer {
+    background: #0a0a0a;
+    padding: 5rem 0 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1fr 1.4fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  @media (max-width: 900px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; } }
+  .footer-logo {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 900;
+    font-size: 1.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  .footer-logo span { color: var(--orange); }
+  .footer-desc { font-size: 0.875rem; color: #555; line-height: 1.7; margin-bottom: 1.25rem; }
+  .footer-social { display: flex; gap: 0.75rem; }
+  .social-btn {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+    color: #666;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .social-btn:hover {
+    background: rgba(255,107,0,0.1);
+    border-color: var(--orange);
+    color: var(--orange);
+  }
+  .footer-heading {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 1.25rem;
+  }
+  .footer-links { display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-links a {
+    font-size: 0.875rem;
+    color: #555;
+    transition: color 0.2s;
+    display: flex; align-items: center; gap: 0.3rem;
+  }
+  .footer-links a:hover { color: #ddd; }
+  .footer-links a::before { content: '—'; color: var(--orange); font-size: 0.7rem; }
+  .footer-contact-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-bottom: 0.9rem;
+  }
+  .footer-contact-icon { color: var(--orange); flex-shrink: 0; font-size: 0.9rem; margin-top: 2px; }
+  .footer-contact-text { font-size: 0.875rem; color: #555; line-height: 1.5; }
+  .footer-contact-text strong { color: #aaa; display: block; }
+  .footer-hours {
+    font-size: 0.8rem;
+    color: #444;
+    margin-top: 0.25rem;
+  }
+  .footer-hours span { color: var(--orange); }
+  .footer-bottom {
+    padding-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-copy { font-size: 0.78rem; color: #333; }
+  .footer-copy span { color: var(--orange); }
+  .footer-badges { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .badge-pill {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    background: rgba(255,107,0,0.07);
+    border: 1px solid rgba(255,107,0,0.2);
+    border-radius: 2px;
+    color: var(--orange);
+  }
+
+  /* =====================================================
+     WHATSAPP BUTTON
+  ===================================================== */
+  #whatsapp-btn {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    z-index: 999;
+    width: 60px; height: 60px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: waPulse 3s infinite;
+  }
+  #whatsapp-btn:hover {
+    transform: scale(1.12);
+    box-shadow: 0 6px 28px rgba(37,211,102,0.6);
+    animation: none;
+  }
+  #whatsapp-btn svg { width: 28px; height: 28px; fill: #fff; }
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 4px 36px rgba(37,211,102,0.7); }
+  }
+  .wa-tooltip {
+    position: absolute;
+    right: 72px; top: 50%;
+    transform: translateY(-50%);
+    background: #111;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    color: #ccc;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  #whatsapp-btn:hover .wa-tooltip { opacity: 1; }
+
+  /* =====================================================
+     MISCELLANEOUS
+  ===================================================== */
+  .orange-line {
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--orange) 30%, var(--amber) 70%, transparent);
+    opacity: 0.6;
+  }
+  .section-eye {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .section-eye .line {
+    height: 2px;
+    width: 40px;
+    background: var(--orange);
+    flex-shrink: 0;
+  }
+  .section-eye span {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+
+  /* guarantee ribbon */
+  .guarantee-bar {
+    background: linear-gradient(90deg, rgba(255,107,0,0.06), rgba(255,107,0,0.12), rgba(255,107,0,0.06));
+    border: 1px solid rgba(255,107,0,0.2);
+    border-radius: 4px;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+  .guarantee-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ddd;
+  }
+  .guarantee-item span { color: var(--orange); }
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     NAVBAR
+========================================================== -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">AUTO<span>SHINE</span> STUDIO</a>
+      <ul class="nav-links">
+        <li><a href="#services">Serviços</a></li>
+        <li><a href="#before-after">Resultados</a></li>
+        <li><a href="#why-us">Diferenciais</a></li>
+        <li><a href="#process">Processo</a></li>
+        <li><a href="#testimonials">Depoimentos</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-cta">
+        <span class="nav-phone">(11) <span>99999-9999</span></span>
+        <a href="#cta-form" class="btn btn-orange btn-sm">Agendar Serviço</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- =========================================================
+     HERO
+========================================================== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-overlay-bottom"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge reveal">
+        ⭐ ESTÉTICA AUTOMOTIVA PREMIUM
+      </div>
+      <h1 class="hero-title reveal reveal-delay-1">
+        SEU CARRO<br><strong>MERECE</strong> O<br>MELHOR
+      </h1>
+      <p class="hero-sub reveal reveal-delay-2">
+        Proteção cerâmica, polimento profissional e detalhamento minucioso que transforma qualquer veículo em uma obra de arte sobre rodas.
+      </p>
+      <div class="hero-stats reveal reveal-delay-3">
+        <div class="hero-stat">
+          <div>
+            <div class="hero-stat-num" data-counter="3200" data-suffix="+">3200+</div>
+            <div class="hero-stat-label">Carros<br>Atendidos</div>
+          </div>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <div>
+            <div class="hero-stat-num" data-counter="8" data-suffix=" anos">8 anos</div>
+            <div class="hero-stat-label">De<br>Experiência</div>
+          </div>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <div>
+            <div class="hero-stat-num" data-counter="100" data-suffix="%">100%</div>
+            <div class="hero-stat-label">Satisfação<br>Garantida</div>
+          </div>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <div>
+            <div class="hero-stat-num">3M</div>
+            <div class="hero-stat-label">Produtos<br>Certificados</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-actions reveal reveal-delay-4">
+        <a href="#services" class="btn btn-orange">Ver Serviços</a>
+        <a href="#cta-form" class="btn btn-outline">Solicitar Orçamento</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <div class="hero-scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     BRAND STRIP
+========================================================== -->
+<div id="brand-strip">
+  <div class="strip-inner">
+    <span class="strip-item highlight">✦ CRISTALIZAÇÃO 9H</span>
+    <span class="strip-item"><span class="strip-dot">●</span> PPF PELÍCULA PROTEÇÃO</span>
+    <span class="strip-item highlight">✦ POLIMENTO TRÍADE</span>
+    <span class="strip-item"><span class="strip-dot">●</span> INSULFILM PREMIUM</span>
+    <span class="strip-item highlight">✦ HIGIENIZAÇÃO OZONE</span>
+    <span class="strip-item"><span class="strip-dot">●</span> LAVAGEM DETALHADA</span>
+    <span class="strip-item highlight">✦ PRODUTOS 3M & MEGUIAR'S</span>
+    <span class="strip-item"><span class="strip-dot">●</span> RELATÓRIO FOTOGRÁFICO</span>
+    <!-- duplicate for infinite loop -->
+    <span class="strip-item highlight">✦ CRISTALIZAÇÃO 9H</span>
+    <span class="strip-item"><span class="strip-dot">●</span> PPF PELÍCULA PROTEÇÃO</span>
+    <span class="strip-item highlight">✦ POLIMENTO TRÍADE</span>
+    <span class="strip-item"><span class="strip-dot">●</span> INSULFILM PREMIUM</span>
+    <span class="strip-item highlight">✦ HIGIENIZAÇÃO OZONE</span>
+    <span class="strip-item"><span class="strip-dot">●</span> LAVAGEM DETALHADA</span>
+    <span class="strip-item highlight">✦ PRODUTOS 3M & MEGUIAR'S</span>
+    <span class="strip-item"><span class="strip-dot">●</span> RELATÓRIO FOTOGRÁFICO</span>
+  </div>
+</div>
+
+<!-- =========================================================
+     SERVICES
+========================================================== -->
+<section id="services">
+  <div class="container">
+    <div class="services-header reveal">
+      <div class="section-eye">
+        <div class="line"></div>
+        <span>O que oferecemos</span>
+      </div>
+      <h2 class="section-title">NOSSOS <span>SERVIÇOS</span></h2>
+      <p class="section-sub">Cada serviço é executado com equipamentos profissionais, produtos premium e técnicos certificados para garantir um resultado acima de qualquer expectativa.</p>
+      <div class="divider mt-3"></div>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- Cristalização -->
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600&h=400&fit=crop&auto=format&q=80" alt="Cristalização Cerâmica" loading="lazy">
+          <div class="service-card-img-overlay"></div>
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon">💎</div>
+          <div class="service-title">Cristalização Cerâmica</div>
+          <p class="service-desc">Revestimento nano-cerâmico dureza 9H que forma uma barreira molecular invisível sobre a pintura. Efeito hidrofóbico extremo, brilho espelhado e proteção por até 5 anos. Aplicação em câmara controlada com umidade e temperatura ideais.</p>
+          <div class="service-footer">
+            <div class="service-price">
+              A partir de
+              <strong>R$ 2.800</strong>
+            </div>
+            <span class="service-tag">5 anos garantia</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Polimento -->
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=600&h=400&fit=crop&auto=format&q=80" alt="Polimento Tríade" loading="lazy">
+          <div class="service-card-img-overlay"></div>
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon">🔆</div>
+          <div class="service-title">Polimento Tríade</div>
+          <p class="service-desc">Processo de correção de pintura em três etapas: composto corte, refino e lustro. Remove riscos de lavagem, swirl marks, oxidação e manchas de água. Recupera a profundidade e brilho originais da pintura como saída de fábrica.</p>
+          <div class="service-footer">
+            <div class="service-price">
+              A partir de
+              <strong>R$ 1.200</strong>
+            </div>
+            <span class="service-tag">Correção total</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Insulfilm -->
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=400&fit=crop&auto=format&q=80" alt="Insulfilm Premium" loading="lazy">
+          <div class="service-card-img-overlay"></div>
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon">🪟</div>
+          <div class="service-title">Insulfilm Premium</div>
+          <p class="service-desc">Películas de alta performance que bloqueiam até 99% dos raios UV e reduzem até 65% do calor solar. Opções: reflexivo, carvão, fumê e nanocerâmico. Melhora o conforto térmico, protege o painel e aumenta a privacidade do veículo.</p>
+          <div class="service-footer">
+            <div class="service-price">
+              A partir de
+              <strong>R$ 450</strong>
+            </div>
+            <span class="service-tag">UV 99%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PPF -->
+      <div class="service-card reveal reveal-delay-4">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&h=400&fit=crop&auto=format&q=80" alt="PPF Película" loading="lazy">
+          <div class="service-card-img-overlay"></div>
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon">🛡️</div>
+          <div class="service-title">PPF Película Proteção</div>
+          <p class="service-desc">Película de uretano termoplástico de alta resistência com tecnologia auto-healing (auto-cura). Protege a pintura contra pedriscos, arranhões, insetos e abrasivos. Invisível, não altera a cor original. Garantia de 10 anos do fabricante.</p>
+          <div class="service-footer">
+            <div class="service-price">
+              A partir de
+              <strong>R$ 4.500</strong>
+            </div>
+            <span class="service-tag">Auto-cura</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Higienização -->
+      <div class="service-card reveal reveal-delay-5">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop&auto=format&q=80" alt="Higienização Interna" loading="lazy">
+          <div class="service-card-img-overlay"></div>
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon">🧹</div>
+          <div class="service-title">Higienização Interna</div>
+          <p class="service-desc">Processo completo de desinfecção e limpeza profunda do habitáculo. Ozonização para eliminação de bactérias e odores, extratora em tapetes e bancos, condicionamento de couro, limpeza de teto e tratamento de plásticos. Seu carro como novo por dentro.</p>
+          <div class="service-footer">
+            <div class="service-price">
+              A partir de
+              <strong>R$ 380</strong>
+            </div>
+            <span class="service-tag">Ozonização</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lavagem -->
+      <div class="service-card reveal reveal-delay-6">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600&h=400&fit=crop&auto=format&q=80" alt="Lavagem Detalhada" loading="lazy">
+          <div class="service-card-img-overlay"></div>
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon">🚗</div>
+          <div class="service-title">Lavagem Detalhada</div>
+          <p class="service-desc">Não é lavagem, é arte. Pincel por pincel, grade, rodas, vãos de portas, caixas de roda. Shampoo neutro de pH controlado, selante de pintura, finalização de borrachas e pneus. 4 horas de trabalho minucioso que fazem toda a diferença.</p>
+          <div class="service-footer">
+            <div class="service-price">
+              A partir de
+              <strong>R$ 180</strong>
+            </div>
+            <span class="service-tag">4h trabalho</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="guarantee-bar reveal">
+      <div class="guarantee-item"><span>✓</span> Produtos 3M & Meguiar's</div>
+      <div class="guarantee-item"><span>✓</span> Técnicos Certificados</div>
+      <div class="guarantee-item"><span>✓</span> Prazo 100% Garantido</div>
+      <div class="guarantee-item"><span>✓</span> Relatório Fotográfico Grátis</div>
+      <div class="guarantee-item"><span>✓</span> Satisfação ou Retrabalho</div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     NUMBERS
+========================================================== -->
+<div id="numbers">
+  <div class="container">
+    <div class="numbers-grid">
+      <div class="number-item reveal">
+        <span class="number-val" data-counter="3200" data-suffix="+">0</span>
+        <div class="number-label">Veículos atendidos</div>
+      </div>
+      <div class="number-item reveal reveal-delay-2">
+        <span class="number-val" data-counter="8" data-suffix=" anos">0</span>
+        <div class="number-label">Anos no mercado</div>
+      </div>
+      <div class="number-item reveal reveal-delay-3">
+        <span class="number-val" data-counter="100" data-suffix="%">0</span>
+        <div class="number-label">Satisfação garantida</div>
+      </div>
+      <div class="number-item reveal reveal-delay-4">
+        <span class="number-val" data-counter="15" data-suffix="k+">0</span>
+        <div class="number-label">Horas de trabalho</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     BEFORE & AFTER
+========================================================== -->
+<section id="before-after">
+  <div class="container">
+    <div class="ba-header reveal text-center">
+      <div class="section-eye" style="justify-content: center;">
+        <div class="line"></div>
+        <span>Transformações reais</span>
+        <div class="line"></div>
+      </div>
+      <h2 class="section-title">RESULTADOS QUE <span>FALAM</span> POR SI</h2>
+      <p class="section-sub" style="margin: 0.75rem auto 0;">Veja a diferença que o nosso trabalho faz na prática. Cada veículo recebe atenção total, do primeiro passo ao produto final entregue com relatório fotográfico.</p>
+      <div class="divider center mt-3"></div>
+    </div>
+
+    <div class="ba-grid" style="margin-top: 3rem;">
+
+      <div class="ba-card reveal reveal-delay-1">
+        <div class="ba-images">
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop&auto=format&q=80" alt="Antes - Polimento" loading="lazy" style="filter: grayscale(0.7) brightness(0.7);">
+            <span class="ba-label before">ANTES</span>
+          </div>
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600&h=400&fit=crop&auto=format&q=80" alt="Depois - Polimento" loading="lazy">
+            <span class="ba-label after">DEPOIS</span>
+          </div>
+        </div>
+        <div class="ba-info">
+          <div class="ba-info-title">Polimento Tríade Completo</div>
+          <div class="ba-info-desc">BMW Série 3 — Remoção de swirls, oxidação e riscos profundos. Pintura recuperada 100%.</div>
+          <div class="ba-result">✦ RESULTADO GARANTIDO</div>
+        </div>
+      </div>
+
+      <div class="ba-card reveal reveal-delay-2">
+        <div class="ba-images">
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=400&fit=crop&auto=format&q=80" alt="Antes - Cerâmica" loading="lazy" style="filter: grayscale(0.6) brightness(0.65);">
+            <span class="ba-label before">ANTES</span>
+          </div>
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=400&fit=crop&auto=format&q=80" alt="Depois - Cerâmica" loading="lazy">
+            <span class="ba-label after">DEPOIS</span>
+          </div>
+        </div>
+        <div class="ba-info">
+          <div class="ba-info-title">Cristalização Cerâmica 9H</div>
+          <div class="ba-info-desc">Porsche 911 — Proteção total com nano-cerâmica. Brilho intenso e efeito hidrofóbico extremo.</div>
+          <div class="ba-result">✦ RESULTADO GARANTIDO</div>
+        </div>
+      </div>
+
+      <div class="ba-card reveal reveal-delay-3">
+        <div class="ba-images">
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&h=400&fit=crop&auto=format&q=80" alt="Antes - PPF" loading="lazy" style="filter: grayscale(0.5) brightness(0.6);">
+            <span class="ba-label before">ANTES</span>
+          </div>
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=600&h=400&fit=crop&auto=format&q=80" alt="Depois - PPF" loading="lazy">
+            <span class="ba-label after">DEPOIS</span>
+          </div>
+        </div>
+        <div class="ba-info">
+          <div class="ba-info-title">PPF Full Body + Cerâmica</div>
+          <div class="ba-info-desc">Ferrari 488 — Cobertura total com película auto-curante. Proteção máxima sem alterar a cor.</div>
+          <div class="ba-result">✦ RESULTADO GARANTIDO</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     WHY US
+========================================================== -->
+<section id="why-us">
+  <div class="container">
+    <div class="reveal" style="max-width: 600px;">
+      <div class="section-eye">
+        <div class="line"></div>
+        <span>Por que a AutoShine</span>
+      </div>
+      <h2 class="section-title">NOSSOS <span>DIFERENCIAIS</span></h2>
+      <p class="section-sub">Não somos apenas uma lavagem. Somos um estúdio de estética automotiva que trata cada veículo como uma obra de arte que merece proteção e cuidado máximos.</p>
+      <div class="divider mt-3"></div>
+    </div>
+
+    <div class="why-grid">
+
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon-wrap">🏅</div>
+        <div>
+          <div class="why-card-title">Produtos 3M & Meguiar's</div>
+          <p class="why-card-desc">Utilizamos exclusivamente linhas premium importadas das marcas líderes mundiais em proteção automotiva. Cada produto é selecionado por sua composição, durabilidade e resultado. Nada de genérico, nada de improvisado.</p>
+        </div>
+      </div>
+
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon-wrap">👨‍🔬</div>
+        <div>
+          <div class="why-card-title">Técnicos Certificados</div>
+          <p class="why-card-desc">Nossa equipe possui certificação internacional em aplicação de coberturas cerâmicas, polimento corretivo e instalação de PPF. Treinamentos regulares na Europa garantem que dominamos as técnicas mais modernas do mercado.</p>
+        </div>
+      </div>
+
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-icon-wrap">⏱️</div>
+        <div>
+          <div class="why-card-title">Prazo 100% Garantido</div>
+          <p class="why-card-desc">Comprometemos com a data de entrega combinada em contrato. Se não entregarmos no prazo, devolvemos 10% do valor do serviço imediatamente. Seu tempo é tão valioso quanto seu veículo.</p>
+        </div>
+      </div>
+
+      <div class="why-card reveal reveal-delay-4">
+        <div class="why-icon-wrap">📸</div>
+        <div>
+          <div class="why-card-title">Relatório Fotográfico</div>
+          <p class="why-card-desc">Documentamos todo o processo com fotos profissionais do seu veículo, do início ao fim. Você acompanha cada etapa e recebe um relatório completo no ato da entrega. Transparência total é a nossa política.</p>
+        </div>
+      </div>
+
+      <div class="why-card reveal reveal-delay-5">
+        <div class="why-icon-wrap">🔬</div>
+        <div>
+          <div class="why-card-title">Câmara Controlada</div>
+          <p class="why-card-desc">Aplicações cerâmicas e de PPF são realizadas em câmara com temperatura e umidade controladas. Esse ambiente garante que o produto cure corretamente e a performance prometida pelo fabricante seja entregue na totalidade.</p>
+        </div>
+      </div>
+
+      <div class="why-card reveal reveal-delay-6">
+        <div class="why-icon-wrap">🛡️</div>
+        <div>
+          <div class="why-card-title">Garantia em Contrato</div>
+          <p class="why-card-desc">Todos os serviços possuem garantia formal registrada em contrato assinado. Se o resultado não atender ao acordado, refazemos sem custo adicional. Nosso compromisso não termina na entrega do veículo.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     GALLERY STRIP
+========================================================== -->
+<div id="gallery-strip">
+  <div class="gallery-track">
+    <div class="gallery-img"><img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=400&fit=crop&auto=format&q=80" alt="Gallery" loading="lazy"></div>
+    <div class="gallery-img"><img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600&h=400&fit=crop&auto=format&q=80" alt="Gallery" loading="lazy"></div>
+    <div class="gallery-img"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=400&fit=crop&auto=format&q=80" alt="Gallery" loading="lazy"></div>
+    <div class="gallery-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop&auto=format&q=80" alt="Gallery" loading="lazy"></div>
+    <div class="gallery-img"><img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&h=400&fit=crop&auto=format&q=80" alt="Gallery" loading="lazy"></div>
+    <div class="gallery-img"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=600&h=400&fit=crop&auto=format&q=80" alt="Gallery" loading="lazy"></div>
+    <!-- duplicate for loop -->
+    <div class="gallery-img"><img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=400&fit=crop&auto=format&q=80" alt="Gallery" loading="lazy"></div>
+    <div class="gallery-img"><img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600&h=400&fit=crop&auto=format&q=80" alt="Gallery" loading="lazy"></div>
+    <div class="gallery-img"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=400&fit=crop&auto=format&q=80" alt="Gallery" loading="lazy"></div>
+    <div class="gallery-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop&auto=format&q=80" alt="Gallery" loading="lazy"></div>
+    <div class="gallery-img"><img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&h=400&fit=crop&auto=format&q=80" alt="Gallery" loading="lazy"></div>
+    <div class="gallery-img"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=600&h=400&fit=crop&auto=format&q=80" alt="Gallery" loading="lazy"></div>
+  </div>
+</div>
+
+<!-- =========================================================
+     BRANDS
+========================================================== -->
+<section id="brands">
+  <div class="container text-center">
+    <div class="brands-label reveal">
+      <div class="section-eye" style="justify-content: center;">
+        <div class="line"></div>
+        <span>Marcas que atendemos</span>
+        <div class="line"></div>
+      </div>
+      <h2 class="section-title">ESPECIALISTAS EM <span>SUPERCARROS</span></h2>
+      <p class="section-sub" style="margin: 0.75rem auto 0;">Nossa expertise vai além do convencional. Temos protocolos específicos para as marcas mais exigentes do mundo, com manuseio certificado e seguros específicos para veículos de alto valor.</p>
+    </div>
+
+    <div class="brands-row reveal reveal-delay-2">
+      <span class="brand-name">Ferrari</span>
+      <span class="brand-name">Porsche</span>
+      <span class="brand-name">Lamborghini</span>
+      <span class="brand-name">Mercedes-Benz</span>
+      <span class="brand-name">BMW</span>
+      <span class="brand-name">Audi</span>
+      <span class="brand-name">McLaren</span>
+      <span class="brand-name">Maserati</span>
+    </div>
+
+    <div class="brands-note reveal reveal-delay-3">
+      Atendemos todos os modelos e marcas — do popular ao supercarro
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     PROCESS
+========================================================== -->
+<section id="process" style="background: #0a0a0a; border-top: 1px solid rgba(255,107,0,0.1);">
+  <div class="container">
+    <div class="process-header reveal text-center">
+      <div class="section-eye" style="justify-content: center;">
+        <div class="line"></div>
+        <span>Como funciona</span>
+        <div class="line"></div>
+      </div>
+      <h2 class="section-title">NOSSO <span>PROCESSO</span></h2>
+      <p class="section-sub" style="margin: 0.75rem auto 0;">Quatro etapas simples, organizadas e transparentes. Do primeiro contato à entrega do seu veículo transformado, você sabe exatamente o que acontece em cada fase.</p>
+      <div class="divider center mt-3"></div>
+    </div>
+
+    <div class="process-row" style="margin-top: 4rem;">
+
+      <div class="process-step reveal reveal-delay-1">
+        <div class="process-num-wrap">
+          <span class="process-num">01</span>
+          <span class="process-icon">📞</span>
+        </div>
+        <div class="process-title">Orçamento Grátis</div>
+        <p class="process-desc">Entre em contato pelo WhatsApp ou pelo formulário. Enviamos um orçamento detalhado em até 2 horas, sem compromisso. Avaliamos o estado do veículo por fotos ou presencialmente.</p>
+      </div>
+
+      <div class="process-step reveal reveal-delay-2">
+        <div class="process-num-wrap">
+          <span class="process-num">02</span>
+          <span class="process-icon">📅</span>
+        </div>
+        <div class="process-title">Agendamento</div>
+        <p class="process-desc">Escolha o dia e horário que for mais conveniente. Confirmamos a agenda e preparamos toda a estrutura, materiais e equipe específica para o serviço do seu veículo antes da chegada.</p>
+      </div>
+
+      <div class="process-step reveal reveal-delay-3">
+        <div class="process-num-wrap">
+          <span class="process-num">03</span>
+          <span class="process-icon">⚙️</span>
+        </div>
+        <div class="process-title">Execução Premium</div>
+        <p class="process-desc">Técnicos certificados executam cada etapa do serviço com máxima atenção ao detalhe. Fotografamos todo o processo. Você pode acompanhar online ou presencialmente. Zero atalhos, zero improviso.</p>
+      </div>
+
+      <div class="process-step reveal reveal-delay-4">
+        <div class="process-num-wrap">
+          <span class="process-num">04</span>
+          <span class="process-icon">🏆</span>
+        </div>
+        <div class="process-title">Entrega + Relatório</div>
+        <p class="process-desc">Entregamos seu veículo no prazo combinado com relatório fotográfico completo, termo de garantia e orientações de manutenção para preservar o resultado pelo maior tempo possível.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     TESTIMONIALS
+========================================================== -->
+<section id="testimonials">
+  <div class="container">
+    <div class="reveal text-center" style="max-width: 600px; margin: 0 auto;">
+      <div class="section-eye" style="justify-content: center;">
+        <div class="line"></div>
+        <span>O que nossos clientes dizem</span>
+        <div class="line"></div>
+      </div>
+      <h2 class="section-title">DEPOIMENTOS <span>REAIS</span></h2>
+      <p class="section-sub" style="margin: 0.75rem auto 0;">Mais de 3.200 clientes satisfeitos. Veja o que eles têm a dizer sobre a experiência AutoShine Studio.</p>
+      <div class="divider center mt-3"></div>
+    </div>
+
+    <div class="testi-grid">
+
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-quote-icon">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Levei meu 911 Turbo S para o serviço de cristalização cerâmica e PPF completo. O resultado foi absolutamente impressionante. A equipe é extremamente profissional, entregaram no prazo e o relatório fotográfico foi um diferencial incrível. Meu carro saiu como novo saído da fábrica."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">RM</div>
+          <div>
+            <div class="testi-name">Ricardo M.</div>
+            <div class="testi-car">Porsche 911 Turbo S — Cliente desde 2021</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-quote-icon">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Minha Ferrari F8 ficou guardada no exterior por dois anos. Voltou com oxidação severa e inúmeros swirls. Pensei que a pintura estivesse perdida. A AutoShine fez milagres com o polimento tríade. Superaram todas as minhas expectativas. Recomendo sem hesitar para qualquer proprietário exigente."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">GC</div>
+          <div>
+            <div class="testi-name">Guilherme C.</div>
+            <div class="testi-car">Ferrari F8 Tributo — Cliente desde 2022</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-3">
+        <div class="testi-quote-icon">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Fiz a higienização completa + insulfilm na minha GLS. O interior estava horrível, cheiro de mofo, manchas no teto, couro ressecado. Voltou impecável, cheiro de carro novo, couro hidratado. O insulfilm cerâmico reduziu demais o calor. Estrutura profissional, atendimento impecável."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AF</div>
+          <div>
+            <div class="testi-name">Ana F.</div>
+            <div class="testi-car">Mercedes GLS 450 — Cliente desde 2023</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Extra testimonials row -->
+    <div class="testi-grid" style="margin-top: 1.5rem;">
+
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-quote-icon">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Profissionalismo em todos os detalhes. Enviaram atualizações durante o processo, o relatório fotográfico foi completo. A cerâmica do meu BMW M4 Competition ficou simplesmente perfeita. A água escorrega como nunca vi. Vale cada centavo investido."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">LS</div>
+          <div>
+            <div class="testi-name">Lucas S.</div>
+            <div class="testi-car">BMW M4 Competition — Cliente desde 2022</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-quote-icon">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Levei o Huracan para fazer PPF full-front e acabei fazendo o carro inteiro depois de ver como ficou. A equipe domina a técnica de instalação sem emendas e bolhas. Garantia em contrato, entrega antecipada. Empresa séria e comprometida. Voltarei sempre."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">PV</div>
+          <div>
+            <div class="testi-name">Pedro V.</div>
+            <div class="testi-car">Lamborghini Huracán — Cliente desde 2020</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-3">
+        <div class="testi-quote-icon">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Trouxe meu carro popular e fui tratada com o mesmo respeito e cuidado que qualquer cliente. Lavagem detalhada de 4h e higienização transformaram meu hatch. Preço justo, resultado incrível. A equipe explica tudo que está fazendo. Indiquei para toda minha família."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">CM</div>
+          <div>
+            <div class="testi-name">Camila M.</div>
+            <div class="testi-car">VW Polo GTS — Cliente desde 2024</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FAQ
+========================================================== -->
+<section id="faq">
+  <div class="container">
+    <div class="reveal" style="max-width: 600px; margin: 0 auto; text-align: center;">
+      <div class="section-eye" style="justify-content: center;">
+        <div class="line"></div>
+        <span>Dúvidas frequentes</span>
+        <div class="line"></div>
+      </div>
+      <h2 class="section-title">PERGUNTAS <span>FREQUENTES</span></h2>
+      <p class="section-sub" style="margin: 0.75rem auto 0;">Reunimos as dúvidas mais comuns dos nossos clientes. Se a sua não estiver aqui, fale diretamente no WhatsApp.</p>
+      <div class="divider center mt-3"></div>
+    </div>
+
+    <div class="faq-grid" style="margin-top: 3rem;">
+
+      <div class="faq-item reveal reveal-delay-1">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Quanto tempo dura a proteção cerâmica?
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-a">
+          A cristalização cerâmica 9H possui garantia de 5 anos quando aplicada sobre pintura corrigida. A durabilidade real pode exceder esse prazo com manutenção adequada — shampoo neutro a cada 15 dias e aplicação de spray booster semestral. Fornecemos cartilha completa de cuidados.
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-2">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          É necessário polir antes de aplicar a cerâmica?
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-a">
+          Sim, sempre. A cerâmica sela a pintura exatamente como ela está. Se aplicada sobre arranhões, swirls ou oxidação, ela vai preservar os defeitos por anos. Por isso, realizamos inspeção e correção de pintura antes de qualquer aplicação de revestimento.
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-3">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Posso lavar meu carro após a cerâmica?
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-a">
+          Aguarde 7 dias antes da primeira lavagem. Esse período de cura é fundamental para que o revestimento alcance dureza máxima. Após isso, lave normalmente com shampoo neutro de pH controlado — nada de produtos alcalinos, ceras à base de cera carnaúba ou esponja dura.
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-4">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          O PPF altera a cor ou aspecto do carro?
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-a">
+          Não. A película PPF de alta qualidade que utilizamos é completamente invisível. Possui acabamento brilhante que combina perfeitamente com a pintura original. Não há efeito "laranja" ou alteração de tonalidade. As emendas são aplicadas em vincos e arestas naturais do carro.
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-5">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Quanto tempo demora a lavagem detalhada?
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-a">
+          Nossa lavagem detalhada leva entre 3 e 5 horas dependendo do tamanho e estado do veículo. Disponibilizamos lounge para clientes e atualizações via WhatsApp durante o processo. A qualidade do resultado justifica cada minuto — não cortamos nenhuma etapa.
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-6">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Vocês atendem marcas populares ou apenas premium?
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-a">
+          Atendemos todos os veículos, do popular ao supercarro. Cada cliente recebe a mesma qualidade de serviço e atenção. Temos protocolos específicos por marca e modelo, e nossos preços são calibrados de acordo com o porte e complexidade do serviço.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     CTA FORM
+========================================================== -->
+<section id="cta-form">
+  <div class="container cta-inner">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+
+      <div class="reveal">
+        <div class="section-eye">
+          <div class="line"></div>
+          <span>Agende agora</span>
+        </div>
+        <h2 class="cta-title">AGENDE SEU<br><span>SERVIÇO AGORA</span></h2>
+        <p class="cta-sub">Preencha o formulário ao lado e entraremos em contato em até 2 horas com um orçamento personalizado. Sem compromisso, sem custo.</p>
+
+        <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1.25rem;">
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 44px; height: 44px; background: rgba(255,107,0,0.1); border: 1px solid rgba(255,107,0,0.3); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;">📍</div>
+            <div>
+              <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: #ccc;">Localização</div>
+              <div style="font-size: 0.85rem; color: #666;">Av. Paulista, 2100 — Bela Vista, São Paulo / SP</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 44px; height: 44px; background: rgba(255,107,0,0.1); border: 1px solid rgba(255,107,0,0.3); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;">📞</div>
+            <div>
+              <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: #ccc;">Telefone / WhatsApp</div>
+              <div style="font-size: 0.85rem; color: #666;">(11) 99999-9999</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 44px; height: 44px; background: rgba(255,107,0,0.1); border: 1px solid rgba(255,107,0,0.3); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;">🕐</div>
+            <div>
+              <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: #ccc;">Horário de Atendimento</div>
+              <div style="font-size: 0.85rem; color: #666;">Seg–Sex: 8h às 18h &nbsp;|&nbsp; Sáb: 8h às 14h</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 8px; padding: 2.5rem;">
+          <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.5rem;">SOLICITAR ORÇAMENTO GRÁTIS</div>
+
+          <form id="orcamento-form" onsubmit="sendToWhatsapp(event)">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="f-nome">Seu Nome *</label>
+                <input class="form-input" type="text" id="f-nome" name="nome" placeholder="Ex: Carlos Silva" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-tel">Telefone *</label>
+                <input class="form-input" type="tel" id="f-tel" name="tel" placeholder="(11) 99999-9999" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-carro">Modelo do Carro *</label>
+                <input class="form-input" type="text" id="f-carro" name="carro" placeholder="Ex: BMW M3 2023" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-servico">Serviço de Interesse *</label>
+                <select class="form-select" id="f-servico" name="servico" required>
+                  <option value="" disabled selected>Selecione...</option>
+                  <option>Cristalização Cerâmica 9H</option>
+                  <option>Polimento Tríade Completo</option>
+                  <option>PPF Película Proteção</option>
+                  <option>Insulfilm Premium</option>
+                  <option>Higienização Interna Completa</option>
+                  <option>Lavagem Detalhada Premium</option>
+                  <option>Pacote Cerâmica + PPF</option>
+                  <option>Outros / Mais de um serviço</option>
+                </select>
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label" for="f-horario">Melhor Horário para Contato</label>
+                <select class="form-select" id="f-horario" name="horario">
+                  <option value="" disabled selected>Selecione o horário...</option>
+                  <option>Manhã (8h–12h)</option>
+                  <option>Tarde (12h–17h)</option>
+                  <option>Fim do dia (17h–18h)</option>
+                  <option>Qualquer horário</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-submit-row">
+              <button type="submit" class="btn btn-orange" style="flex: 1; justify-content: center;">
+                ✉ ENVIAR SOLICITAÇÃO
+              </button>
+            </div>
+            <div class="form-note" style="margin-top: 0.75rem; justify-content: center;">
+              🔒 Suas informações estão seguras. Sem spam.
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FOOTER
+========================================================== -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div>
+        <div class="footer-logo">AUTO<span>SHINE</span> STUDIO</div>
+        <p class="footer-desc">Estúdio premium de estética automotiva especializado em proteção cerâmica, PPF, polimento profissional e detalhamento completo. Há mais de 8 anos transformando veículos em obras de arte sobre rodas em São Paulo.</p>
+        <div class="footer-social">
+          <div class="social-btn" title="Instagram">📸</div>
+          <div class="social-btn" title="Facebook">📘</div>
+          <div class="social-btn" title="YouTube">▶</div>
+          <div class="social-btn" title="WhatsApp">💬</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-heading">Serviços</div>
+        <div class="footer-links">
+          <a href="#services">Cristalização Cerâmica</a>
+          <a href="#services">Polimento Tríade</a>
+          <a href="#services">PPF Película Proteção</a>
+          <a href="#services">Insulfilm Premium</a>
+          <a href="#services">Higienização Interna</a>
+          <a href="#services">Lavagem Detalhada</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-heading">Links Rápidos</div>
+        <div class="footer-links">
+          <a href="#before-after">Antes e Depois</a>
+          <a href="#why-us">Por que a AutoShine</a>
+          <a href="#process">Nosso Processo</a>
+          <a href="#testimonials">Depoimentos</a>
+          <a href="#faq">Perguntas Frequentes</a>
+          <a href="#cta-form">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-heading">Contato</div>
+
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">📍</span>
+          <div class="footer-contact-text">
+            <strong>Endereço</strong>
+            Av. Paulista, 2100 — Bela Vista<br>
+            São Paulo / SP — CEP 01310-200
+          </div>
+        </div>
+
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">📞</span>
+          <div class="footer-contact-text">
+            <strong>Telefone / WhatsApp</strong>
+            (11) 99999-9999
+          </div>
+        </div>
+
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">✉</span>
+          <div class="footer-contact-text">
+            <strong>E-mail</strong>
+            contato@autoshinestudio.com.br
+          </div>
+        </div>
+
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">🕐</span>
+          <div class="footer-contact-text">
+            <strong>Horário de Funcionamento</strong>
+            <div class="footer-hours">
+              Seg–Sex: <span>8h às 18h</span><br>
+              Sábado: <span>8h às 14h</span><br>
+              Domingo: Fechado
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © 2024 <span>AutoShine Studio</span>. Todos os direitos reservados.
+      </div>
+      <div class="footer-badges">
+        <span class="badge-pill">3M Certified</span>
+        <span class="badge-pill">Meguiar's Partner</span>
+        <span class="badge-pill">ANVISA</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- =========================================================
+     WHATSAPP BUTTON
+========================================================== -->
+<div id="whatsapp-btn" onclick="openWhatsApp()" title="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+  <span class="wa-tooltip">Falar no WhatsApp</span>
+</div>
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================== -->
+<script>
+  // -------------------------------------------------------
+  // SMOOTH SCROLL (fallback for older browsers)
+  // -------------------------------------------------------
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // -------------------------------------------------------
+  // NAVBAR SOLID ON SCROLL
+  // -------------------------------------------------------
+  const navbar = document.getElementById('navbar');
+  function handleNavbarScroll() {
+    if (window.scrollY > 60) {
+      navbar.classList.add('solid');
+    } else {
+      navbar.classList.remove('solid');
+    }
+  }
+  window.addEventListener('scroll', handleNavbarScroll, { passive: true });
+  handleNavbarScroll();
+
+  // -------------------------------------------------------
+  // HERO IMAGE ANIMATION
+  // -------------------------------------------------------
+  window.addEventListener('load', () => {
+    document.getElementById('hero').classList.add('loaded');
+  });
+
+  // -------------------------------------------------------
+  // INTERSECTION OBSERVER — REVEAL ANIMATION
+  // -------------------------------------------------------
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  // -------------------------------------------------------
+  // ANIMATED COUNTER
+  // -------------------------------------------------------
+  function animateCounter(el, from, to, duration, suffix) {
+    const start = performance.now();
+    const isDecimal = to.toString().includes('.');
+
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(from + (to - from) * eased);
+      el.textContent = current + (suffix || '');
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        el.textContent = to + (suffix || '');
+      }
+    }
+    requestAnimationFrame(update);
+  }
+
+  // Counter observer
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-counter'), 10);
+        const suffix = el.getAttribute('data-suffix') || '';
+        animateCounter(el, 0, target, 1800, suffix);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('[data-counter]').forEach(el => {
+    counterObserver.observe(el);
+  });
+
+  // -------------------------------------------------------
+  // SEND TO WHATSAPP
+  // -------------------------------------------------------
+  function sendToWhatsapp(event) {
+    event.preventDefault();
+    const form = event.target;
+
+    const nome = form.querySelector('#f-nome').value.trim();
+    const tel = form.querySelector('#f-tel').value.trim();
+    const carro = form.querySelector('#f-carro').value.trim();
+    const servico = form.querySelector('#f-servico').value;
+    const horario = form.querySelector('#f-horario').value || 'Qualquer horário';
+
+    if (!nome || !tel || !carro || !servico) {
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
+
+    const message = [
+      '🚗 *SOLICITAÇÃO DE ORÇAMENTO — AutoShine Studio*',
+      '',
+      `👤 *Nome:* ${nome}`,
+      `📞 *Telefone:* ${tel}`,
+      `🚘 *Veículo:* ${carro}`,
+      `🔧 *Serviço:* ${servico}`,
+      `🕐 *Melhor horário:* ${horario}`,
+      '',
+      'Aguardo retorno com orçamento. Obrigado!'
+    ].join('\n');
+
+    const encoded = encodeURIComponent(message);
+    const waUrl = `https://wa.me/5511999999999?text=${encoded}`;
+    window.open(waUrl, '_blank');
+  }
+
+  // -------------------------------------------------------
+  // OPEN WHATSAPP (floating button)
+  // -------------------------------------------------------
+  function openWhatsApp() {
+    const message = encodeURIComponent('Olá! Gostaria de solicitar um orçamento para o meu veículo na AutoShine Studio.');
+    window.open(`https://wa.me/5511999999999?text=${message}`, '_blank');
+  }
+
+  // -------------------------------------------------------
+  // FAQ TOGGLE
+  // -------------------------------------------------------
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(openItem => {
+      openItem.classList.remove('open');
+    });
+
+    // Open clicked if it wasn't open
+    if (!isOpen) {
+      item.classList.add('open');
+    }
+  }
+
+  // -------------------------------------------------------
+  // PARALLAX EFFECT ON HERO (subtle)
+  // -------------------------------------------------------
+  const heroBg = document.querySelector('.hero-bg');
+  if (heroBg) {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      if (scrolled < window.innerHeight) {
+        heroBg.style.transform = `scale(1) translateY(${scrolled * 0.3}px)`;
+      }
+    }, { passive: true });
+  }
+</script>
+
+</body>
+</html>

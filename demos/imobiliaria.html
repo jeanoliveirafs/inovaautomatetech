@@ -1,0 +1,3050 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>html, body { overflow-x: hidden; max-width: 100%; }</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Imóveis — Lucas Mendes | Corretor de Imóveis Premium em São Paulo</title>
+<meta name="description" content="Lucas Mendes, corretor de imóveis com 12 anos de experiência. Especialista em imóveis premium em São Paulo. CRECI 123456-F. +850 negociações realizadas.">
+<meta name="keywords" content="corretor de imóveis, imóveis premium, São Paulo, compra e venda, apartamentos de luxo, Lucas Mendes, Prime Imóveis">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     RESET & BASE
+  ============================================================ */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  :root {
+    --navy:   #0f1f3d;
+    --navy-light: #162845;
+    --navy-mid: #1a3060;
+    --gold:   #d4a853;
+    --gold-light: #e8c070;
+    --gold-dark: #b8892d;
+    --cream:  #f8f4ed;
+    --cream-dark: #ede8df;
+    --white:  #ffffff;
+    --text-dark: #1a1a2e;
+    --text-mid: #4a4a6a;
+    --text-light: #8a8aaa;
+    --shadow-sm: 0 2px 8px rgba(15,31,61,0.08);
+    --shadow-md: 0 8px 32px rgba(15,31,61,0.12);
+    --shadow-lg: 0 20px 60px rgba(15,31,61,0.18);
+    --shadow-xl: 0 32px 80px rgba(15,31,61,0.25);
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 32px;
+    --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    background: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Libre Baskerville', serif;
+    line-height: 1.2;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  /* ============================================================
+     REVEAL ANIMATIONS
+  ============================================================ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ============================================================
+     NAVBAR
+  ============================================================ */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 24px 0;
+    transition: var(--transition);
+  }
+
+  .navbar.scrolled {
+    background: rgba(15, 31, 61, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 14px 0;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  }
+
+  .navbar-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .navbar-logo-icon {
+    width: 42px;
+    height: 42px;
+    background: var(--gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .navbar-logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .navbar-logo-text strong {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+  }
+
+  .navbar-logo-text span {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+
+  .navbar-links a {
+    color: rgba(255,255,255,0.85);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: color 0.25s ease;
+    position: relative;
+  }
+
+  .navbar-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  .navbar-links a:hover {
+    color: var(--gold);
+  }
+
+  .navbar-links a:hover::after {
+    width: 100%;
+  }
+
+  .btn-navbar {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 11px 26px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    transition: var(--transition);
+    white-space: nowrap;
+  }
+
+  .btn-navbar:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(212,168,83,0.4);
+  }
+
+  /* ============================================================
+     HERO SECTION
+  ============================================================ */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&h=900&fit=crop&auto=format&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: scale(1.05);
+    transition: transform 8s ease;
+  }
+
+  .hero-bg.loaded {
+    transform: scale(1);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgba(15,31,61,0.92) 0%,
+      rgba(15,31,61,0.80) 50%,
+      rgba(15,31,61,0.50) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 160px 40px 100px;
+    width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(212,168,83,0.15);
+    border: 1px solid rgba(212,168,83,0.4);
+    color: var(--gold-light);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 32px;
+    backdrop-filter: blur(10px);
+  }
+
+  .hero-badge span {
+    font-size: 16px;
+  }
+
+  .hero-headline {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(42px, 5.5vw, 72px);
+    color: var(--white);
+    line-height: 1.15;
+    max-width: 750px;
+    margin-bottom: 24px;
+    font-weight: 700;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+    color: rgba(255,255,255,0.80);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    font-weight: 400;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 72px;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 18px 36px;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 35px rgba(212,168,83,0.45);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    padding: 18px 36px;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 2px solid rgba(255,255,255,0.4);
+    cursor: pointer;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.7);
+    transform: translateY(-2px);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 0;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    max-width: 760px;
+  }
+
+  .hero-stat {
+    flex: 1;
+    padding: 24px 20px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.3s ease;
+  }
+
+  .hero-stat:last-child {
+    border-right: none;
+  }
+
+  .hero-stat:hover {
+    background: rgba(212,168,83,0.08);
+  }
+
+  .hero-stat-value {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .hero-stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ============================================================
+     PROOF STRIP
+  ============================================================ */
+  .proof-strip {
+    background: var(--navy);
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .proof-strip-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+    flex-wrap: wrap;
+  }
+
+  .proof-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .proof-partners {
+    display: flex;
+    align-items: center;
+    gap: 52px;
+    flex-wrap: wrap;
+  }
+
+  .proof-partner {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.22);
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+    cursor: default;
+  }
+
+  .proof-partner:hover {
+    color: rgba(212,168,83,0.5);
+  }
+
+  .proof-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  /* ============================================================
+     SECTION COMMON
+  ============================================================ */
+  .section {
+    padding: 100px 0;
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gold-dark);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(30px, 3.5vw, 46px);
+    color: var(--navy);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .section-subtitle {
+    font-size: 17px;
+    color: var(--text-mid);
+    max-width: 580px;
+    line-height: 1.7;
+  }
+
+  .section-header {
+    margin-bottom: 64px;
+  }
+
+  /* ============================================================
+     DIFERENCIAIS
+  ============================================================ */
+  .diferenciais {
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .diferenciais::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(212,168,83,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .diferenciais .section-title {
+    color: var(--white);
+  }
+
+  .diferenciais .section-subtitle {
+    color: rgba(255,255,255,0.6);
+  }
+
+  .diferenciais .section-tag {
+    color: var(--gold);
+  }
+
+  .diferenciais-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .diferencial-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--radius-lg);
+    padding: 40px 32px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .diferencial-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(212,168,83,0.08) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: var(--radius-lg);
+  }
+
+  .diferencial-card:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(212,168,83,0.25);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .diferencial-card:hover::before {
+    opacity: 1;
+  }
+
+  .diferencial-icon {
+    font-size: 40px;
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .diferencial-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 20px;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .diferencial-text {
+    font-size: 14.5px;
+    color: rgba(255,255,255,0.58);
+    line-height: 1.75;
+  }
+
+  .diferencial-card-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .diferencial-card:hover .diferencial-card-accent {
+    opacity: 1;
+  }
+
+  /* ============================================================
+     IMOVEIS EM DESTAQUE
+  ============================================================ */
+  .imoveis {
+    background: var(--cream);
+  }
+
+  .imoveis-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .imovel-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .imovel-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .imovel-image-wrap {
+    position: relative;
+    overflow: hidden;
+    height: 280px;
+  }
+
+  .imovel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .imovel-card:hover .imovel-image {
+    transform: scale(1.06);
+  }
+
+  .imovel-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .imovel-badge.novo {
+    background: #10b981;
+    color: var(--white);
+  }
+
+  .imovel-badge.exclusivo {
+    background: var(--gold);
+    color: var(--navy);
+  }
+
+  .imovel-badge.lancamento {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  .imovel-fav {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 38px;
+    height: 38px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .imovel-fav:hover {
+    transform: scale(1.15);
+  }
+
+  .imovel-body {
+    padding: 28px;
+  }
+
+  .imovel-tipo {
+    font-size: 12px;
+    color: var(--gold-dark);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .imovel-nome {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 20px;
+    color: var(--navy);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .imovel-local {
+    font-size: 14px;
+    color: var(--text-mid);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .imovel-features {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .imovel-feature {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    color: var(--text-mid);
+    font-weight: 500;
+  }
+
+  .imovel-feature-icon {
+    font-size: 16px;
+  }
+
+  .imovel-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-top: 1px solid var(--cream-dark);
+    gap: 16px;
+  }
+
+  .imovel-preco {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  .imovel-preco-label {
+    font-size: 11px;
+    color: var(--text-light);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .btn-imovel {
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 22px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    transition: var(--transition);
+    white-space: nowrap;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-imovel:hover {
+    background: var(--gold);
+    color: var(--navy);
+    transform: translateY(-1px);
+  }
+
+  /* ============================================================
+     SOBRE O CORRETOR
+  ============================================================ */
+  .sobre {
+    background: var(--white);
+  }
+
+  .sobre-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .sobre-image-wrap {
+    position: relative;
+  }
+
+  .sobre-image-frame {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+  }
+
+  .sobre-image {
+    width: 100%;
+    height: 580px;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    border-radius: var(--radius-xl);
+  }
+
+  .sobre-badge-float {
+    position: absolute;
+    bottom: -24px;
+    right: -24px;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 20px 28px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    z-index: 2;
+  }
+
+  .sobre-badge-float strong {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 36px;
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .sobre-badge-float span {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+  }
+
+  .sobre-accent-bar {
+    position: absolute;
+    top: 40px;
+    left: -16px;
+    width: 6px;
+    height: 120px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    border-radius: 3px;
+  }
+
+  .sobre-content {
+    padding-right: 16px;
+  }
+
+  .sobre-bio {
+    font-size: 16.5px;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .sobre-creci {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--cream);
+    border: 1px solid var(--cream-dark);
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 36px;
+  }
+
+  .sobre-creci-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .sobre-especialidades {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+
+  .especialidade-tag {
+    background: var(--cream);
+    color: var(--navy);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--cream-dark);
+    transition: var(--transition);
+  }
+
+  .especialidade-tag:hover {
+    background: var(--navy);
+    color: var(--gold);
+    border-color: var(--navy);
+  }
+
+  .sobre-certs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .cert-item {
+    background: var(--cream);
+    border-radius: var(--radius-md);
+    padding: 18px 16px;
+    text-align: center;
+    border: 1px solid var(--cream-dark);
+    transition: var(--transition);
+  }
+
+  .cert-item:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .cert-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .cert-label {
+    font-size: 12px;
+    color: var(--text-mid);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .sobre-cta {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .btn-whatsapp {
+    background: #25d366;
+    color: var(--white);
+    padding: 16px 30px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+    cursor: pointer;
+  }
+
+  .btn-whatsapp:hover {
+    background: #20bb5a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37,211,102,0.35);
+  }
+
+  .btn-tel {
+    color: var(--navy);
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.25s;
+  }
+
+  .btn-tel:hover {
+    color: var(--gold-dark);
+  }
+
+  /* ============================================================
+     PROCESSO
+  ============================================================ */
+  .processo {
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .processo::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--navy), var(--gold), var(--navy));
+    opacity: 0.3;
+  }
+
+  .processo-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    position: relative;
+  }
+
+  .processo-steps::before {
+    content: '';
+    position: absolute;
+    top: 42px;
+    left: 12.5%;
+    right: 12.5%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--cream-dark) 100%);
+    z-index: 0;
+  }
+
+  .passo {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 16px;
+  }
+
+  .passo-num-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+
+  .passo-num {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 3px solid var(--cream-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .passo-num-text {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 11px;
+    color: var(--text-light);
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .passo-num-value {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .passo:hover .passo-num {
+    background: var(--gold);
+    border-color: var(--gold);
+    transform: scale(1.08);
+    box-shadow: 0 8px 25px rgba(212,168,83,0.3);
+  }
+
+  .passo:hover .passo-num-text,
+  .passo:hover .passo-num-value {
+    color: var(--navy);
+  }
+
+  .passo-icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+    display: block;
+    text-align: center;
+  }
+
+  .passo-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .passo-desc {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+
+  /* ============================================================
+     DEPOIMENTOS
+  ============================================================ */
+  .depoimentos {
+    background: var(--white);
+  }
+
+  .depoimentos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .depoimento-card {
+    background: var(--cream);
+    border-radius: var(--radius-lg);
+    padding: 36px 32px;
+    border: 1px solid var(--cream-dark);
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .depoimento-card::before {
+    content: '"';
+    position: absolute;
+    top: 20px;
+    right: 28px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 80px;
+    color: var(--gold);
+    opacity: 0.15;
+    line-height: 1;
+  }
+
+  .depoimento-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--gold);
+  }
+
+  .depoimento-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+
+  .depoimento-text {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.75;
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+
+  .depoimento-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .depoimento-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--white);
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+  }
+
+  .depoimento-author-info strong {
+    font-size: 15px;
+    color: var(--navy);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .depoimento-author-info span {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+
+  .depoimento-verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #10b981;
+    font-weight: 600;
+    margin-top: 3px;
+  }
+
+  /* ============================================================
+     NUMEROS
+  ============================================================ */
+  .numeros {
+    background: var(--navy);
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .numeros::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .numeros-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .numero-item {
+    background: transparent;
+    padding: 48px 32px;
+    text-align: center;
+    transition: background 0.3s ease;
+  }
+
+  .numero-item:hover {
+    background: rgba(212,168,83,0.06);
+  }
+
+  .numero-value {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .numero-label {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* ============================================================
+     CTA / FORMULARIO
+  ============================================================ */
+  .cta-section {
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(212,168,83,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(212,168,83,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-content .section-tag {
+    color: var(--gold);
+  }
+
+  .cta-content .section-title {
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .cta-content p {
+    color: rgba(255,255,255,0.65);
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 40px;
+  }
+
+  .cta-urgency {
+    background: rgba(212,168,83,0.12);
+    border: 1px solid rgba(212,168,83,0.3);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .cta-urgency-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+
+  .cta-urgency-text strong {
+    color: var(--gold-light);
+    font-size: 15px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .cta-urgency-text span {
+    color: rgba(255,255,255,0.55);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .cta-form {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-xl);
+    padding: 48px 40px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .form-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .form-subtitle {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    font-size: 15px;
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    transition: var(--transition);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: rgba(255,255,255,0.3);
+  }
+
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    border-color: var(--gold);
+    background: rgba(212,168,83,0.06);
+    box-shadow: 0 0 0 3px rgba(212,168,83,0.12);
+  }
+
+  .form-select option {
+    background: var(--navy-mid);
+    color: var(--white);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .btn-form {
+    width: 100%;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 18px;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .btn-form:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 35px rgba(212,168,83,0.45);
+  }
+
+  .form-privacy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+
+  /* ============================================================
+     FOOTER
+  ============================================================ */
+  .footer {
+    background: #080f1f;
+    color: rgba(255,255,255,0.7);
+    padding: 72px 0 32px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 64px;
+  }
+
+  .footer-brand-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .footer-brand-tagline {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 10px;
+    transition: color 0.25s;
+  }
+
+  .footer-contact-item:hover {
+    color: var(--gold-light);
+  }
+
+  .footer-contact-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+  }
+
+  .footer-col-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+
+  .footer-links a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    transition: color 0.25s;
+  }
+
+  .footer-links a:hover {
+    color: var(--gold-light);
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .social-link {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: var(--transition);
+    cursor: pointer;
+  }
+
+  .social-link:hover {
+    background: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  .footer-creci {
+    background: rgba(212,168,83,0.08);
+    border: 1px solid rgba(212,168,83,0.2);
+    border-radius: var(--radius-md);
+    padding: 14px 20px;
+    margin-top: 24px;
+  }
+
+  .footer-creci-text {
+    font-size: 13px;
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+
+  .footer-creci-sub {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 2px;
+  }
+
+  .footer-bottom {
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .footer-disclaimer {
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    max-width: 500px;
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* ============================================================
+     WHATSAPP FLOAT
+  ============================================================ */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  .whatsapp-tooltip {
+    background: var(--white);
+    color: var(--navy);
+    padding: 10px 16px;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: var(--shadow-lg);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+
+  .whatsapp-btn {
+    width: 62px;
+    height: 62px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(37,211,102,0.45);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .whatsapp-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(37,211,102,0.55);
+  }
+
+  .whatsapp-float:hover .whatsapp-tooltip {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .whatsapp-icon {
+    font-size: 30px;
+  }
+
+  .whatsapp-pulse {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: #25d366;
+    opacity: 0;
+    animation: whatsapp-pulse 2.5s ease infinite;
+  }
+
+  @keyframes whatsapp-pulse {
+    0% { opacity: 0.5; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.6); }
+  }
+
+  /* ============================================================
+     AVALIACOES PARCIAL
+  ============================================================ */
+  .avaliacao-banner {
+    background: linear-gradient(135deg, var(--navy-light), var(--navy-mid));
+    padding: 64px 0;
+  }
+
+  .avaliacao-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .avaliacao-text h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 32px;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .avaliacao-text p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    max-width: 480px;
+    line-height: 1.6;
+  }
+
+  .avaliacao-cta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+
+  .avaliacao-score {
+    text-align: center;
+  }
+
+  .avaliacao-score-value {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 52px;
+    color: var(--gold);
+    font-weight: 700;
+    display: block;
+    line-height: 1;
+  }
+
+  .avaliacao-score-stars {
+    font-size: 18px;
+    margin: 4px 0;
+    display: block;
+  }
+
+  .avaliacao-score-count {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ============================================================
+     BAIRROS ATENDIDOS
+  ============================================================ */
+  .bairros {
+    background: var(--cream);
+    padding: 80px 0;
+  }
+
+  .bairros-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    margin-top: 48px;
+  }
+
+  .bairro-item {
+    background: var(--white);
+    border: 1px solid var(--cream-dark);
+    border-radius: var(--radius-md);
+    padding: 18px 14px;
+    text-align: center;
+    transition: var(--transition);
+    cursor: default;
+  }
+
+  .bairro-item:hover {
+    background: var(--navy);
+    border-color: var(--navy);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .bairro-item:hover .bairro-name {
+    color: var(--white);
+  }
+
+  .bairro-item:hover .bairro-tipo {
+    color: var(--gold-light);
+  }
+
+  .bairro-emoji {
+    font-size: 22px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .bairro-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 2px;
+    transition: color 0.3s;
+  }
+
+  .bairro-tipo {
+    font-size: 11px;
+    color: var(--text-light);
+    transition: color 0.3s;
+  }
+
+  /* ============================================================
+     UTILITIES
+  ============================================================ */
+  .text-gold { color: var(--gold); }
+  .text-navy { color: var(--navy); }
+  .text-white { color: var(--white); }
+  .mb-0 { margin-bottom: 0 !important; }
+
+  /* ============================================================
+     RESPONSIVE (basic)
+  ============================================================ */
+  @media (max-width: 1100px) {
+    .diferenciais-grid { grid-template-columns: repeat(2, 1fr); }
+    .sobre-certs { grid-template-columns: repeat(3, 1fr); }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .bairros-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 860px) {
+    .navbar-links { display: none; }
+    .imoveis-grid { grid-template-columns: 1fr; }
+    .sobre-inner { grid-template-columns: 1fr; }
+    .processo-steps { grid-template-columns: repeat(2, 1fr); }
+    .processo-steps::before { display: none; }
+    .depoimentos-grid { grid-template-columns: 1fr; }
+    .cta-inner { grid-template-columns: 1fr; }
+    .numeros-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-stats { flex-wrap: wrap; }
+    .footer-top { grid-template-columns: 1fr; }
+    .bairros-grid { grid-template-columns: repeat(2, 1fr); }
+    .avaliacao-inner { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="#hero" class="navbar-logo">
+      <div class="navbar-logo-icon">🏡</div>
+      <div class="navbar-logo-text">
+        <strong>Prime Imóveis</strong>
+        <span>Lucas Mendes · Corretor</span>
+      </div>
+    </a>
+
+    <ul class="navbar-links">
+      <li><a href="#diferenciais">Diferenciais</a></li>
+      <li><a href="#imoveis">Imóveis</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#processo">Como Funciona</a></li>
+      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+
+    <a href="#contato" class="btn-navbar">Agendar Visita</a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO SECTION
+============================================================ -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge reveal">
+      <span>🏆</span>
+      +850 Imóveis Negociados &nbsp;·&nbsp; CRECI 123456-F &nbsp;·&nbsp; Desde 2012
+    </div>
+
+    <h1 class="hero-headline reveal reveal-delay-1">
+      Encontre o Imóvel <em>Perfeito</em><br>para Sua Família
+    </h1>
+
+    <p class="hero-subtitle reveal reveal-delay-2">
+      Mais de 12 anos conectando famílias aos lares dos seus sonhos em São Paulo.
+      Atendimento personalizado, acesso exclusivo a imóveis off-market e
+      assessoria completa do início ao fim do processo.
+    </p>
+
+    <div class="hero-cta-group reveal reveal-delay-3">
+      <a href="#imoveis" class="btn-primary">
+        Ver Imóveis Disponíveis
+        <span>→</span>
+      </a>
+      <a href="#contato" class="btn-secondary" onclick="openWhatsapp()">
+        <span>💬</span>
+        Falar com Corretor
+      </a>
+    </div>
+
+    <div class="hero-stats reveal reveal-delay-4">
+      <div class="hero-stat">
+        <span class="hero-stat-value">850+</span>
+        <span class="hero-stat-label">Negociações</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">R$2,1Bi</span>
+        <span class="hero-stat-label">em Imóveis</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">12 Anos</span>
+        <span class="hero-stat-label">de Mercado</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">98%</span>
+        <span class="hero-stat-label">Satisfação</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROOF STRIP
+============================================================ -->
+<section class="proof-strip">
+  <div class="proof-strip-inner">
+    <span class="proof-label">Parceiros de Confiança</span>
+    <div class="proof-partners">
+      <span class="proof-partner">LOFT</span>
+      <div class="proof-divider"></div>
+      <span class="proof-partner">QuintoAndar</span>
+      <div class="proof-divider"></div>
+      <span class="proof-partner">ZAP Imóveis</span>
+      <div class="proof-divider"></div>
+      <span class="proof-partner">Viva Real</span>
+      <div class="proof-divider"></div>
+      <span class="proof-partner">OLX PRO</span>
+      <div class="proof-divider"></div>
+      <span class="proof-partner">SECOVI-SP</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DIFERENCIAIS
+============================================================ -->
+<section class="section diferenciais" id="diferenciais">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Por que nos escolher</span>
+      <h2 class="section-title" style="color: var(--white);">O Que Nos Torna<br>Verdadeiramente Diferentes</h2>
+      <p class="section-subtitle" style="color: rgba(255,255,255,0.6);">
+        Não somos apenas intermediários. Somos consultores estratégicos que protegem
+        seus interesses e garantem que cada decisão seja a melhor possível para seu patrimônio.
+      </p>
+    </div>
+
+    <div class="diferenciais-grid">
+      <div class="diferencial-card reveal">
+        <div class="diferencial-card-accent"></div>
+        <span class="diferencial-icon">🔑</span>
+        <h3 class="diferencial-title">Acesso Off-Market</h3>
+        <p class="diferencial-text">
+          Mais de 60% dos nossos imóveis nunca chegam a ser publicados em portais.
+          Através de uma rede exclusiva de proprietários e construtoras parceiras,
+          você tem acesso a oportunidades únicas antes de qualquer concorrente.
+        </p>
+      </div>
+
+      <div class="diferencial-card reveal reveal-delay-1">
+        <div class="diferencial-card-accent"></div>
+        <span class="diferencial-icon">📊</span>
+        <h3 class="diferencial-title">Avaliação Gratuita em 24h</h3>
+        <p class="diferencial-text">
+          Nossa metodologia proprietária de valuation combina análise de mercado,
+          dados históricos de transações e inteligência de precificação regional.
+          Você recebe um laudo completo em até 24 horas, totalmente gratuito.
+        </p>
+      </div>
+
+      <div class="diferencial-card reveal reveal-delay-2">
+        <div class="diferencial-card-accent"></div>
+        <span class="diferencial-icon">⚖️</span>
+        <h3 class="diferencial-title">Assessoria Jurídica</h3>
+        <p class="diferencial-text">
+          Parceria com escritórios especializados em direito imobiliário para revisão
+          de contratos, verificação de matrícula, análise de pendências e acompanhamento
+          do registro em cartório. Segurança jurídica total na sua transação.
+        </p>
+      </div>
+
+      <div class="diferencial-card reveal reveal-delay-3">
+        <div class="diferencial-card-accent"></div>
+        <span class="diferencial-icon">🤝</span>
+        <h3 class="diferencial-title">Negociação Especializada</h3>
+        <p class="diferencial-text">
+          12 anos negociando imóveis de alto padrão nos ensinaram técnicas que
+          economizam em média R$ 85.000 por transação. Nossa expertise em
+          concessões estratégicas é um diferencial mensurável para cada cliente.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     IMOVEIS EM DESTAQUE
+============================================================ -->
+<section class="section imoveis" id="imoveis">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Portfólio Premium</span>
+      <h2 class="section-title">Imóveis em Destaque</h2>
+      <p class="section-subtitle">
+        Seleção curada dos melhores imóveis disponíveis atualmente. Todos verificados,
+        documentados e prontos para visita imediata.
+      </p>
+    </div>
+
+    <div class="imoveis-grid">
+      <!-- Card 1 -->
+      <div class="imovel-card reveal">
+        <div class="imovel-image-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&auto=format&q=80"
+            alt="Apartamento de luxo Vila Nova Conceição"
+            class="imovel-image"
+            loading="lazy"
+          >
+          <span class="imovel-badge exclusivo">Exclusivo</span>
+          <div class="imovel-fav" title="Favoritar imóvel">♡</div>
+        </div>
+        <div class="imovel-body">
+          <p class="imovel-tipo">Apartamento Alto Padrão</p>
+          <h3 class="imovel-nome">Residencial Jardins — Piso Alto</h3>
+          <p class="imovel-local">📍 Vila Nova Conceição, São Paulo · SP</p>
+          <div class="imovel-features">
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">📐</span> 180 m²
+            </span>
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">🛏️</span> 4 quartos
+            </span>
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">🚿</span> 4 suítes
+            </span>
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">🚘</span> 3 vagas
+            </span>
+          </div>
+          <div class="imovel-footer">
+            <div>
+              <span class="imovel-preco-label">Valor do imóvel</span>
+              <span class="imovel-preco">R$ 2.850.000</span>
+            </div>
+            <button class="btn-imovel" onclick="openWhatsapp('Residencial Jardins — Vila Nova Conceição — R$ 2.850.000')">
+              Ver Detalhes
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="imovel-card reveal reveal-delay-1">
+        <div class="imovel-image-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=400&fit=crop&auto=format&q=80"
+            alt="Casa em condomínio fechado Alphaville"
+            class="imovel-image"
+            loading="lazy"
+          >
+          <span class="imovel-badge novo">Novo</span>
+          <div class="imovel-fav" title="Favoritar imóvel">♡</div>
+        </div>
+        <div class="imovel-body">
+          <p class="imovel-tipo">Casa em Condomínio Fechado</p>
+          <h3 class="imovel-nome">Reserva Alphaville — Casa de Campo</h3>
+          <p class="imovel-local">📍 Alphaville, Barueri · SP</p>
+          <div class="imovel-features">
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">📐</span> 380 m²
+            </span>
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">🛏️</span> 5 quartos
+            </span>
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">🏊</span> Piscina
+            </span>
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">🚘</span> 4 vagas
+            </span>
+          </div>
+          <div class="imovel-footer">
+            <div>
+              <span class="imovel-preco-label">Valor do imóvel</span>
+              <span class="imovel-preco">R$ 4.200.000</span>
+            </div>
+            <button class="btn-imovel" onclick="openWhatsapp('Reserva Alphaville — Casa de Campo — R$ 4.200.000')">
+              Ver Detalhes
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="imovel-card reveal reveal-delay-2">
+        <div class="imovel-image-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=400&fit=crop&auto=format&q=80"
+            alt="Apartamento moderno em Pinheiros"
+            class="imovel-image"
+            loading="lazy"
+          >
+          <span class="imovel-badge lancamento">Lançamento</span>
+          <div class="imovel-fav" title="Favoritar imóvel">♡</div>
+        </div>
+        <div class="imovel-body">
+          <p class="imovel-tipo">Apartamento Moderno</p>
+          <h3 class="imovel-nome">Pinheiros Concept — Vida no Centro</h3>
+          <p class="imovel-local">📍 Pinheiros, São Paulo · SP</p>
+          <div class="imovel-features">
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">📐</span> 90 m²
+            </span>
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">🛏️</span> 3 quartos
+            </span>
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">🚿</span> 2 suítes
+            </span>
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">🚘</span> 2 vagas
+            </span>
+          </div>
+          <div class="imovel-footer">
+            <div>
+              <span class="imovel-preco-label">Valor do imóvel</span>
+              <span class="imovel-preco">R$ 980.000</span>
+            </div>
+            <button class="btn-imovel" onclick="openWhatsapp('Pinheiros Concept — R$ 980.000')">
+              Ver Detalhes
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="imovel-card reveal reveal-delay-3">
+        <div class="imovel-image-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=400&fit=crop&auto=format&q=80"
+            alt="Cobertura duplex em Moema"
+            class="imovel-image"
+            loading="lazy"
+          >
+          <span class="imovel-badge exclusivo">Exclusivo</span>
+          <div class="imovel-fav" title="Favoritar imóvel">♡</div>
+        </div>
+        <div class="imovel-body">
+          <p class="imovel-tipo">Cobertura Duplex Premium</p>
+          <h3 class="imovel-nome">Moema Sky — Terraço Privativo</h3>
+          <p class="imovel-local">📍 Moema, São Paulo · SP</p>
+          <div class="imovel-features">
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">📐</span> 320 m²
+            </span>
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">🛏️</span> 4 suítes
+            </span>
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">🌇</span> Vista 360°
+            </span>
+            <span class="imovel-feature">
+              <span class="imovel-feature-icon">🚘</span> 4 vagas
+            </span>
+          </div>
+          <div class="imovel-footer">
+            <div>
+              <span class="imovel-preco-label">Valor do imóvel</span>
+              <span class="imovel-preco">R$ 6.500.000</span>
+            </div>
+            <button class="btn-imovel" onclick="openWhatsapp('Moema Sky Cobertura Duplex — R$ 6.500.000')">
+              Ver Detalhes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top: 52px;">
+      <a href="#contato" class="btn-primary" style="display: inline-flex;">
+        Ver Todos os Imóveis Disponíveis
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     NUMEROS
+============================================================ -->
+<section class="numeros">
+  <div class="container">
+    <div class="numeros-grid">
+      <div class="numero-item reveal">
+        <span class="numero-value">850+</span>
+        <span class="numero-label">Imóveis negociados<br>com sucesso</span>
+      </div>
+      <div class="numero-item reveal reveal-delay-1">
+        <span class="numero-value">R$2,1Bi</span>
+        <span class="numero-label">Em volume de imóveis<br>transacionados</span>
+      </div>
+      <div class="numero-item reveal reveal-delay-2">
+        <span class="numero-value">12 anos</span>
+        <span class="numero-label">De experiência no<br>mercado imobiliário SP</span>
+      </div>
+      <div class="numero-item reveal reveal-delay-3">
+        <span class="numero-value">98%</span>
+        <span class="numero-label">Índice de satisfação<br>dos clientes atendidos</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SOBRE O CORRETOR
+============================================================ -->
+<section class="section sobre" id="sobre">
+  <div class="container">
+    <div class="sobre-inner">
+      <div class="sobre-image-wrap reveal">
+        <div class="sobre-accent-bar"></div>
+        <div class="sobre-image-frame">
+          <img
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&auto=format&q=80"
+            alt="Lucas Mendes — Corretor de Imóveis Premium"
+            class="sobre-image"
+          >
+        </div>
+        <div class="sobre-badge-float">
+          <strong>12+</strong>
+          <span>Anos de<br>Experiência</span>
+        </div>
+      </div>
+
+      <div class="sobre-content reveal reveal-delay-1">
+        <span class="section-tag">Conheça o Profissional</span>
+        <h2 class="section-title">Lucas Mendes,<br>Seu Consultor Imobiliário de Confiança</h2>
+
+        <div class="sobre-creci">
+          <div class="sobre-creci-dot"></div>
+          Registro Ativo · CRECI-SP 123456-F · Habilitado para todo o estado de SP
+        </div>
+
+        <p class="sobre-bio">
+          Formado em Administração pela FGV-SP e especializado em Mercado Imobiliário pelo IBMEC,
+          Lucas Mendes construiu ao longo de 12 anos uma reputação sólida como um dos corretores
+          mais respeitados no segmento premium de São Paulo.
+        </p>
+
+        <p class="sobre-bio">
+          Sua trajetória inclui passagens por grandes incorporadoras como Brookfield, Cyrela e
+          Gafisa antes de fundar a Prime Imóveis em 2018. Hoje, lidera uma operação boutique
+          que prioriza qualidade sobre quantidade, atendendo no máximo 8 clientes simultâneos
+          para garantir atenção total e personalizada.
+        </p>
+
+        <p class="sobre-bio" style="margin-bottom: 28px;">
+          Especialista em negociações de alto valor, Lucas é conhecido pela sua capacidade
+          de encontrar o imóvel perfeito para cada perfil familiar — do primeiro apartamento
+          ao penthouse de R$ 15 milhões. Seu método exclusivo combina escuta ativa,
+          análise de estilo de vida e inteligência de mercado para criar matches perfeitos.
+        </p>
+
+        <div class="sobre-especialidades">
+          <span class="especialidade-tag">Alto Padrão</span>
+          <span class="especialidade-tag">Imóveis Residenciais</span>
+          <span class="especialidade-tag">Condomínios Fechados</span>
+          <span class="especialidade-tag">Coberturas</span>
+          <span class="especialidade-tag">Off-Market</span>
+          <span class="especialidade-tag">Negociação</span>
+          <span class="especialidade-tag">Assessoria Jurídica</span>
+          <span class="especialidade-tag">Avaliação</span>
+        </div>
+
+        <div class="sobre-certs">
+          <div class="cert-item">
+            <span class="cert-icon">🎓</span>
+            <span class="cert-label">FGV-SP Administração</span>
+          </div>
+          <div class="cert-item">
+            <span class="cert-icon">🏛️</span>
+            <span class="cert-label">IBMEC Imobiliário</span>
+          </div>
+          <div class="cert-item">
+            <span class="cert-icon">🏅</span>
+            <span class="cert-label">SECOVI Top Performer</span>
+          </div>
+          <div class="cert-item">
+            <span class="cert-icon">⭐</span>
+            <span class="cert-label">CRECI Destaque 2023</span>
+          </div>
+          <div class="cert-item">
+            <span class="cert-icon">📋</span>
+            <span class="cert-label">Perito Avaliador CRA</span>
+          </div>
+          <div class="cert-item">
+            <span class="cert-icon">🤝</span>
+            <span class="cert-label">Membro ABMI</span>
+          </div>
+        </div>
+
+        <div class="sobre-cta">
+          <a href="https://wa.me/5511999999999" class="btn-whatsapp" target="_blank" rel="noopener">
+            <span>💬</span>
+            Falar no WhatsApp
+          </a>
+          <a href="tel:+5511999999999" class="btn-tel">
+            <span>📞</span>
+            (11) 9 9999-9999
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROCESSO
+============================================================ -->
+<section class="section processo" id="processo">
+  <div class="container">
+    <div class="section-header reveal" style="text-align: center;">
+      <div style="display:flex; justify-content:center; margin-bottom:12px;">
+        <span class="section-tag">Metodologia Exclusiva</span>
+      </div>
+      <h2 class="section-title">Como Funciona Nosso<br>Processo de Atendimento</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">
+        Um processo transparente, estruturado e centrado nas suas necessidades.
+        Cada etapa é conduzida por Lucas pessoalmente, garantindo consistência e qualidade.
+      </p>
+    </div>
+
+    <div class="processo-steps">
+      <div class="passo reveal">
+        <div class="passo-num-wrap">
+          <div class="passo-num">
+            <span class="passo-num-text">Passo</span>
+            <span class="passo-num-value">01</span>
+          </div>
+        </div>
+        <span class="passo-icon">🎯</span>
+        <h3 class="passo-title">Diagnóstico de Perfil</h3>
+        <p class="passo-desc">
+          Em uma reunião inicial de 60 minutos — presencial ou por vídeo — mapeamos
+          seu estilo de vida, necessidades da família, orçamento total e preferências
+          de localização. Sem pressa, sem pressão.
+        </p>
+      </div>
+
+      <div class="passo reveal reveal-delay-1">
+        <div class="passo-num-wrap">
+          <div class="passo-num">
+            <span class="passo-num-text">Passo</span>
+            <span class="passo-num-value">02</span>
+          </div>
+        </div>
+        <span class="passo-icon">🔍</span>
+        <h3 class="passo-title">Curadoria Personalizada</h3>
+        <p class="passo-desc">
+          Buscamos em toda a nossa rede — incluindo imóveis off-market — e
+          apresentamos uma seleção de no máximo 6 opções altamente relevantes.
+          Qualidade acima de quantidade, sempre.
+        </p>
+      </div>
+
+      <div class="passo reveal reveal-delay-2">
+        <div class="passo-num-wrap">
+          <div class="passo-num">
+            <span class="passo-num-text">Passo</span>
+            <span class="passo-num-value">03</span>
+          </div>
+        </div>
+        <span class="passo-icon">🏠</span>
+        <h3 class="passo-title">Visitas Acompanhadas</h3>
+        <p class="passo-desc">
+          Acompanhamos cada visita presencialmente, com olhar técnico para identificar
+          pontos de atenção, potencial de valorização e aspectos construtivos que
+          leigos frequentemente ignoram.
+        </p>
+      </div>
+
+      <div class="passo reveal reveal-delay-3">
+        <div class="passo-num-wrap">
+          <div class="passo-num">
+            <span class="passo-num-text">Passo</span>
+            <span class="passo-num-value">04</span>
+          </div>
+        </div>
+        <span class="passo-icon">✍️</span>
+        <h3 class="passo-title">Fechamento Total</h3>
+        <p class="passo-desc">
+          Da proposta ao registro em cartório, cuidamos de tudo. Negociação de preço
+          e condições, revisão jurídica de contratos, financiamento e acompanhamento
+          até a entrega das chaves.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BAIRROS ATENDIDOS
+============================================================ -->
+<section class="bairros">
+  <div class="container">
+    <div class="reveal" style="text-align: center; margin-bottom: 0;">
+      <span class="section-tag" style="justify-content: center; display: flex;">Cobertura Geográfica</span>
+      <h2 class="section-title" style="text-align: center;">Principais Bairros<br>que Atendemos</h2>
+    </div>
+
+    <div class="bairros-grid">
+      <div class="bairro-item reveal">
+        <span class="bairro-emoji">🏙️</span>
+        <div class="bairro-name">Jardins</div>
+        <div class="bairro-tipo">Alto Padrão</div>
+      </div>
+      <div class="bairro-item reveal reveal-delay-1">
+        <span class="bairro-emoji">🌳</span>
+        <div class="bairro-name">Moema</div>
+        <div class="bairro-tipo">Premium</div>
+      </div>
+      <div class="bairro-item reveal reveal-delay-2">
+        <span class="bairro-emoji">🏡</span>
+        <div class="bairro-name">Alphaville</div>
+        <div class="bairro-tipo">Condomínio</div>
+      </div>
+      <div class="bairro-item reveal reveal-delay-3">
+        <span class="bairro-emoji">🌆</span>
+        <div class="bairro-name">Vila Nova Conceição</div>
+        <div class="bairro-tipo">Exclusivo</div>
+      </div>
+      <div class="bairro-item reveal">
+        <span class="bairro-emoji">🎨</span>
+        <div class="bairro-name">Pinheiros</div>
+        <div class="bairro-tipo">Moderno</div>
+      </div>
+      <div class="bairro-item reveal reveal-delay-1">
+        <span class="bairro-emoji">🌴</span>
+        <div class="bairro-name">Higienópolis</div>
+        <div class="bairro-tipo">Clássico</div>
+      </div>
+      <div class="bairro-item reveal reveal-delay-2">
+        <span class="bairro-emoji">⛵</span>
+        <div class="bairro-name">Itaim Bibi</div>
+        <div class="bairro-tipo">Corporativo</div>
+      </div>
+      <div class="bairro-item reveal reveal-delay-3">
+        <span class="bairro-emoji">🏌️</span>
+        <div class="bairro-name">Morumbi</div>
+        <div class="bairro-tipo">Espaçoso</div>
+      </div>
+      <div class="bairro-item reveal">
+        <span class="bairro-emoji">🌺</span>
+        <div class="bairro-name">Campo Belo</div>
+        <div class="bairro-tipo">Residencial</div>
+      </div>
+      <div class="bairro-item reveal reveal-delay-1">
+        <span class="bairro-emoji">🔭</span>
+        <div class="bairro-name">Brooklin</div>
+        <div class="bairro-tipo">Moderno</div>
+      </div>
+      <div class="bairro-item reveal reveal-delay-2">
+        <span class="bairro-emoji">🏰</span>
+        <div class="bairro-name">Perdizes</div>
+        <div class="bairro-tipo">Tradicional</div>
+      </div>
+      <div class="bairro-item reveal reveal-delay-3">
+        <span class="bairro-emoji">🌠</span>
+        <div class="bairro-name">Tatuapé</div>
+        <div class="bairro-tipo">Em Alta</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DEPOIMENTOS
+============================================================ -->
+<section class="section depoimentos" id="depoimentos">
+  <div class="container">
+    <div class="section-header reveal" style="text-align: center;">
+      <div style="display:flex; justify-content:center;">
+        <span class="section-tag">Histórias Reais</span>
+      </div>
+      <h2 class="section-title">O Que Dizem Nossos Clientes</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">
+        Mais de 850 famílias transformaram suas vidas através da nossa consultoria.
+        Estas são algumas das histórias que mais nos orgulham.
+      </p>
+    </div>
+
+    <div class="depoimentos-grid">
+      <!-- Depoimento 1 -->
+      <div class="depoimento-card reveal">
+        <div class="depoimento-stars">
+          ⭐⭐⭐⭐⭐
+        </div>
+        <p class="depoimento-text">
+          "Passei 8 meses procurando sozinho e não achei nada que me convencesse.
+          Depois de uma semana com o Lucas, visitei três apartamentos e fechei o segundo.
+          Ele entendeu exatamente o que eu precisava — e o que eu não sabia que precisava.
+          O processo todo, da visita até o registro em cartório, foi impecável.
+          Nunca me senti em mãos mais seguras numa negociação de R$ 1,8 milhão."
+        </p>
+        <div class="depoimento-author">
+          <img
+            src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&auto=format&q=80"
+            alt="Rafael Carvalho"
+            class="depoimento-avatar"
+            loading="lazy"
+          >
+          <div class="depoimento-author-info">
+            <strong>Rafael Carvalho</strong>
+            <span>Diretor Executivo · Itaim Bibi</span>
+            <div class="depoimento-verified">✓ Cliente Verificado · 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Depoimento 2 -->
+      <div class="depoimento-card reveal reveal-delay-1">
+        <div class="depoimento-stars">
+          ⭐⭐⭐⭐⭐
+        </div>
+        <p class="depoimento-text">
+          "Minha família sempre sonhou com uma casa em condomínio fechado em Alphaville.
+          Achávamos que estava fora do orçamento, mas o Lucas nos mostrou uma oportunidade
+          off-market que ninguém tinha visto ainda — e negociou R$ 120.000 abaixo do preço inicial.
+          Hoje moramos na casa dos nossos sonhos, pagando exatamente o que podíamos.
+          Ele literalmente mudou nossa vida. Recomendo sem hesitar para qualquer pessoa."
+        </p>
+        <div class="depoimento-author">
+          <img
+            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&auto=format&q=80"
+            alt="Ana Paula Mendonça"
+            class="depoimento-avatar"
+            loading="lazy"
+          >
+          <div class="depoimento-author-info">
+            <strong>Ana Paula Mendonça</strong>
+            <span>Empresária · Alphaville</span>
+            <div class="depoimento-verified">✓ Cliente Verificada · 2023</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Depoimento 3 -->
+      <div class="depoimento-card reveal reveal-delay-2">
+        <div class="depoimento-stars">
+          ⭐⭐⭐⭐⭐
+        </div>
+        <p class="depoimento-text">
+          "Vendemos nosso apartamento em Moema depois de 4 anos tentando com outras imobiliárias.
+          O Lucas fez a avaliação, reformulou a apresentação do imóvel e em 47 dias fechou
+          a venda por R$ 3,4 milhões — 8% acima do nosso preço mínimo. A assessoria jurídica
+          inclusa identificou um problema na matrícula que poderia ter inviabilizado o negócio.
+          Profissionalismo e atenção ao detalhe que eu nunca vi antes no mercado imobiliário."
+        </p>
+        <div class="depoimento-author">
+          <img
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&auto=format&q=80"
+            alt="Pedro Henrique Fonseca"
+            class="depoimento-avatar"
+            loading="lazy"
+          >
+          <div class="depoimento-author-info">
+            <strong>Pedro Henrique Fonseca</strong>
+            <span>Médico Cirurgião · Moema</span>
+            <div class="depoimento-verified">✓ Cliente Verificado · 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rating geral -->
+    <div class="avaliacao-banner" style="margin-top: 60px; border-radius: var(--radius-xl);">
+      <div class="container">
+        <div class="avaliacao-inner">
+          <div class="avaliacao-text">
+            <h2>Avaliação Media de Satisfação</h2>
+            <p>
+              Nossos clientes nos avaliam consistentemente com 5 estrelas em todas as plataformas.
+              Isso não é sorte — é o resultado de um processo meticuloso de atendimento,
+              transparência absoluta e comprometimento com o resultado de cada família.
+            </p>
+          </div>
+          <div class="avaliacao-cta">
+            <div class="avaliacao-score">
+              <span class="avaliacao-score-value">4,98</span>
+              <span class="avaliacao-score-stars">⭐⭐⭐⭐⭐</span>
+              <span class="avaliacao-score-count">Baseado em 412 avaliações verificadas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA / FORMULARIO
+============================================================ -->
+<section class="section cta-section" id="contato">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-content reveal">
+        <span class="section-tag">Comece Agora</span>
+        <h2 class="section-title">O Imóvel Perfeito<br>Está Esperando por Você</h2>
+        <p>
+          Não deixe a oportunidade da sua vida passar. Imóveis de alto padrão em São Paulo
+          são vendidos em média em apenas 34 dias. Quanto mais cedo você iniciar,
+          maiores as chances de encontrar exatamente o que procura.
+        </p>
+        <p>
+          Preencha o formulário ao lado e receba um atendimento personalizado
+          em até 2 horas em dias úteis. Sem compromisso, sem pressão —
+          apenas consultoria honesta e especializada.
+        </p>
+
+        <div class="cta-urgency">
+          <div class="cta-urgency-icon">⏳</div>
+          <div class="cta-urgency-text">
+            <strong>Atenção: Agenda com Vagas Limitadas</strong>
+            <span>
+              Lucas atende no máximo 8 clientes simultâneos para garantir qualidade total.
+              Atualmente há apenas 2 vagas disponíveis para novos clientes neste mês.
+            </span>
+          </div>
+        </div>
+
+        <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display:flex; align-items:center; gap: 12px; color: rgba(255,255,255,0.7); font-size: 14px;">
+            <span style="color: #10b981; font-size: 18px;">✓</span>
+            Atendimento em até 2 horas em dias úteis
+          </div>
+          <div style="display:flex; align-items:center; gap: 12px; color: rgba(255,255,255,0.7); font-size: 14px;">
+            <span style="color: #10b981; font-size: 18px;">✓</span>
+            Avaliação gratuita do seu imóvel atual
+          </div>
+          <div style="display:flex; align-items:center; gap: 12px; color: rgba(255,255,255,0.7); font-size: 14px;">
+            <span style="color: #10b981; font-size: 18px;">✓</span>
+            Sem compromisso — consulta inicial gratuita
+          </div>
+          <div style="display:flex; align-items:center; gap: 12px; color: rgba(255,255,255,0.7); font-size: 14px;">
+            <span style="color: #10b981; font-size: 18px;">✓</span>
+            Acesso imediato ao portfólio off-market
+          </div>
+          <div style="display:flex; align-items:center; gap: 12px; color: rgba(255,255,255,0.7); font-size: 14px;">
+            <span style="color: #10b981; font-size: 18px;">✓</span>
+            Seus dados são 100% confidenciais e protegidos
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-form reveal reveal-delay-1">
+        <h3 class="form-title">Quero Ser Atendido</h3>
+        <p class="form-subtitle">
+          Preencha seus dados e entraremos em contato via WhatsApp para
+          entender melhor o que você procura.
+        </p>
+
+        <form id="contactForm" onsubmit="sendToWhatsapp(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="nome">Nome Completo *</label>
+              <input
+                class="form-input"
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Seu nome completo"
+                required
+              >
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="telefone">Telefone / WhatsApp *</label>
+              <input
+                class="form-input"
+                type="tel"
+                id="telefone"
+                name="telefone"
+                placeholder="(11) 9 0000-0000"
+                required
+              >
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="tipo">Tipo de Imóvel</label>
+              <select class="form-select" id="tipo" name="tipo">
+                <option value="">Selecione o tipo</option>
+                <option value="Apartamento">Apartamento</option>
+                <option value="Casa">Casa</option>
+                <option value="Casa em Condomínio">Casa em Condomínio</option>
+                <option value="Cobertura">Cobertura</option>
+                <option value="Terreno">Terreno</option>
+                <option value="Comercial">Comercial</option>
+                <option value="Não sei ainda">Não sei ainda</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="faixa">Faixa de Preço</label>
+              <select class="form-select" id="faixa" name="faixa">
+                <option value="">Selecione a faixa</option>
+                <option value="Até R$ 500 mil">Até R$ 500 mil</option>
+                <option value="R$ 500 mil a R$ 1 milhão">R$ 500 mil a R$ 1 milhão</option>
+                <option value="R$ 1 mi a R$ 2 milhões">R$ 1 mi a R$ 2 milhões</option>
+                <option value="R$ 2 mi a R$ 4 milhões">R$ 2 mi a R$ 4 milhões</option>
+                <option value="R$ 4 mi a R$ 8 milhões">R$ 4 mi a R$ 8 milhões</option>
+                <option value="Acima de R$ 8 milhões">Acima de R$ 8 milhões</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="mensagem">Como posso te ajudar?</label>
+            <textarea
+              class="form-textarea"
+              id="mensagem"
+              name="mensagem"
+              placeholder="Conte um pouco sobre o que você procura: localização desejada, número de quartos, necessidades específicas..."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-form">
+            <span>💬</span>
+            Quero Ser Atendido Agora
+          </button>
+        </form>
+
+        <p class="form-privacy">
+          🔒 Seus dados são protegidos e nunca serão compartilhados com terceiros.
+          Ao enviar, você concorda em receber nosso contato via WhatsApp.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Prime Imóveis</div>
+        <div class="footer-brand-tagline">
+          Consultoria imobiliária premium com mais de 12 anos de experiência no mercado
+          de alto padrão de São Paulo. Seu patrimônio em mãos de confiança.
+        </div>
+
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">📍</span>
+          Av. Brigadeiro Faria Lima, 3477 · Itaim Bibi, São Paulo – SP
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">📞</span>
+          (11) 9 9999-9999
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">✉️</span>
+          lucas@primeimoveisp.com.br
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">⏰</span>
+          Segunda a Sábado, 8h às 20h
+        </div>
+
+        <div class="footer-creci">
+          <div class="footer-creci-text">CRECI-SP 123456-F · Lucas Mendes</div>
+          <div class="footer-creci-sub">Corretor de Imóveis Habilitado · Estado de São Paulo</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Serviços</div>
+        <ul class="footer-links">
+          <li><a href="#imoveis">Imóveis para Compra</a></li>
+          <li><a href="#imoveis">Imóveis para Venda</a></li>
+          <li><a href="#sobre">Avaliação Gratuita</a></li>
+          <li><a href="#sobre">Assessoria Jurídica</a></li>
+          <li><a href="#sobre">Imóveis Off-Market</a></li>
+          <li><a href="#contato">Consultoria Personalizada</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Bairros</div>
+        <ul class="footer-links">
+          <li><a href="#bairros">Jardins</a></li>
+          <li><a href="#bairros">Moema</a></li>
+          <li><a href="#bairros">Alphaville</a></li>
+          <li><a href="#bairros">Pinheiros</a></li>
+          <li><a href="#bairros">Itaim Bibi</a></li>
+          <li><a href="#bairros">Higienópolis</a></li>
+          <li><a href="#bairros">Morumbi</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Redes Sociais</div>
+        <p style="font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 16px; line-height: 1.5;">
+          Siga nosso trabalho e fique por dentro das melhores oportunidades do mercado.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="social-link" title="Instagram">📷</a>
+          <a href="#" class="social-link" title="LinkedIn">💼</a>
+          <a href="#" class="social-link" title="WhatsApp">💬</a>
+          <a href="#" class="social-link" title="YouTube">▶️</a>
+        </div>
+        <div style="margin-top: 32px;">
+          <div class="footer-col-title">Horário de Atendimento</div>
+          <p style="font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.8;">
+            Segunda a Sexta: 8h – 20h<br>
+            Sábado: 9h – 17h<br>
+            Domingo: Plantão WhatsApp
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">
+        © 2024 Prime Imóveis · Lucas Mendes · Todos os direitos reservados
+      </span>
+      <span class="footer-disclaimer">
+        As imagens utilizadas são meramente ilustrativas. Preços, disponibilidade e condições
+        sujeitos a alteração sem aviso prévio. Consulte-nos para informações atualizadas.
+        CRECI-SP 123456-F.
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     WHATSAPP FLOAT BUTTON
+============================================================ -->
+<div class="whatsapp-float" id="whatsappFloat">
+  <div class="whatsapp-tooltip">Fale comigo agora! 👋</div>
+  <a
+    href="https://wa.me/5511999999999?text=Olá%20Lucas!%20Encontrei%20seu%20contato%20no%20site%20da%20Prime%20Imóveis%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20imóveis%20disponíveis."
+    class="whatsapp-btn"
+    target="_blank"
+    rel="noopener"
+    title="Falar no WhatsApp"
+    aria-label="Contato pelo WhatsApp"
+  >
+    <div class="whatsapp-pulse"></div>
+    <span class="whatsapp-icon">💬</span>
+  </a>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+  // ─── Navbar scroll ───────────────────────────────────────────
+  const navbar = document.getElementById('navbar');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  }, { passive: true });
+
+  // ─── Hero background Ken Burns on load ───────────────────────
+  window.addEventListener('load', () => {
+    const heroBg = document.getElementById('heroBg');
+    if (heroBg) {
+      heroBg.style.backgroundImage = "url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&h=900&fit=crop&auto=format&q=80')";
+      setTimeout(() => heroBg.classList.add('loaded'), 100);
+    }
+  });
+
+  // ─── IntersectionObserver for .reveal ────────────────────────
+  (function () {
+    const revealEls = document.querySelectorAll('.reveal');
+
+    if (!revealEls.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px',
+      }
+    );
+
+    revealEls.forEach((el) => observer.observe(el));
+  })();
+
+  // ─── Smooth scroll for anchor links ──────────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', function (e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const navbarHeight = navbar ? navbar.offsetHeight : 80;
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 16;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth',
+        });
+      }
+    });
+  });
+
+  // ─── sendToWhatsapp (form) ────────────────────────────────────
+  function sendToWhatsapp(event) {
+    if (event) event.preventDefault();
+
+    const nome     = document.getElementById('nome')     ? document.getElementById('nome').value.trim()     : '';
+    const telefone = document.getElementById('telefone') ? document.getElementById('telefone').value.trim() : '';
+    const tipo     = document.getElementById('tipo')     ? document.getElementById('tipo').value             : '';
+    const faixa    = document.getElementById('faixa')    ? document.getElementById('faixa').value            : '';
+    const mensagem = document.getElementById('mensagem') ? document.getElementById('mensagem').value.trim()  : '';
+
+    if (!nome || !telefone) {
+      alert('Por favor, preencha pelo menos seu Nome e Telefone para continuar.');
+      return;
+    }
+
+    const partes = [];
+    partes.push('Olá Lucas! Me chamo *' + nome + '* e gostaria de uma consultoria imobiliária.');
+    if (tipo)     partes.push('📌 Tipo de imóvel: ' + tipo);
+    if (faixa)    partes.push('💰 Faixa de preço: ' + faixa);
+    if (telefone) partes.push('📞 Meu telefone: ' + telefone);
+    if (mensagem) partes.push('💬 Mensagem: ' + mensagem);
+    partes.push('Aguardo seu retorno. Obrigado!');
+
+    const texto = partes.join('\n');
+    const url = 'https://wa.me/5511999999999?text=' + encodeURIComponent(texto);
+
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
+  // ─── openWhatsapp (generic / property cards) ─────────────────
+  function openWhatsapp(imovel) {
+    let mensagem;
+    if (imovel) {
+      mensagem = 'Olá Lucas! Vi no site da Prime Imóveis e tenho interesse no seguinte imóvel:\n\n📍 *' + imovel + '*\n\nPoderia me passar mais informações e agendar uma visita? Obrigado!';
+    } else {
+      mensagem = 'Olá Lucas! Encontrei seu contato no site da Prime Imóveis e gostaria de saber mais sobre os imóveis disponíveis.';
+    }
+    const url = 'https://wa.me/5511999999999?text=' + encodeURIComponent(mensagem);
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
+  // ─── Phone input mask ────────────────────────────────────────
+  const telefoneInput = document.getElementById('telefone');
+  if (telefoneInput) {
+    telefoneInput.addEventListener('input', function () {
+      let v = this.value.replace(/\D/g, '');
+      if (v.length > 11) v = v.slice(0, 11);
+      if (v.length >= 11) {
+        v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+      } else if (v.length >= 7) {
+        v = v.replace(/^(\d{2})(\d{4,5})(\d{0,4})$/, '($1) $2-$3');
+      } else if (v.length >= 3) {
+        v = v.replace(/^(\d{2})(\d+)$/, '($1) $2');
+      }
+      this.value = v;
+    });
+  }
+
+  // ─── Favorite toggle on property cards ───────────────────────
+  document.querySelectorAll('.imovel-fav').forEach((btn) => {
+    btn.addEventListener('click', function () {
+      const isFav = this.textContent === '♥';
+      this.textContent = isFav ? '♡' : '♥';
+      this.style.color = isFav ? '' : '#e74c3c';
+    });
+  });
+
+  // ─── Animate number counters ─────────────────────────────────
+  function animateCounter(el, target, suffix, prefix, duration) {
+    let start = 0;
+    const step = Math.ceil(target / (duration / 16));
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) {
+        start = target;
+        clearInterval(timer);
+      }
+      el.textContent = (prefix || '') + start.toLocaleString('pt-BR') + (suffix || '');
+    }, 16);
+  }
+
+  // Observe numero section and trigger counters
+  const numerosSection = document.querySelector('.numeros');
+  if (numerosSection) {
+    const counterObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          counterObserver.disconnect();
+          // Counters are text-based; just trigger reveal
+          document.querySelectorAll('.numero-item').forEach((el) => {
+            el.style.transition = 'background 0.3s ease, opacity 0.6s ease';
+            el.style.opacity = '0';
+            setTimeout(() => { el.style.opacity = '1'; }, 100);
+          });
+        }
+      },
+      { threshold: 0.3 }
+    );
+    counterObserver.observe(numerosSection);
+  }
+
+  // ─── Stats bar initial reveal ─────────────────────────────────
+  // Trigger hero reveals immediately since they are in viewport on load
+  setTimeout(() => {
+    document.querySelectorAll('.hero .reveal').forEach((el) => {
+      el.classList.add('visible');
+    });
+  }, 200);
+
+  // ─── Console branding ─────────────────────────────────────────
+  console.log('%cPrime Imóveis — Lucas Mendes', 'color: #d4a853; font-size: 18px; font-weight: bold; font-family: serif;');
+  console.log('%cCRECI-SP 123456-F | (11) 9 9999-9999', 'color: #666; font-size: 12px;');
+</script>
+
+</body>
+</html>

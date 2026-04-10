@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>html, body { overflow-x: hidden; max-width: 100%; }</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bella Forma | Estética Avançada — Harmonização Facial em São Paulo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --plum:      #1a0530;
+  --plum2:     #2a0845;
+  --plum3:     #3b0f5e;
+  --rose:      #f43f5e;
+  --rose-lt:   #fb7185;
+  --gold:      #c9a96e;
+  --gold-lt:   #e2c896;
+  --pink:      #ffd6e0;
+  --pink-dim:  rgba(255,214,224,0.12);
+  --white:     #ffffff;
+  --off-white: #fff8f9;
+  --muted:     #c8afc0;
+  --border:    rgba(201,169,110,0.18);
+  --border-rose: rgba(244,63,94,0.22);
+  --card-bg:   rgba(42,8,69,0.7);
+  --card-bg2:  rgba(58,15,94,0.55);
+  --grad-rose: linear-gradient(135deg, #f43f5e 0%, #c9a96e 100%);
+  --grad-gold: linear-gradient(135deg, #c9a96e 0%, #f43f5e 100%);
+  --grad-plum: linear-gradient(180deg, #1a0530 0%, #2a0845 100%);
+  --shadow-rose: 0 8px 32px rgba(244,63,94,0.28);
+  --shadow-gold: 0 8px 32px rgba(201,169,110,0.22);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--plum);
+  color: var(--white);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; }
+
+/* ========================
+   UTILITY
+======================== */
+.container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+.text-center { text-align: center; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 16px;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  font-size: 0.72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(201,169,110,0.07);
+  margin-bottom: 18px;
+}
+
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+h2 .accent {
+  background: var(--grad-rose);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-desc {
+  color: var(--muted);
+  font-size: 1.0rem;
+  line-height: 1.75;
+  max-width: 580px;
+}
+
+section { padding: 96px 0; }
+
+/* ========================
+   BUTTONS
+======================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all .25s;
+  border: none;
+  outline: none;
+}
+
+.btn-primary {
+  padding: 16px 34px;
+  background: var(--grad-rose);
+  color: #fff;
+  font-size: 0.97rem;
+  box-shadow: var(--shadow-rose);
+  letter-spacing: .01em;
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 44px rgba(244,63,94,0.42); }
+
+.btn-gold {
+  padding: 16px 34px;
+  background: var(--grad-gold);
+  color: var(--plum);
+  font-size: 0.97rem;
+  box-shadow: var(--shadow-gold);
+  letter-spacing: .01em;
+}
+.btn-gold:hover { transform: translateY(-3px); box-shadow: 0 16px 44px rgba(201,169,110,0.4); }
+
+.btn-outline {
+  padding: 14px 30px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.93rem;
+  border: 1.5px solid var(--border);
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ========================
+   NAVBAR
+======================== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  padding: 0 24px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(26,5,48,0.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.nav-logo-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: .04em;
+}
+
+.nav-logo-sub {
+  font-size: 0.6rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.nav-cta {
+  padding: 10px 22px;
+  font-size: 0.83rem;
+}
+
+/* ========================
+   HERO
+======================== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 72px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=1400&h=900&fit=crop&auto=format&q=85');
+  background-size: cover;
+  background-position: center 30%;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(26,5,48,0.96) 0%,
+    rgba(26,5,48,0.85) 45%,
+    rgba(26,5,48,0.4) 75%,
+    rgba(26,5,48,0.15) 100%
+  );
+  z-index: 1;
+}
+
+.hero-overlay-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to top, var(--plum), transparent);
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  padding: 80px 0 80px;
+  max-width: 680px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border: 1px solid rgba(201,169,110,0.35);
+  border-radius: 50px;
+  font-size: 0.8rem;
+  color: var(--gold-lt);
+  background: rgba(201,169,110,0.08);
+  letter-spacing: .04em;
+  margin-bottom: 32px;
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  margin-bottom: 24px;
+  letter-spacing: -.01em;
+}
+
+.hero h1 em {
+  font-style: italic;
+  background: var(--grad-rose);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 1.08rem;
+  color: var(--muted);
+  max-width: 520px;
+  margin-bottom: 38px;
+  line-height: 1.8;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.urgency-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 22px;
+  background: rgba(244,63,94,0.09);
+  border: 1px solid rgba(244,63,94,0.25);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  color: #fda4af;
+}
+
+.urgency-pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--rose);
+  flex-shrink: 0;
+  animation: pulseAnim 1.6s infinite;
+}
+
+@keyframes pulseAnim {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .35; transform: scale(1.6); }
+}
+
+/* ========================
+   SOCIAL PROOF BAR
+======================== */
+.proof-bar {
+  padding: 0;
+  background: var(--plum2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.proof-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  divide: var(--border);
+}
+
+.proof-item {
+  padding: 32px 24px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+
+.proof-item:last-child { border-right: none; }
+
+.proof-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.proof-label {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: .04em;
+}
+
+/* ========================
+   TREATMENTS
+======================== */
+.treatments-section {
+  background: linear-gradient(180deg, var(--plum) 0%, var(--plum2) 100%);
+}
+
+.treat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 56px;
+}
+
+.treat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+}
+
+.treat-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(201,169,110,0.45);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.45), 0 0 0 1px rgba(201,169,110,0.2);
+}
+
+.treat-img-wrap {
+  height: 190px;
+  overflow: hidden;
+  position: relative;
+}
+
+.treat-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s;
+}
+
+.treat-card:hover .treat-img-wrap img { transform: scale(1.08); }
+
+.treat-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26,5,48,0.75) 0%, transparent 60%);
+}
+
+.treat-body { padding: 24px; }
+
+.treat-icon-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.treat-emoji { font-size: 1.5rem; }
+
+.treat-tag {
+  padding: 4px 12px;
+  background: rgba(201,169,110,0.1);
+  border: 1px solid rgba(201,169,110,0.25);
+  border-radius: 50px;
+  font-size: 0.7rem;
+  color: var(--gold-lt);
+  letter-spacing: .04em;
+}
+
+.treat-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--white);
+}
+
+.treat-card p {
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+/* Treatments that have shared photos (rows 2 and 3) */
+.treat-no-img .treat-img-wrap { display: none; }
+.treat-no-img { padding: 28px; }
+.treat-no-img .treat-body { padding: 0; }
+
+/* ========================
+   ABOUT SPECIALIST
+======================== */
+.about-section {
+  background: var(--plum2);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.about-photo-col {
+  position: relative;
+}
+
+.about-photo-frame {
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.55);
+}
+
+.about-photo-frame img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.about-photo-badge {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--grad-gold);
+  color: var(--plum);
+  padding: 14px 28px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  box-shadow: 0 8px 28px rgba(201,169,110,0.35);
+  text-align: center;
+}
+
+.about-photo-badge small {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 400;
+  opacity: .75;
+  margin-top: 2px;
+}
+
+.about-content { padding-bottom: 20px; }
+
+.about-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.about-title {
+  color: var(--gold);
+  font-size: 0.9rem;
+  letter-spacing: .05em;
+  margin-bottom: 28px;
+}
+
+.about-bio {
+  color: var(--muted);
+  font-size: 0.97rem;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.creds-list {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-bottom: 36px;
+}
+
+.cred-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  font-size: 0.88rem;
+  transition: border-color .2s;
+}
+
+.cred-item:hover { border-color: rgba(201,169,110,0.4); }
+
+.cred-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--grad-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* ========================
+   BEFORE & AFTER
+======================== */
+.ba-section {
+  background: linear-gradient(180deg, var(--plum2) 0%, var(--plum) 100%);
+}
+
+.ba-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 56px;
+}
+
+.ba-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: transform .3s, box-shadow .3s;
+}
+
+.ba-card:hover { transform: translateY(-5px); box-shadow: 0 24px 56px rgba(0,0,0,0.45); }
+
+.ba-visual {
+  height: 240px;
+  display: flex;
+  position: relative;
+}
+
+.ba-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+}
+
+.ba-side-before {
+  background: linear-gradient(135deg, rgba(26,5,48,0.95), rgba(42,8,69,0.9));
+  border-right: 1.5px solid rgba(201,169,110,0.2);
+}
+
+.ba-side-after {
+  background: linear-gradient(135deg, rgba(58,15,94,0.6), rgba(201,169,110,0.12));
+}
+
+.ba-side-label {
+  font-size: 0.65rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.ba-side-icon { font-size: 2.4rem; }
+
+.ba-divider {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--grad-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--plum);
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.ba-body { padding: 22px; }
+
+.ba-treatment {
+  font-size: 0.7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.ba-body h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.ba-body p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+
+.ba-result-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: rgba(244,63,94,0.1);
+  border: 1px solid rgba(244,63,94,0.25);
+  border-radius: 50px;
+  font-size: 0.73rem;
+  color: #fda4af;
+}
+
+/* ========================
+   PROCESS
+======================== */
+.process-section {
+  background: var(--plum2);
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 56px;
+  position: relative;
+}
+
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 36px;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), var(--gold), var(--border), transparent);
+  z-index: 0;
+}
+
+.process-step {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.step-number-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  margin: 0 auto 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--grad-gold);
+  box-shadow: 0 8px 28px rgba(201,169,110,0.3);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--plum);
+}
+
+.step-emoji {
+  font-size: 1.6rem;
+}
+
+.process-step h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--white);
+}
+
+.process-step p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+/* ========================
+   TESTIMONIALS
+======================== */
+.testi-section { background: var(--plum); }
+
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 56px;
+}
+
+.testi-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform .3s, border-color .3s;
+}
+
+.testi-card:hover { transform: translateY(-5px); border-color: rgba(201,169,110,0.4); }
+
+.testi-stars { color: var(--gold); font-size: 1rem; letter-spacing: 2px; margin-bottom: 16px; }
+
+.testi-quote {
+  font-size: 1.8rem;
+  color: rgba(244,63,94,0.3);
+  font-family: Georgia, serif;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.testi-text {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.75;
+  font-style: italic;
+  margin-bottom: 22px;
+}
+
+.testi-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+}
+
+.testi-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--grad-rose);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.testi-name { font-weight: 700; font-size: 0.92rem; }
+.testi-treatment {
+  font-size: 0.75rem;
+  color: var(--gold);
+  margin-top: 2px;
+}
+
+/* ========================
+   URGENCY CTA
+======================== */
+.urgency-section {
+  background: linear-gradient(135deg, var(--plum2) 0%, var(--plum3) 50%, var(--plum2) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.urgency-section::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244,63,94,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.urgency-section::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  left: -80px;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,169,110,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.urgency-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.urgency-scarcity {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  background: rgba(244,63,94,0.1);
+  border: 1px solid rgba(244,63,94,0.3);
+  border-radius: 50px;
+  font-size: 0.82rem;
+  color: #fda4af;
+  margin-bottom: 28px;
+}
+
+.urgency-inner h2 { margin-bottom: 12px; }
+.urgency-inner .section-desc { margin: 0 auto 40px; }
+
+/* FORM */
+.contact-form {
+  background: rgba(26,5,48,0.8);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  text-align: left;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 8px;
+  letter-spacing: .03em;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 13px 18px;
+  background: rgba(42,8,69,0.8);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--white);
+  font-size: 0.94rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  appearance: none;
+}
+
+.form-group input::placeholder { color: rgba(200,175,192,0.45); }
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,169,110,0.12);
+}
+
+.form-group select option { background: var(--plum2); }
+
+.form-submit {
+  width: 100%;
+  padding: 17px;
+  background: var(--grad-rose);
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: #fff;
+  cursor: pointer;
+  transition: all .25s;
+  box-shadow: var(--shadow-rose);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: .01em;
+  margin-top: 4px;
+}
+
+.form-submit:hover { transform: translateY(-2px); box-shadow: 0 16px 44px rgba(244,63,94,0.42); }
+
+.form-privacy {
+  text-align: center;
+  font-size: 0.76rem;
+  color: var(--muted);
+  margin-top: 14px;
+  opacity: .7;
+}
+
+/* ========================
+   FOOTER
+======================== */
+footer {
+  background: var(--plum2);
+  border-top: 1px solid var(--border);
+  padding: 52px 24px 32px;
+}
+
+.footer-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 40px;
+}
+
+.footer-brand-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 4px;
+}
+
+.footer-brand-sub {
+  font-size: 0.68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.footer-desc { font-size: 0.86rem; color: var(--muted); line-height: 1.7; max-width: 300px; }
+
+.footer-col h4 {
+  font-size: 0.78rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links li a {
+  font-size: 0.86rem;
+  color: var(--muted);
+  transition: color .2s;
+}
+
+.footer-links li a:hover { color: var(--white); }
+
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.social-link {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all .2s;
+}
+
+.social-link:hover { border-color: var(--gold); transform: translateY(-2px); }
+
+.footer-bottom {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ========================
+   WHATSAPP FLOAT
+======================== */
+.wa-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 300;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #25d366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 28px rgba(37,211,102,0.45);
+  transition: transform .25s, box-shadow .25s;
+}
+
+.wa-float:hover { transform: scale(1.12); box-shadow: 0 10px 36px rgba(37,211,102,0.6); }
+
+.wa-float svg { width: 28px; height: 28px; fill: #fff; }
+
+.wa-label {
+  position: absolute;
+  right: 72px;
+  background: var(--plum2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  white-space: nowrap;
+  color: var(--white);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all .2s;
+}
+
+.wa-float:hover .wa-label { opacity: 1; transform: translateX(0); }
+
+/* ========================
+   DECORATIVE DIVIDERS
+======================== */
+.divider-gold {
+  width: 60px;
+  height: 2px;
+  background: var(--grad-gold);
+  margin: 0 auto 24px;
+  border-radius: 2px;
+}
+
+/* ========================
+   MEDIA QUERIES
+======================== */
+@media (max-width: 1024px) {
+  .treat-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-grid { grid-template-columns: 1fr 1.15fr; gap: 44px; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .footer-inner > :first-child { grid-column: 1 / -1; }
+  .process-steps { grid-template-columns: repeat(2, 1fr); }
+  .process-steps::before { display: none; }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 0 16px; }
+  section { padding: 72px 0; }
+  .hero-content { padding: 60px 0 60px; }
+  .hero h1 { font-size: clamp(2.4rem, 9vw, 3.4rem); }
+  .treat-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-photo-frame img { height: 420px; }
+  .ba-grid { grid-template-columns: 1fr; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .proof-inner { grid-template-columns: repeat(2, 1fr); }
+  .proof-item:nth-child(2) { border-right: none; }
+  .proof-item:nth-child(3) { border-top: 1px solid var(--border); }
+  .proof-item:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+  .contact-form { padding: 28px 20px; }
+}
+
+@media (max-width: 480px) {
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  .nav-logo-sub { display: none; }
+  .process-steps { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==============================
+     FIXED NAVBAR
+============================== -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-main">Bella Forma</span>
+    <span class="nav-logo-sub">Estética Avançada</span>
+  </div>
+  <a class="btn btn-primary nav-cta"
+     href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20agendar%20uma%20avaliação%20gratuita."
+     target="_blank">
+    ✨ Agendar Avaliação Grátis
+  </a>
+</nav>
+
+
+<!-- ==============================
+     HERO
+============================== -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-overlay-bottom"></div>
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">🌸 Especialistas em Harmonização Facial</div>
+
+      <h1>
+        Desperte a beleza<br>
+        que já <em>existe</em><br>
+        em você
+      </h1>
+
+      <p class="hero-sub">
+        Protocolos exclusivos de harmonização facial com toxina botulínica, preenchedores e bioestimuladores. Resultados naturais, seguros e transformadores.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-gold"
+           href="https://wa.me/5511999999999?text=Olá!%20Vim%20pelo%20site%20e%20quero%20agendar%20minha%20avaliação%20gratuita."
+           target="_blank">
+          💬 Quero Minha Avaliação Gratuita
+        </a>
+        <a class="btn btn-outline" href="#tratamentos">Ver Procedimentos</a>
+      </div>
+
+      <div class="urgency-bar">
+        <div class="urgency-pulse"></div>
+        <span><strong>⚡ Apenas 3 vagas disponíveis</strong> para avaliação gratuita esta semana</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==============================
+     SOCIAL PROOF BAR
+============================== -->
+<div class="proof-bar">
+  <div class="container">
+    <div class="proof-inner">
+      <div class="proof-item">
+        <div class="proof-number">1.500+</div>
+        <div class="proof-label">Procedimentos realizados</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-number">8 anos</div>
+        <div class="proof-label">De experiência clínica</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-number">99%</div>
+        <div class="proof-label">Índice de satisfação</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-number">ANVISA</div>
+        <div class="proof-label">Produtos certificados</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ==============================
+     TREATMENTS
+============================== -->
+<section id="tratamentos" class="treatments-section">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-eyebrow">✦ Procedimentos</div>
+      <h2>Tratamentos que <span class="accent">transformam</span></h2>
+      <div class="divider-gold"></div>
+      <p class="section-desc mx-auto">
+        Todos os procedimentos utilizam produtos originais com registro ANVISA, aplicados com técnicas internacionais de última geração.
+      </p>
+    </div>
+
+    <div class="treat-grid">
+
+      <!-- Card 1 — with photo -->
+      <div class="treat-card">
+        <div class="treat-img-wrap">
+          <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=700&h=500&fit=crop&auto=format&q=80"
+               alt="Toxina Botulínica" loading="lazy">
+          <div class="treat-img-overlay"></div>
+        </div>
+        <div class="treat-body">
+          <div class="treat-icon-row">
+            <span class="treat-emoji">💉</span>
+            <span class="treat-tag">Sem cortes · Rápido</span>
+          </div>
+          <h3>Toxina Botulínica</h3>
+          <p>Elimine rugas de expressão e linhas finas com resultados naturais que duram até 6 meses.</p>
+        </div>
+      </div>
+
+      <!-- Card 2 — with photo -->
+      <div class="treat-card">
+        <div class="treat-img-wrap">
+          <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=700&h=500&fit=crop&auto=format&q=80"
+               alt="Preenchimento Labial" loading="lazy">
+          <div class="treat-img-overlay"></div>
+        </div>
+        <div class="treat-body">
+          <div class="treat-icon-row">
+            <span class="treat-emoji">💋</span>
+            <span class="treat-tag">Resultado imediato</span>
+          </div>
+          <h3>Preenchimento Labial</h3>
+          <p>Lábios mais definidos, hidratados e proporcionais ao rosto. Natural e elegante como você.</p>
+        </div>
+      </div>
+
+      <!-- Card 3 — no photo -->
+      <div class="treat-card treat-no-img">
+        <div class="treat-body">
+          <div class="treat-icon-row">
+            <span class="treat-emoji">✨</span>
+            <span class="treat-tag">Protocolo exclusivo</span>
+          </div>
+          <h3>Harmonização Facial Completa</h3>
+          <p>Protocolo completo que equilibra e valoriza cada traço do rosto com precisão estética personalizada.</p>
+        </div>
+      </div>
+
+      <!-- Card 4 — no photo -->
+      <div class="treat-card treat-no-img">
+        <div class="treat-body">
+          <div class="treat-icon-row">
+            <span class="treat-emoji">🌟</span>
+            <span class="treat-tag">Efeito progressivo</span>
+          </div>
+          <h3>Bioestimuladores de Colágeno</h3>
+          <p>Estimula a produção natural de colágeno para pele mais firme e jovem por até 2 anos.</p>
+        </div>
+      </div>
+
+      <!-- Card 5 — no photo -->
+      <div class="treat-card treat-no-img">
+        <div class="treat-body">
+          <div class="treat-icon-row">
+            <span class="treat-emoji">🪡</span>
+            <span class="treat-tag">Sem bisturi</span>
+          </div>
+          <h3>Fios de PDO</h3>
+          <p>Lifting minimamente invasivo que reposiciona os tecidos faciais com fios bioestimuladores.</p>
+        </div>
+      </div>
+
+      <!-- Card 6 — no photo -->
+      <div class="treat-card treat-no-img">
+        <div class="treat-body">
+          <div class="treat-icon-row">
+            <span class="treat-emoji">🧴</span>
+            <span class="treat-tag">Renovação profunda</span>
+          </div>
+          <h3>Peeling Químico</h3>
+          <p>Renova camadas superficiais da pele, clareando manchas, fechando poros e uniformizando o tom.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ==============================
+     ABOUT THE SPECIALIST
+============================== -->
+<section id="sobre" class="about-section">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-photo-col">
+        <div class="about-photo-frame">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&h=700&fit=crop&auto=format&q=85"
+               alt="Dra. Isabela Carvalho" loading="lazy">
+        </div>
+        <div class="about-photo-badge">
+          Dra. Isabela Carvalho
+          <small>CRBio 12345 · Biomédica Esteta</small>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <div class="section-eyebrow">✦ Quem cuida de você</div>
+        <h2>Mais de 8 anos <span class="accent">transformando vidas</span></h2>
+        <p class="about-bio">
+          A Dra. Isabela acredita que a beleza real é aquela que respeita e potencializa os traços naturais de cada paciente. Cada protocolo é desenvolvido de forma totalmente personalizada, pensado para realçar a individualidade de quem a busca.
+        </p>
+        <p class="about-bio" style="margin-top: -12px;">
+          Utilizamos apenas produtos originais com registro ANVISA e técnicas validadas internacionalmente. Sua segurança e satisfação são a nossa prioridade absoluta em cada procedimento.
+        </p>
+
+        <div class="creds-list">
+          <div class="cred-item">
+            <div class="cred-icon">🎓</div>
+            Pós-Graduação em Harmonização Facial — USP
+          </div>
+          <div class="cred-item">
+            <div class="cred-icon">🏅</div>
+            Certificada pela SBME — Sociedade Brasileira de Medicina Estética
+          </div>
+          <div class="cred-item">
+            <div class="cred-icon">🌎</div>
+            Treinamento Internacional em Miami e Buenos Aires
+          </div>
+          <div class="cred-item">
+            <div class="cred-icon">💉</div>
+            +1.500 procedimentos realizados com índice 99% de satisfação
+          </div>
+          <div class="cred-item">
+            <div class="cred-icon">✅</div>
+            Todos os produtos com certificação ANVISA
+          </div>
+        </div>
+
+        <a class="btn btn-primary"
+           href="https://wa.me/5511999999999?text=Olá%20Dra.%20Isabela!%20Quero%20agendar%20minha%20avaliação%20gratuita."
+           target="_blank">
+          💬 Falar com a Dra. Isabela
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ==============================
+     BEFORE & AFTER
+============================== -->
+<section id="resultados" class="ba-section">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-eyebrow">✦ Antes &amp; Depois</div>
+      <h2>Resultados <span class="accent">reais</span> de pacientes reais</h2>
+      <div class="divider-gold"></div>
+      <p class="section-desc mx-auto">
+        Cada resultado é único e personalizado. Veja transformações realizadas com protocolos exclusivos da Bella Forma.
+      </p>
+    </div>
+
+    <div class="ba-grid">
+
+      <div class="ba-card">
+        <div class="ba-visual">
+          <div class="ba-side ba-side-before">
+            <span class="ba-side-label">Antes</span>
+            <span class="ba-side-icon">😔</span>
+          </div>
+          <div class="ba-divider">VS</div>
+          <div class="ba-side ba-side-after">
+            <span class="ba-side-label">Depois</span>
+            <span class="ba-side-icon">✨</span>
+          </div>
+        </div>
+        <div class="ba-body">
+          <div class="ba-treatment">Toxina Botulínica</div>
+          <h4>Rugas da testa e entre os olhos</h4>
+          <p>Paciente de 42 anos. Tratamento realizado em sessão única. Resultado natural e rejuvenescido.</p>
+          <span class="ba-result-pill">✦ 6 meses de duração</span>
+        </div>
+      </div>
+
+      <div class="ba-card">
+        <div class="ba-visual">
+          <div class="ba-side ba-side-before">
+            <span class="ba-side-label">Antes</span>
+            <span class="ba-side-icon">😶</span>
+          </div>
+          <div class="ba-divider">VS</div>
+          <div class="ba-side ba-side-after">
+            <span class="ba-side-label">Depois</span>
+            <span class="ba-side-icon">💋</span>
+          </div>
+        </div>
+        <div class="ba-body">
+          <div class="ba-treatment">Preenchimento Labial</div>
+          <h4>Volume e definição dos lábios</h4>
+          <p>Paciente de 29 anos. Harmonização do formato com aumento natural do volume labial.</p>
+          <span class="ba-result-pill">✦ Resultado imediato</span>
+        </div>
+      </div>
+
+      <div class="ba-card">
+        <div class="ba-visual">
+          <div class="ba-side ba-side-before">
+            <span class="ba-side-label">Antes</span>
+            <span class="ba-side-icon">😐</span>
+          </div>
+          <div class="ba-divider">VS</div>
+          <div class="ba-side ba-side-after">
+            <span class="ba-side-label">Depois</span>
+            <span class="ba-side-icon">🌟</span>
+          </div>
+        </div>
+        <div class="ba-body">
+          <div class="ba-treatment">Harmonização Facial Completa</div>
+          <h4>Equilíbrio e proporção facial</h4>
+          <p>Paciente de 36 anos. Protocolo completo: toxina + preenchimento + bioestimulador.</p>
+          <span class="ba-result-pill">✦ Transformação completa</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ==============================
+     PROCESS — COMO FUNCIONA
+============================== -->
+<section id="processo" class="process-section">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-eyebrow">✦ Como Funciona</div>
+      <h2>Do primeiro contato ao <span class="accent">resultado</span></h2>
+      <div class="divider-gold"></div>
+      <p class="section-desc mx-auto">
+        Nosso processo é simples, seguro e totalmente personalizado para você.
+      </p>
+    </div>
+
+    <div class="process-steps">
+
+      <div class="process-step">
+        <div class="step-number-wrap">
+          <span class="step-emoji">🔍</span>
+        </div>
+        <h3>Avaliação</h3>
+        <p>Consulta gratuita para entender seus objetivos, analisar seu rosto e identificar o protocolo ideal.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="step-number-wrap">
+          <span class="step-emoji">📋</span>
+        </div>
+        <h3>Protocolo</h3>
+        <p>Desenvolvimento de um plano totalmente personalizado com os procedimentos e cronograma adequados.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="step-number-wrap">
+          <span class="step-emoji">💎</span>
+        </div>
+        <h3>Procedimento</h3>
+        <p>Aplicação com técnicas de alta precisão, produtos certificados e máximo conforto e segurança.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="step-number-wrap">
+          <span class="step-emoji">🌸</span>
+        </div>
+        <h3>Resultado</h3>
+        <p>Acompanhamento pós-procedimento e retorno de avaliação para garantir sua satisfação plena.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ==============================
+     TESTIMONIALS
+============================== -->
+<section id="depoimentos" class="testi-section">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-eyebrow">✦ Depoimentos</div>
+      <h2>Pacientes que <span class="accent">amaram</span> os resultados</h2>
+      <div class="divider-gold"></div>
+    </div>
+
+    <div class="testi-grid">
+
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">
+          Fiz a harmonização completa e o resultado ficou incrível — totalmente natural. Minha autoestima mudou completamente. A Dra. Isabela é um anjo, profissional impecável do início ao fim!
+        </p>
+        <div class="testi-footer">
+          <div class="testi-avatar">JL</div>
+          <div>
+            <div class="testi-name">Juliana Lima, 34</div>
+            <div class="testi-treatment">Harmonização Facial Completa</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">
+          Tinha medo de ficar artificial, mas ficou perfeito! O preenchimento labial valorizou tanto meu rosto — não me arrependo de nada. Recomendo a todas as minhas amigas!
+        </p>
+        <div class="testi-footer">
+          <div class="testi-avatar">BM</div>
+          <div>
+            <div class="testi-name">Bruna Mendes, 27</div>
+            <div class="testi-treatment">Preenchimento Labial</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">
+          O bioestimulador transformou minha pele! Com 45 anos estou me sentindo com 30. Profissionalismo, cuidado e ambiente luxuoso. A melhor decisão que já tomei!
+        </p>
+        <div class="testi-footer">
+          <div class="testi-avatar">PR</div>
+          <div>
+            <div class="testi-name">Patrícia Rocha, 45</div>
+            <div class="testi-treatment">Bioestimuladores de Colágeno</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ==============================
+     URGENCY CTA + FORM
+============================== -->
+<section id="agendar" class="urgency-section">
+  <div class="container">
+    <div class="urgency-inner">
+      <div class="urgency-scarcity">
+        <div class="urgency-pulse"></div>
+        ⚡ Últimas vagas para avaliação gratuita esta semana
+      </div>
+
+      <h2>Sua <span class="accent">transformação</span> começa com uma conversa</h2>
+      <p class="section-desc">
+        Agende agora sua avaliação gratuita e descubra o protocolo ideal para você. Sem compromisso, sem pressão.
+      </p>
+
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Seu nome completo</label>
+            <input type="text" id="form-name" placeholder="Como prefere ser chamada?">
+          </div>
+          <div class="form-group">
+            <label>WhatsApp com DDD</label>
+            <input type="tel" id="form-phone" placeholder="(11) 99999-9999">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Procedimento de interesse</label>
+          <select id="form-treatment">
+            <option value="Avaliação gratuita (sem compromisso)">Avaliação gratuita — quero conhecer as opções</option>
+            <option value="Toxina Botulínica">Toxina Botulínica</option>
+            <option value="Preenchimento Labial">Preenchimento Labial</option>
+            <option value="Harmonização Facial Completa">Harmonização Facial Completa</option>
+            <option value="Bioestimuladores de Colágeno">Bioestimuladores de Colágeno</option>
+            <option value="Fios de PDO">Fios de PDO</option>
+            <option value="Peeling Químico">Peeling Químico</option>
+          </select>
+        </div>
+        <button class="form-submit" onclick="sendToWhatsapp()">
+          ✨ Quero Minha Avaliação Gratuita
+        </button>
+        <p class="form-privacy">🔒 Seus dados são confidenciais e usados somente para agendamento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==============================
+     FOOTER
+============================== -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name">Bella Forma</div>
+      <div class="footer-brand-sub">Estética Avançada</div>
+      <p class="footer-desc">
+        Especialistas em harmonização facial e procedimentos estéticos avançados. Resultados naturais que revelam a sua melhor versão.
+      </p>
+      <div class="footer-social">
+        <a class="social-link" href="#" aria-label="Instagram">📸</a>
+        <a class="social-link" href="#" aria-label="TikTok">🎵</a>
+        <a class="social-link"
+           href="https://wa.me/5511999999999?text=Olá!%20Vim%20pelo%20site%20e%20quero%20saber%20mais."
+           target="_blank" aria-label="WhatsApp">💬</a>
+      </div>
+    </div>
+
+    <div>
+      <h4>Procedimentos</h4>
+      <ul class="footer-links">
+        <li><a href="#tratamentos">Toxina Botulínica</a></li>
+        <li><a href="#tratamentos">Preenchimento Labial</a></li>
+        <li><a href="#tratamentos">Harmonização Facial</a></li>
+        <li><a href="#tratamentos">Bioestimuladores</a></li>
+        <li><a href="#tratamentos">Fios de PDO</a></li>
+        <li><a href="#tratamentos">Peeling Químico</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Contato</h4>
+      <ul class="footer-links">
+        <li><a href="#sobre">Sobre a Dra. Isabela</a></li>
+        <li><a href="#resultados">Antes &amp; Depois</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#agendar">Agendar Avaliação</a></li>
+      </ul>
+      <div style="margin-top: 20px; font-size: 0.84rem; color: var(--muted); line-height: 1.7;">
+        📍 Rua das Flores, 500 — Jardins<br>
+        São Paulo — SP<br>
+        Segunda a Sábado · 9h às 18h
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2025 <strong style="color:var(--gold)">Bella Forma Estética Avançada</strong> · Dra. Isabela Carvalho · CRBio 12345</span>
+    <span>Todos os produtos possuem registro ANVISA</span>
+  </div>
+</footer>
+
+
+<!-- ==============================
+     WHATSAPP FLOAT
+============================== -->
+<a class="wa-float"
+   href="https://wa.me/5511999999999?text=Olá!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20os%20procedimentos."
+   target="_blank"
+   aria-label="Falar pelo WhatsApp">
+  <span class="wa-label">Falar agora</span>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+
+<script>
+function sendToWhatsapp() {
+  const name = document.getElementById('form-name').value.trim() || 'você';
+  const treatment = document.getElementById('form-treatment').value;
+  const msg = `Olá Dra. Isabela! Me chamo ${name} e tenho interesse em: ${treatment}. Gostaria de agendar minha avaliação gratuita.`;
+  window.open('https://wa.me/5511999999999?text=' + encodeURIComponent(msg), '_blank');
+}
+</script>
+
+</body>
+</html>
