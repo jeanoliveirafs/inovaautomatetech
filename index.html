@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InovaAutomateTech — Automação, IA e Desenvolvimento</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%237c3aed'/><stop offset='100%25' stop-color='%233b82f6'/></linearGradient></defs><rect width='100' height='100' rx='22' fill='url(%23g)'/><text y='.9em' font-size='68' x='50%25' text-anchor='middle' dominant-baseline='auto' dy='0.1em'>%E2%9A%A1</text></svg>" />
+  <meta name="description" content="Agentes de IA, bots, dashboards, apps e integrações sob medida — entregues em 2 a 4 semanas." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0f1e;
+      --bg2: #0d1428;
+      --bg3: #111827;
+      --blue: #3b82f6;
+      --purple: #7c3aed;
+      --blue-light: #60a5fa;
+      --purple-light: #a78bfa;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --border: rgba(255,255,255,0.07);
+      --glass: rgba(255,255,255,0.04);
+      --glass-hover: rgba(255,255,255,0.08);
+      --grad: linear-gradient(135deg, var(--blue), var(--purple));
+      --grad-text: linear-gradient(135deg, #60a5fa, #a78bfa);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-glow: 0 0 32px rgba(59,130,246,0.25);
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+
+    body {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 3px; }
+
+    /* ── UTILS ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 96px 0; overflow-x: clip; }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3);
+      color: var(--blue-light); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 50px; margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700;
+      line-height: 1.2; margin-bottom: 16px;
+    }
+    .section-title span { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section-sub { color: var(--text-muted); font-size: 1.1rem; max-width: 540px; }
+    .section-header { margin-bottom: 64px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-sub { margin: 0 auto; }
+
+    /* ── GRADIENT TEXT ── */
+    .grad-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* ── BUTTON ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 50px; font-weight: 600;
+      font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease;
+      text-decoration: none; border: none; font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--grad); color: #fff;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(124,58,237,0.6); }
+    .btn-secondary {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: var(--glass-hover); border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+    .btn-sm { padding: 10px 20px; font-size: 0.85rem; }
+
+    /* ── NAVBAR ── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 20px 0; transition: all 0.3s ease;
+    }
+    #navbar.scrolled {
+      background: rgba(10,15,30,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text);
+    }
+    .nav-logo-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--grad); display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-text { font-weight: 700; font-size: 1.1rem; }
+    .nav-logo-text span { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { display: flex; align-items: center; gap: 16px; }
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--text); }
+    .mobile-menu {
+      display: flex; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10,15,30,0.98); z-index: 999; opacity: 0; pointer-events: none;
+      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a { color: var(--text); text-decoration: none; font-size: 1.4rem; font-weight: 600; }
+    .mobile-menu-close { position: absolute; top: 24px; right: 24px; background: none; border: none; color: var(--text); cursor: pointer; }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta .btn { display: none; }
+      .nav-hamburger { display: block; }
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center;
+      position: relative; overflow: hidden; padding-top: 80px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124,58,237,0.18) 0%, transparent 70%),
+                  radial-gradient(ellipse 60% 50% at 80% 50%, rgba(59,130,246,0.12) 0%, transparent 60%),
+                  var(--bg);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(59,130,246,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+    }
+    .hero-particles { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+    .particle {
+      position: absolute; border-radius: 50%;
+      animation: float-particle linear infinite;
+    }
+    @keyframes float-particle {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 760px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.35);
+      color: var(--blue-light); font-size: 0.85rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 50px; margin-bottom: 32px;
+      animation: pulse-badge 2s ease-in-out infinite;
+    }
+    @keyframes pulse-badge { 0%,100% { box-shadow: 0 0 0 0 rgba(59,130,246,0.4); } 50% { box-shadow: 0 0 0 8px rgba(59,130,246,0); } }
+    .hero-badge .dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: blink 1.4s ease-in-out infinite; }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .hero-title {
+      font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 700;
+      line-height: 1.15; margin-bottom: 24px;
+    }
+    .hero-sub { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--text-muted); margin-bottom: 40px; max-width: 560px; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; }
+    .hero-stats { display: flex; gap: 40px; flex-wrap: wrap; }
+    .hero-stat { }
+    .hero-stat-num { font-size: 1.8rem; font-weight: 700; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-stat-label { font-size: 0.85rem; color: var(--text-dim); }
+    .hero-visual { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 42%; z-index: 1; pointer-events: none; display: flex; flex-direction: column; gap: 0; min-width: 260px; max-width: 320px; }
+    @media (max-width: 1100px) { .hero-visual { display: none !important; } }
+    @media (max-width: 768px) {
+      /* Hero centralizado */
+      #inicio .container { grid-template-columns: 1fr !important; gap: 0 !important; }
+      .hero-content { text-align: center; }
+      .hero-btns { justify-content: center; }
+      .hero-badge { justify-content: center; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .hero-stats { justify-content: center; }
+      /* Grid inline de métricas */
+      .stats-inline-grid { grid-template-columns: 1fr !important; }
+      /* Proteção global de overflow */
+      * { max-width: 100%; }
+      img, video, iframe { max-width: 100%; }
+    }
+
+    /* ── FLOATING CARD (hero visual) ── */
+    .float-card {
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      backdrop-filter: blur(12px); border-radius: var(--radius);
+      padding: 20px 24px; margin-bottom: 16px;
+      animation: float-card 4s ease-in-out infinite;
+    }
+    .float-card:nth-child(2) { animation-delay: -2s; margin-left: 40px; }
+    @keyframes float-card { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .fc-label { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .fc-value { font-size: 1.4rem; font-weight: 700; color: #22c55e; }
+    .fc-bar { height: 4px; background: var(--border); border-radius: 2px; margin-top: 10px; overflow: hidden; }
+    .fc-fill { height: 100%; background: var(--grad); border-radius: 2px; animation: fill-bar 2s ease-out forwards; }
+
+    /* ── SERVICES ── */
+    #servicos { background: var(--bg2); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+    .service-card {
+      background: var(--glass); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px;
+      transition: all 0.35s ease; position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; inset: 0; opacity: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(59,130,246,0.1), transparent 70%);
+      transition: opacity 0.35s ease;
+    }
+    .service-card:hover { transform: translateY(-6px); border-color: rgba(59,130,246,0.3); background: var(--glass-hover); box-shadow: 0 12px 40px rgba(59,130,246,0.15), 0 0 0 1px rgba(59,130,246,0.1); }
+    .service-card:hover::before { opacity: 1; }
+    .sc-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: var(--grad); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px; color: white; flex-shrink: 0;
+    }
+    .sc-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
+    .sc-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 16px; }
+    .sc-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .sc-tag {
+      font-size: 0.75rem; font-weight: 500;
+      background: rgba(59,130,246,0.1); color: var(--blue-light);
+      border: 1px solid rgba(59,130,246,0.2); border-radius: 50px; padding: 3px 10px;
+    }
+
+    /* ── PORTFOLIO ── */
+    .portfolio-filters { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+    .pf-btn {
+      padding: 9px 22px; border-radius: 50px; font-size: 0.9rem; font-weight: 500;
+      cursor: pointer; border: 1px solid var(--border); background: transparent;
+      color: var(--text-muted); transition: all 0.25s ease; font-family: inherit;
+    }
+    .pf-btn.active, .pf-btn:hover {
+      background: var(--grad); border-color: transparent; color: white;
+    }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+    .portfolio-card {
+      background: var(--glass); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      transition: all 0.35s ease; cursor: pointer;
+    }
+    .portfolio-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.4), var(--shadow-glow); border-color: rgba(59,130,246,0.25); }
+    .portfolio-card.hidden { display: none; }
+    .pc-thumb {
+      height: 180px; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pc-thumb-bg { position: absolute; inset: 0; }
+    .pc-thumb-icon { position: relative; z-index: 1; opacity: 0.9; }
+    .pc-badge {
+      position: absolute; top: 14px; right: 14px; z-index: 2;
+      background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.35);
+      color: #4ade80; font-size: 0.75rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 50px;
+    }
+    .pc-body { padding: 24px; }
+    .pc-cat { font-size: 0.75rem; font-weight: 600; color: var(--blue-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+    .pc-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+    .pc-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .pc-tag { font-size: 0.75rem; background: rgba(124,58,237,0.12); color: var(--purple-light); border: 1px solid rgba(124,58,237,0.2); border-radius: 50px; padding: 3px 10px; }
+    .pc-result { display: flex; align-items: center; gap: 8px; color: #4ade80; font-size: 0.9rem; font-weight: 600; }
+
+    /* ── PROCESS ── */
+    #processo { background: var(--bg2); }
+    .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; position: relative; }
+    .process-steps::before {
+      content: ''; position: absolute; top: 48px; left: calc(12.5% + 24px); right: calc(12.5% + 24px);
+      height: 1px; background: linear-gradient(90deg, transparent, var(--blue), var(--purple), transparent);
+    }
+    @media (max-width: 768px) { .process-steps::before { display: none; } }
+    .process-step { padding: 32px 24px; text-align: center; position: relative; }
+    .ps-num {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--grad); display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; font-weight: 700; margin: 0 auto 24px; position: relative;
+      box-shadow: 0 0 0 8px rgba(59,130,246,0.08);
+    }
+    .ps-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .ps-desc { color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; }
+    .process-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; }
+    .pm-card {
+      background: var(--glass); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px; text-align: center;
+    }
+    .pm-num { font-size: 2.2rem; font-weight: 700; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+    .pm-label { color: var(--text-muted); font-size: 0.9rem; }
+    @media (max-width: 600px) { .process-metrics { grid-template-columns: 1fr; } }
+
+    /* ── CONTACT ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+    @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 48px; } }
+    .contact-info { }
+    .ci-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 28px; }
+    .ci-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); display: flex; align-items: center; justify-content: center; color: var(--blue-light); flex-shrink: 0; }
+    .ci-label { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 4px; }
+    .ci-value { font-weight: 600; }
+    .ci-value a { color: var(--text); text-decoration: none; transition: color 0.2s; }
+    .ci-value a:hover { color: var(--blue-light); }
+
+    /* FAQ */
+    .faq { margin-top: 40px; }
+    .faq-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; }
+    .faq-item { border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 10px; overflow: hidden; }
+    .faq-q {
+      width: 100%; background: none; border: none; color: var(--text);
+      padding: 18px 20px; font-family: inherit; font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+      transition: background 0.2s;
+    }
+    .faq-q:hover { background: var(--glass); }
+    .faq-q .arrow { transition: transform 0.3s; color: var(--blue-light); flex-shrink: 0; }
+    .faq-q.open .arrow { transform: rotate(180deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
+    .faq-a.open { max-height: 200px; }
+    .faq-a-inner { padding: 0 20px 18px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
+
+    .text-center { text-align: center; }
+
+    /* FORM */
+    .contact-form { }
+    .form-group { margin-bottom: 20px; }
+    .form-label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
+    .form-input, .form-textarea {
+      width: 100%; background: #ffffff; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: #000000;
+      padding: 14px 18px; font-family: inherit; font-size: 0.95rem;
+      transition: all 0.25s ease; outline: none;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: rgba(59,130,246,0.5); background: #ffffff; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+    .form-input::placeholder, .form-textarea::placeholder { color: #666666; }
+    .form-textarea { min-height: 120px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+
+    /* ── FOOTER ── */
+    footer { background: #060b17; border-top: 1px solid var(--border); padding: 64px 0 32px; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 48px; }
+    @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .footer-top { grid-template-columns: 1fr; } }
+    .footer-brand { }
+    .footer-tagline { color: var(--text-muted); font-size: 0.9rem; margin: 16px 0 24px; line-height: 1.7; }
+    .footer-social { display: flex; gap: 12px; }
+    .fs-link {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--glass); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); text-decoration: none; transition: all 0.25s;
+    }
+    .fs-link:hover { background: var(--glass-hover); color: var(--blue-light); border-color: rgba(59,130,246,0.3); }
+    .footer-col-title { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 20px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .newsletter { }
+    .nl-desc { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 16px; }
+    .nl-form { display: flex; gap: 10px; }
+    .nl-input {
+      flex: 1; background: var(--glass); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text);
+      padding: 12px 16px; font-family: inherit; font-size: 0.9rem; outline: none;
+      transition: border-color 0.25s;
+    }
+    .nl-input:focus { border-color: rgba(59,130,246,0.5); }
+    .nl-input::placeholder { color: var(--text-dim); }
+    .nl-btn {
+      background: var(--grad); color: white; border: none; border-radius: var(--radius-sm);
+      padding: 12px 18px; cursor: pointer; font-family: inherit; font-weight: 600; font-size: 0.85rem;
+      transition: opacity 0.2s; white-space: nowrap;
+    }
+    .nl-btn:hover { opacity: 0.85; }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; gap: 16px; }
+    .footer-copy { color: var(--text-dim); font-size: 0.85rem; }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 900;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: #25d366; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.5); text-decoration: none;
+      transition: all 0.3s ease; animation: wa-pulse 2.5s ease-in-out infinite;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(37,211,102,0.7); }
+    @keyframes wa-pulse { 0%,100% { box-shadow: 0 4px 24px rgba(37,211,102,0.5); } 50% { box-shadow: 0 4px 24px rgba(37,211,102,0.5), 0 0 0 14px rgba(37,211,102,0.1); } }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-44px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(44px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* ── LOADER ── */
+    .loader { position: fixed; inset: 0; z-index: 9999; background: var(--bg); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20px; transition: opacity 0.7s ease, visibility 0.7s ease; }
+    .loader.gone { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-brand { font-size: 1.6rem; font-weight: 700; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.02em; }
+    .loader-bar { width: 180px; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .loader-fill { height: 100%; background: var(--grad); animation: load-fill 1.5s cubic-bezier(0.4,0,0.2,1) forwards; }
+    @keyframes load-fill { 0% { width: 0 } 60% { width: 80% } 100% { width: 100% } }
+
+    /* ── CUSTOM CURSOR ── */
+    .cur-dot { position: fixed; width: 6px; height: 6px; background: #fff; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); mix-blend-mode: difference; will-change: transform; }
+    .cur-ring { position: fixed; width: 36px; height: 36px; border: 1.5px solid rgba(99,179,246,0.55); border-radius: 50%; pointer-events: none; z-index: 9997; transform: translate(-50%,-50%); transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, opacity 0.3s ease; will-change: transform; }
+    .cur-ring.big { width: 60px; height: 60px; border-color: rgba(124,58,237,0.7); }
+    @media (pointer: coarse) { .cur-dot, .cur-ring { display: none; } }
+
+    /* ── BACK TO TOP ── */
+    .back-top { position: fixed; bottom: 108px; right: 28px; z-index: 900; width: 44px; height: 44px; border-radius: 12px; background: rgba(255,255,255,0.06); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); cursor: pointer; backdrop-filter: blur(16px); opacity: 0; transform: translateY(14px); transition: all 0.3s cubic-bezier(0.16,1,0.3,1); pointer-events: none; }
+    .back-top.show { opacity: 1; transform: translateY(0); pointer-events: all; }
+    .back-top:hover { background: var(--grad); border-color: transparent; color: white; transform: translateY(-3px) scale(1.05); }
+
+    /* ── ACTIVE NAV LINK ── */
+    .nav-links a { position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 50%; right: 50%; height: 2px; background: var(--grad); border-radius: 2px; transition: left 0.3s ease, right 0.3s ease; }
+    .nav-links a.active, .nav-links a:hover { color: var(--text); }
+    .nav-links a.active::after, .nav-links a:hover::after { left: 0; right: 0; }
+
+    /* ── HERO ENTRANCE ── */
+    .hero-badge { animation: fade-up 0.8s cubic-bezier(0.16,1,0.3,1) 0.15s both; }
+    .hero-title { animation: fade-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.3s both; }
+    .hero-sub { animation: fade-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.45s both; }
+    .hero-btns { animation: fade-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.6s both; }
+    .hero-stats { animation: fade-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.75s both; }
+    .hero-visual { animation: fade-left 1.1s cubic-bezier(0.16,1,0.3,1) 0.4s both; }
+    @keyframes fade-up { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fade-left { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+
+    /* ── GLOW MOUSE CARD FX ── */
+    .service-card, .portfolio-card, .testimonial-card { transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease; }
+    .service-card::after, .portfolio-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; opacity: 0;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(59,130,246,0.1) 0%, transparent 65%);
+      transition: opacity 0.4s ease; pointer-events: none;
+    }
+    .service-card:hover::after, .portfolio-card:hover::after { opacity: 1; }
+
+    /* ── FEATURED PRICING ANIMATED BORDER ── */
+    @property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+    .pricing-card.featured::before {
+      content: ''; position: absolute; inset: -1px; border-radius: calc(var(--radius) + 1px);
+      background: conic-gradient(from var(--angle), transparent 30%, #3b82f6 50%, #7c3aed 60%, transparent 70%);
+      animation: spin-border 4s linear infinite; z-index: 0;
+    }
+    .pricing-card.featured > * { position: relative; z-index: 1; }
+    .pricing-card.featured::after { content: ''; position: absolute; inset: 1px; background: #0e1630; border-radius: calc(var(--radius) - 1px); z-index: 0; }
+    @keyframes spin-border { to { --angle: 360deg; } }
+
+    /* ── SHIMMER SECTION TAG ── */
+    .section-tag { position: relative; overflow: hidden; }
+    .section-tag::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); animation: shimmer 2.5s ease-in-out infinite 1s; }
+    @keyframes shimmer { 0% { left: -100%; } 100% { left: 200%; } }
+
+    /* ── TECH CHIP HOVER GLOW ── */
+    .tech-chip { transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease; }
+    .tech-chip:hover { box-shadow: 0 8px 24px rgba(59,130,246,0.2); }
+
+    /* ── SMOOTH MOBILE MENU ── */
+    .mobile-menu { transition: opacity 0.3s ease; opacity: 0; display: flex !important; pointer-events: none; }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a { transform: translateY(20px); opacity: 0; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease; }
+    .mobile-menu.open a:nth-child(2) { transform: translateY(0); opacity: 1; transition-delay: 0.05s; }
+    .mobile-menu.open a:nth-child(3) { transform: translateY(0); opacity: 1; transition-delay: 0.1s; }
+    .mobile-menu.open a:nth-child(4) { transform: translateY(0); opacity: 1; transition-delay: 0.15s; }
+    .mobile-menu.open a:nth-child(5) { transform: translateY(0); opacity: 1; transition-delay: 0.2s; }
+    .mobile-menu.open a:nth-child(6) { transform: translateY(0); opacity: 1; transition-delay: 0.25s; }
+    .mobile-menu.open a:nth-child(7) { transform: translateY(0); opacity: 1; transition-delay: 0.3s; }
+    .mobile-menu.open a:nth-child(8) { transform: translateY(0); opacity: 1; transition-delay: 0.35s; }
+
+    /* ── HERO ROTATOR ── */
+    #heroTitle { display: block; }
+    #heroTitle.exit { animation: title-exit 0.38s cubic-bezier(0.4,0,1,1) forwards; }
+    #heroTitle.enter { animation: title-enter 0.55s cubic-bezier(0.16,1,0.3,1) forwards; }
+    @keyframes title-exit {
+      0%   { opacity:1; transform: translateY(0) scale(1); filter: blur(0); }
+      100% { opacity:0; transform: translateY(-30px) scale(0.96); filter: blur(4px); }
+    }
+    @keyframes title-enter {
+      0%   { opacity:0; transform: translateY(36px) scale(0.96); filter: blur(4px); }
+      100% { opacity:1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+    .rotator-bottom { margin-top: 20px; }
+    .rotator-progress { height: 2px; background: rgba(255,255,255,0.07); border-radius: 2px; max-width: 380px; overflow: hidden; margin-bottom: 14px; }
+    .rotator-fill { height: 100%; background: var(--grad); border-radius: 2px; width: 0%; }
+    .rotator-fill.running { animation: rot-fill 5s linear forwards; }
+    @keyframes rot-fill { from { width: 0% } to { width: 100% } }
+    .rotator-dots { display: flex; gap: 8px; align-items: center; }
+    .rdot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.18); transition: all 0.35s ease; cursor: pointer; border: none; padding: 0; }
+    .rdot.active { background: var(--blue-light); transform: scale(1.5); box-shadow: 0 0 8px rgba(96,165,250,0.6); }
+
+    /* ── MARQUEE TICKER ── */
+    .ticker-strip { background: rgba(59,130,246,0.04); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 13px 0; overflow: hidden; }
+    .ticker-track { display: flex; gap: 56px; animation: marquee-go 30s linear infinite; white-space: nowrap; width: max-content; }
+    .ticker-track:hover { animation-play-state: paused; }
+    @keyframes marquee-go { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+    .ticker-item { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.84rem; font-weight: 500; }
+    .ticker-sep { color: var(--text-dim); }
+
+    /* ── WORD STAGGER ── */
+    .words-stagger .word { display: inline-block; opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16,1,0.3,1); }
+    .words-stagger.visible .word { opacity: 1; transform: translateY(0); }
+
+    /* ── ANIMATED GRADIENT TEXT ── */
+    .grad-anim {
+      background: linear-gradient(270deg, #60a5fa, #a78bfa, #34d399, #f472b6, #60a5fa);
+      background-size: 400%;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: grad-flow 5s ease infinite;
+    }
+    @keyframes grad-flow { 0%,100% { background-position: 0% 50% } 50% { background-position: 100% 50% } }
+
+    /* ── HIGHLIGHT UNDERLINE ── */
+    .hl { position: relative; display: inline-block; }
+    .hl::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: var(--grad); transform: scaleX(0); transform-origin: left; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .hl.in::after { transform: scaleX(1); }
+
+    /* ── SECTION COUNTER BADGE ── */
+    .aida-label { display: inline-flex; align-items: center; gap: 6px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--blue-light); background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); padding: 4px 12px; border-radius: 50px; margin-bottom: 8px; }
+
+    /* ── PREVIEW MODAL ── */
+    .preview-modal { position: fixed; inset: 0; z-index: 9990; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.35s ease, visibility 0.35s ease; padding: 16px; }
+    .preview-modal.open { opacity: 1; visibility: visible; }
+    .pm-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .pm-content { position: relative; z-index: 1; width: 100%; max-width: 1140px; height: 88vh; background: var(--bg2); border-radius: 20px; border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.7); transform: scale(0.95); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); }
+    .preview-modal.open .pm-content { transform: scale(1); }
+    .pm-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid var(--border); flex-shrink: 0; gap: 12px; }
+    .pm-title { font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 10px; }
+    .pm-title::before { content: '🌐'; font-size: 1rem; }
+    .pm-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .pm-open-full { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 8px; background: var(--glass); border: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; font-weight: 600; text-decoration: none; transition: all 0.2s ease; }
+    .pm-open-full:hover { background: var(--glass-hover); color: var(--text); }
+    .pm-close { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-muted); cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; flex-shrink: 0; }
+    .pm-close:hover { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.3); color: #f87171; }
+    .pm-device-bar { display: flex; gap: 8px; align-items: center; }
+    .pm-device { padding: 5px 10px; border-radius: 6px; background: transparent; border: 1px solid var(--border); color: var(--text-dim); cursor: pointer; font-size: 12px; transition: all 0.2s; }
+    .pm-device.active, .pm-device:hover { background: var(--glass); color: var(--text); border-color: rgba(59,130,246,0.35); }
+    .pm-frame-wrap { flex: 1; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #f0f0f0; transition: all 0.35s ease; }
+    .pm-frame-wrap iframe { width: 100%; height: 100%; border: none; transition: width 0.35s cubic-bezier(0.16,1,0.3,1); }
+    .pm-frame-wrap.mobile { background: #1a1a2e; padding: 20px; }
+    .pm-frame-wrap.mobile iframe { width: 375px; max-width: 100%; border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
+    .pm-footer { padding: 12px 20px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; gap: 12px; flex-wrap: wrap; }
+    .pm-footer-text { font-size: 0.82rem; color: var(--text-muted); }
+
+    /* ── MODAL MOBILE ── */
+    @media (max-width: 640px) {
+      .preview-modal { padding: 0; }
+      .pm-content { width: 100vw !important; max-width: 100vw !important; height: 100dvh; height: 100vh; border-radius: 0; border: none; overflow: hidden; }
+      .pm-header { padding: 10px 12px; flex-wrap: nowrap; gap: 8px; overflow: hidden; }
+      .pm-title { font-size: 0.82rem; flex: 1 1 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .pm-device-bar { display: none !important; }
+      .pm-actions { gap: 6px; flex-shrink: 0; }
+      .pm-open-full { display: none !important; }
+      .pm-close { position: fixed; top: 10px; right: 12px; z-index: 9999; width: 40px; height: 40px; font-size: 20px; background: rgba(239,68,68,0.85); border-color: rgba(239,68,68,0.9); color: #fff; border-radius: 10px; }
+      .pm-footer { display: none; }
+      .pm-frame-wrap { background: #0e1117; padding: 0; overflow: hidden; }
+      .pm-frame-wrap iframe { width: 100vw !important; max-width: 100vw !important; height: 100%; border-radius: 0; box-shadow: none; }
+    }
+
+    /* ── NICHE CARDS ── */
+    .niche-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 20px; }
+    .niche-card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.35s ease, box-shadow 0.35s ease; }
+    .niche-card:hover { transform: translateY(-8px); box-shadow: 0 20px 48px rgba(0,0,0,0.4); }
+    .niche-thumb { height: 190px; position: relative; overflow: hidden; }
+    .niche-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+    .niche-card:hover .niche-thumb img { transform: scale(1.07); }
+    .niche-thumb-overlay { position: absolute; inset: 0; opacity: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 60%); transition: opacity 0.3s ease; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 18px; }
+    .niche-card:hover .niche-thumb-overlay { opacity: 1; }
+    .niche-preview-btn { background: white; color: #111; font-size: 0.82rem; font-weight: 700; padding: 9px 22px; border-radius: 50px; letter-spacing: 0.04em; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+    .niche-body { padding: 20px; }
+    .niche-cat { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+    .niche-title { font-weight: 700; font-size: 1rem; margin-bottom: 10px; }
+    .niche-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .niche-tag { font-size: 0.72rem; background: rgba(59,130,246,0.1); color: var(--blue-light); border: 1px solid rgba(59,130,246,0.2); border-radius: 50px; padding: 2px 9px; }
+    .niche-cta { font-size: 0.82rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+
+    /* ── MISC ── */
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
+
+    /* ── SCROLL PROGRESS ── */
+    .scroll-progress { position: fixed; top: 0; left: 0; z-index: 2000; height: 3px; background: var(--grad); width: 0%; transition: width 0.05s linear; pointer-events: none; }
+
+    /* ── SOBRE ── */
+    .sobre-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 80px; align-items: center; }
+    @media (max-width: 900px) { .sobre-grid { grid-template-columns: 1fr; gap: 48px; } }
+    .sobre-visual { position: relative; display: flex; align-items: center; justify-content: center; min-height: 320px; }
+    .sobre-avatar-box {
+      width: 260px; height: 260px; border-radius: 28px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(124,58,237,0.2));
+      border: 1px solid rgba(124,58,237,0.35);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5.5rem; position: relative; z-index: 1;
+      box-shadow: 0 24px 64px rgba(124,58,237,0.3), inset 0 0 80px rgba(59,130,246,0.05);
+    }
+    .sobre-chips {
+      position: absolute; display: flex; flex-direction: column; gap: 10px;
+      right: -8px; top: 50%; transform: translateY(-50%);
+    }
+    @media (max-width: 900px) { .sobre-chips { display: none; } }
+    .sobre-chip {
+      background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+      backdrop-filter: blur(12px); border-radius: 50px;
+      padding: 7px 14px; font-size: 0.78rem; font-weight: 600;
+      display: flex; align-items: center; gap: 6px; white-space: nowrap; color: var(--text-muted);
+    }
+    .sobre-chip:nth-child(1) { animation: float-card 3.2s ease-in-out infinite; }
+    .sobre-chip:nth-child(2) { animation: float-card 3.2s ease-in-out -1.2s infinite; }
+    .sobre-chip:nth-child(3) { animation: float-card 3.2s ease-in-out -2.4s infinite; }
+    .sobre-text p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 14px; }
+    .sobre-skills { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+    @media (max-width: 500px) { .sobre-skills { grid-template-columns: 1fr; } }
+    .skill-item { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; }
+    .skill-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .skill-name { font-size: 0.82rem; font-weight: 600; }
+    .skill-pct { font-size: 0.78rem; color: var(--blue-light); font-weight: 700; }
+    .skill-track { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .skill-fill { height: 100%; background: var(--grad); border-radius: 2px; width: 0; transition: width 1.4s cubic-bezier(0.16,1,0.3,1); }
+
+    /* ── TECNOLOGIAS ── */
+    #servicos-section { background: var(--bg3); }
+    .tech-categories { display: flex; flex-direction: column; gap: 36px; }
+    .tech-cat-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); margin-bottom: 12px; }
+    .tech-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tech-chip {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--glass); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 9px 16px;
+      font-size: 0.85rem; font-weight: 500; transition: all 0.25s ease; cursor: default;
+    }
+    .tech-chip:hover { background: var(--glass-hover); border-color: rgba(59,130,246,0.35); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+    .tech-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── DEPOIMENTOS ── */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .testimonial-card {
+      background: var(--glass); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px; transition: all 0.35s ease; position: relative;
+    }
+    .testimonial-card:hover { transform: translateY(-4px); border-color: rgba(59,130,246,0.25); box-shadow: var(--shadow-glow); }
+    .tc-stars { color: #f59e0b; font-size: 14px; margin-bottom: 14px; letter-spacing: 2px; }
+    .tc-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.75; margin-bottom: 22px; font-style: italic; }
+    .tc-author { display: flex; align-items: center; gap: 12px; }
+    .tc-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; color: white; flex-shrink: 0; }
+    .tc-name { font-weight: 700; font-size: 0.9rem; }
+    .tc-role { font-size: 0.78rem; color: var(--text-dim); }
+
+    /* ── PREÇOS ── */
+    #precos { background: var(--bg2); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+    @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } }
+    .pricing-card {
+      background: var(--glass); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 36px 28px; position: relative;
+      transition: all 0.35s ease; display: flex; flex-direction: column;
+    }
+    .pricing-card.featured {
+      border-color: rgba(124,58,237,0.5);
+      background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(124,58,237,0.07));
+      box-shadow: 0 0 48px rgba(124,58,237,0.15);
+    }
+    .pricing-card:hover { transform: translateY(-6px); }
+    .pricing-badge {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--grad); color: white; font-size: 0.72rem; font-weight: 700;
+      padding: 4px 16px; border-radius: 50px; white-space: nowrap;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .pricing-tier { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 8px; }
+    .pricing-from { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 2px; }
+    .pricing-price { font-size: 2.4rem; font-weight: 700; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.1; margin-bottom: 12px; }
+    .pricing-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; }
+    .pricing-sep { height: 1px; background: var(--border); margin-bottom: 24px; }
+    .pricing-list { list-style: none; display: flex; flex-direction: column; gap: 12px; flex: 1; margin-bottom: 28px; }
+    .pricing-list li { display: flex; align-items: center; gap: 10px; font-size: 0.87rem; }
+    .pl-check { color: #4ade80; flex-shrink: 0; font-size: 13px; }
+    .pl-x { color: var(--text-dim); flex-shrink: 0; font-size: 13px; }
+    .pricing-list li.off { color: var(--text-dim); }
+    .pricing-note { text-align: center; margin-top: 32px; color: var(--text-dim); font-size: 0.82rem; }
+
+    /* ── SERVICE CAROUSEL ── */
+    .svc-carousel-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .svc-slides {
+      display: flex;
+      align-items: flex-start;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+    .svc-slide {
+      min-width: 100%;
+      flex-shrink: 0;
+      padding: 0 4px;
+      box-sizing: border-box;
+    }
+    .svc-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .svc-btn {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.25s ease;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .svc-btn:hover {
+      background: var(--grad);
+      border-color: transparent;
+      transform: scale(1.08);
+    }
+    .svc-btn:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .svc-dots {
+      display: flex; gap: 8px; align-items: center;
+    }
+    .svc-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      border: none; cursor: pointer; padding: 0;
+      transition: all 0.3s ease;
+    }
+    .svc-dot.active {
+      background: var(--blue-light);
+      transform: scale(1.5);
+      box-shadow: 0 0 8px rgba(96,165,250,0.6);
+    }
+    .svc-counter {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      font-weight: 600;
+      min-width: 40px;
+      text-align: center;
+    }
+    .svc-slide-label {
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--blue-light);
+      margin-bottom: 24px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="pageLoader">
+  <div class="loader-brand">InovaAutomateTech</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- CURSOR -->
+<div class="cur-dot" id="curDot"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" aria-label="Voltar ao topo">
+  <i data-lucide="arrow-up" style="width:18px;height:18px"></i>
+</button>
+
+<div class="scroll-progress"></div>
+
+<!-- ══════════════════ NAVBAR ══════════════════ -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#inicio" class="nav-logo">
+        <div class="nav-logo-icon">
+          <i data-lucide="zap" style="width:20px;height:20px;color:white"></i>
+        </div>
+        <span class="nav-logo-text">Inova<span>AutomateTech</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#agentes-ia">Agentes de IA</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#contato" class="btn btn-primary btn-sm">Quero automatizar →</a>
+        <button class="nav-hamburger" id="hamburgerBtn" aria-label="Menu">
+          <i data-lucide="menu" style="width:24px;height:24px"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileClose"><i data-lucide="x" style="width:28px;height:28px"></i></button>
+  <a href="#inicio" onclick="closeMobile()">Início</a>
+  <a href="#agentes-ia" onclick="closeMobile()">Agentes de IA</a>
+  <a href="#depoimentos" onclick="closeMobile()">Depoimentos</a>
+  <a href="#contato" onclick="closeMobile()">Contato</a>
+  <a href="#contato" class="btn btn-primary" onclick="closeMobile()">Quero automatizar →</a>
+</div>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section id="inicio" style="min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:80px;">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div style="position:absolute;inset:0;z-index:0;opacity:0.03;background-image:url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\");pointer-events:none;"></div>
+  <div class="hero-particles" id="particles"></div>
+
+  <div class="container" style="position:relative;z-index:1;width:100%;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;">
+    <div class="hero-content">
+      <div class="hero-badge" style="background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.4);color:#f87171;">
+        <span class="dot" style="background:#ef4444;"></span>
+        🔴 Apenas 3 vagas abertas este mês — encerra Sexta-feira
+      </div>
+      <h1 class="hero-title" id="heroTitle">
+        Enquanto você ainda faz isso no manual, seu concorrente já está <span class="grad-anim">lucrando com IA</span>
+      </h1>
+      <div class="rotator-bottom hero-badge" style="background:transparent;border:none;padding:0;margin-bottom:0;animation:none;">
+        <div class="rotator-progress"><div class="rotator-fill running" id="rotFill"></div></div>
+        <div class="rotator-dots" id="rotDots">
+          <button class="rdot active" onclick="goToPhrase(0)"></button>
+          <button class="rdot" onclick="goToPhrase(1)"></button>
+          <button class="rdot" onclick="goToPhrase(2)"></button>
+          <button class="rdot" onclick="goToPhrase(3)"></button>
+          <button class="rdot" onclick="goToPhrase(4)"></button>
+        </div>
+      </div>
+      <p class="hero-sub">
+        Processos lentos, clientes perdidos e horas desperdiçadas em tarefas que um sistema poderia fazer sozinho — isso tem solução. E eu vou te mostrar como.
+      </p>
+      <div class="hero-btns">
+        <a href="#contato" class="btn btn-primary">
+          Quero automatizar meu negócio →
+        </a>
+        <a href="#depoimentos" class="btn btn-secondary">
+          Ver depoimentos ↓
+        </a>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:20px;font-size:0.85rem;color:var(--text-muted);border-top:1px solid var(--border);padding-top:24px;" class="hero-stats">
+        <span style="color:#4ade80;font-weight:600;">✓ 50+ empresas transformadas</span>
+        <span style="color:var(--text-dim);">·</span>
+        <span style="color:#4ade80;font-weight:600;">✓ R$2M+ em resultados gerados</span>
+        <span style="color:var(--text-dim);">·</span>
+        <span style="color:#4ade80;font-weight:600;">✓ Entrega em 2 a 4 semanas</span>
+        <span style="color:var(--text-dim);">·</span>
+        <span style="color:#4ade80;font-weight:600;">✓ 5★ avaliação média</span>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="float-card">
+        <div class="fc-label">ROI médio dos clientes</div>
+        <div class="fc-value">+127%</div>
+        <div class="fc-bar"><div class="fc-fill" style="width:83%"></div></div>
+      </div>
+      <div class="float-card">
+        <div class="fc-label">Aumento em conversões</div>
+        <div class="fc-value">+250%</div>
+        <div class="fc-bar"><div class="fc-fill" style="width:70%;animation-delay:.4s"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ TICKER ══════════════════ -->
+<div class="ticker-strip">
+  <div class="ticker-track">
+    <span class="ticker-item">🏆 50+ empresas transformadas</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">💰 R$2M+ em resultados gerados</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">⚡ Entrega em 2 a 4 semanas</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">★★★★★ Avaliação 5 estrelas</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">🤖 Robôs ativos 24h por dia</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">🛡️ Garantia total de satisfação</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">📱 Apps para iPhone e Android</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">📊 +250% de conversões em média</span>
+    <span class="ticker-sep">·</span>
+    <!-- duplicado para loop infinito -->
+    <span class="ticker-item">🏆 50+ empresas transformadas</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">💰 R$2M+ em resultados gerados</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">⚡ Entrega em 2 a 4 semanas</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">★★★★★ Avaliação 5 estrelas</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">🤖 Robôs ativos 24h por dia</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">🛡️ Garantia total de satisfação</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">📱 Apps para iPhone e Android</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">📊 +250% de conversões em média</span>
+  </div>
+</div>
+
+<!-- ══════════════════ DOR ══════════════════ -->
+<section id="dor" class="section" style="background:var(--bg2);">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-tag reveal">⚠️ Você se identifica?</div>
+      <h2 class="section-title reveal">Se você tem algum desses problemas, <span>continue lendo:</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:48px;">
+      <div class="service-card reveal" style="border-color:rgba(239,68,68,0.2);">
+        <div style="font-size:1.4rem;margin-bottom:12px;">❌</div>
+        <div class="sc-title" style="font-size:1rem;">Perde tempo em tarefas repetitivas que poderiam ser automatizadas</div>
+      </div>
+      <div class="service-card reveal" style="border-color:rgba(239,68,68,0.2);">
+        <div style="font-size:1.4rem;margin-bottom:12px;">❌</div>
+        <div class="sc-title" style="font-size:1rem;">Seu site ou app é lento, feio ou não converte visitantes em clientes</div>
+      </div>
+      <div class="service-card reveal" style="border-color:rgba(239,68,68,0.2);">
+        <div style="font-size:1.4rem;margin-bottom:12px;">❌</div>
+        <div class="sc-title" style="font-size:1rem;">Não tem visibilidade dos seus dados e métricas em tempo real</div>
+      </div>
+      <div class="service-card reveal" style="border-color:rgba(239,68,68,0.2);">
+        <div style="font-size:1.4rem;margin-bottom:12px;">❌</div>
+        <div class="sc-title" style="font-size:1rem;">Perde vendas porque não tem chatbot ou atendimento automatizado 24/7</div>
+      </div>
+      <div class="service-card reveal" style="border-color:rgba(239,68,68,0.2);">
+        <div style="font-size:1.4rem;margin-bottom:12px;">❌</div>
+        <div class="sc-title" style="font-size:1rem;">Depende de planilhas e processos manuais que erram e atrasam</div>
+      </div>
+      <div class="service-card reveal" style="border-color:rgba(239,68,68,0.2);">
+        <div style="font-size:1.4rem;margin-bottom:12px;">❌</div>
+        <div class="sc-title" style="font-size:1rem;">Já tentou contratar dev antes e foi entregue fora do prazo ou com bugs</div>
+      </div>
+    </div>
+    <p class="reveal" style="text-align:center;font-weight:700;font-size:1.1rem;color:var(--text);max-width:620px;margin:0 auto;padding:24px;background:rgba(59,130,246,0.06);border:1px solid var(--border);border-radius:var(--radius);">
+      "Se você marcou mentalmente pelo menos 2 desses pontos — eu construí essa página pra você."
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════ SOBRE ══════════════════ -->
+<section id="sobre" class="section">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-visual reveal-left">
+        <div class="sobre-avatar-box">👨‍💻</div>
+        <div class="sobre-chips">
+          <div class="sobre-chip">⚡ 5+ anos no mercado</div>
+          <div class="sobre-chip">🏆 50+ projetos entregues</div>
+          <div class="sobre-chip">💰 R$2M+ em resultados</div>
+        </div>
+      </div>
+      <div class="sobre-text reveal-right">
+        <div class="section-tag">👨‍💻 Quem vai resolver seu problema</div>
+        <h2 class="section-title">Jean — <span>Especialista em Tecnologia para Negócios</span></h2>
+        <p>Meu nome é Jean. Nos últimos 5 anos ajudei mais de 50 empresas a crescer com tecnologia — desde pequenos negócios até operações maiores — gerando mais de R$2 milhões em resultados comprovados.</p>
+        <p>Não sou uma agência com dezenas de pessoas no meio. Sou eu, com foco total no seu projeto, entregando uma solução que funciona de verdade, no prazo combinado.</p>
+        <p>Se você quer um robô respondendo clientes no WhatsApp, um painel mostrando os números do seu negócio, um app no celular ou processos automáticos trabalhando por você enquanto você dorme — é aqui.</p>
+        <div class="sobre-skills">
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Sites e Aplicações Web</span><span class="skill-pct">95%</span></div>
+            <div class="skill-track"><div class="skill-fill" data-width="95"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Sistemas e Banco de Dados</span><span class="skill-pct">90%</span></div>
+            <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Apps para Celular</span><span class="skill-pct">85%</span></div>
+            <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Inteligência Artificial e Automação</span><span class="skill-pct">92%</span></div>
+            <div class="skill-track"><div class="skill-fill" data-width="92"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ TECNOLOGIAS (reposicionado antes do portfolio) ══════════════════ -->
+<section id="servicos-section" class="section" style="background:var(--bg3)">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-tag reveal">⚙️ O que entrego</div>
+      <h2 class="section-title reveal">Não importa o tamanho do seu negócio. <span>Tenho a solução certa para você.</span></h2>
+      <p class="section-sub reveal">Cada projeto é diferente. Uso a ferramenta certa para o seu problema — não a que está na moda.</p>
+    </div>
+
+    <div class="svc-carousel-wrap" id="carousel-servicos">
+      <div class="svc-slides" id="slides-servicos">
+
+        <!-- Slide 1: Sites e Lojas Online -->
+        <div class="svc-slide">
+          <div class="svc-slide-label">1 de 6 · Sites e Lojas Online</div>
+          <div style="text-align:center;max-width:720px;margin:0 auto;">
+            <div style="font-size:3rem;margin-bottom:16px;">💻</div>
+            <h3 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin-bottom:12px;">Sites e Lojas Online</h3>
+            <p style="color:var(--text-muted);margin-bottom:32px;font-size:1rem;line-height:1.7;">Do site institucional à loja online completa — crio presença digital profissional que converte visitantes em clientes.</p>
+            <div class="tech-row" style="justify-content:center;margin-bottom:40px;">
+              <div class="tech-chip"><span class="tech-dot" style="background:#3b82f6"></span>Sites institucionais</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#7c3aed"></span>Lojas virtuais</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#22c55e"></span>Landing pages que vendem</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#f59e0b"></span>Portais e plataformas</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#ec4899"></span>Sites otimizados pro Google</div>
+            </div>
+            <a href="#contato" class="btn btn-primary">Quero este serviço →</a>
+          </div>
+        </div>
+
+        <!-- Slide 2: Apps para Celular -->
+        <div class="svc-slide">
+          <div class="svc-slide-label">2 de 6 · Apps para Celular</div>
+          <div style="text-align:center;max-width:720px;margin:0 auto;">
+            <div style="font-size:3rem;margin-bottom:16px;">📱</div>
+            <h3 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin-bottom:12px;">Apps para Celular</h3>
+            <p style="color:var(--text-muted);margin-bottom:32px;font-size:1rem;line-height:1.7;">Aplicativos nativos e multiplataforma para iPhone e Android, com design moderno e funcionalidades que encantam.</p>
+            <div class="tech-row" style="justify-content:center;margin-bottom:40px;">
+              <div class="tech-chip"><span class="tech-dot" style="background:#3b82f6"></span>App para iPhone</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#22c55e"></span>App para Android</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#f59e0b"></span>App para iPhone e Android ao mesmo tempo</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#a78bfa"></span>Login com biometria / rosto</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#34d399"></span>Notificações automáticas</div>
+            </div>
+            <a href="#contato" class="btn btn-primary">Quero este serviço →</a>
+          </div>
+        </div>
+
+        <!-- Slide 3: Robôs e Automação -->
+        <div class="svc-slide">
+          <div class="svc-slide-label">3 de 6 · Robôs e Automação</div>
+          <div style="text-align:center;max-width:720px;margin:0 auto;">
+            <div style="font-size:3rem;margin-bottom:16px;">🤖</div>
+            <h3 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin-bottom:12px;">Robôs e Automação</h3>
+            <p style="color:var(--text-muted);margin-bottom:32px;font-size:1rem;line-height:1.7;">Automatize o que drena seu tempo. Bots inteligentes trabalham 24h por você no WhatsApp, Telegram e muito mais.</p>
+            <div class="tech-row" style="justify-content:center;margin-bottom:40px;">
+              <div class="tech-chip"><span class="tech-dot" style="background:#25d366"></span>Robô de atendimento no WhatsApp</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#0088cc"></span>Robô no Telegram</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#00a67e"></span>Assistente com Inteligência Artificial</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#f59e0b"></span>Automação de tarefas repetitivas</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#ef4444"></span>Agendamento automático</div>
+            </div>
+            <a href="#contato" class="btn btn-primary">Quero este serviço →</a>
+          </div>
+        </div>
+
+        <!-- Slide 4: Painéis e Relatórios -->
+        <div class="svc-slide">
+          <div class="svc-slide-label">4 de 6 · Painéis e Relatórios</div>
+          <div style="text-align:center;max-width:720px;margin:0 auto;">
+            <div style="font-size:3rem;margin-bottom:16px;">📊</div>
+            <h3 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin-bottom:12px;">Painéis e Relatórios</h3>
+            <p style="color:var(--text-muted);margin-bottom:32px;font-size:1rem;line-height:1.7;">Visibilidade total do seu negócio em tempo real — dashboards e relatórios automáticos que facilitam decisões.</p>
+            <div class="tech-row" style="justify-content:center;margin-bottom:40px;">
+              <div class="tech-chip"><span class="tech-dot" style="background:#3b82f6"></span>Painel de controle do negócio</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#7c3aed"></span>Relatórios em tempo real</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#22c55e"></span>Gráficos de vendas e resultados</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#f59e0b"></span>Alertas automáticos por meta</div>
+            </div>
+            <a href="#contato" class="btn btn-primary">Quero este serviço →</a>
+          </div>
+        </div>
+
+        <!-- Slide 5: Integrações e Conexões -->
+        <div class="svc-slide">
+          <div class="svc-slide-label">5 de 6 · Integrações e Conexões</div>
+          <div style="text-align:center;max-width:720px;margin:0 auto;">
+            <div style="font-size:3rem;margin-bottom:16px;">🔗</div>
+            <h3 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin-bottom:12px;">Integrações e Conexões</h3>
+            <p style="color:var(--text-muted);margin-bottom:32px;font-size:1rem;line-height:1.7;">Conecte seus sistemas, elimine retrabalho e faça seus dados fluírem automaticamente entre ferramentas.</p>
+            <div class="tech-row" style="justify-content:center;margin-bottom:40px;">
+              <div class="tech-chip"><span class="tech-dot" style="background:#25d366"></span>WhatsApp Business</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#4285f4"></span>Google Agenda / Drive</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#0088cc"></span>Sistemas de pagamento online</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#f59e0b"></span>Conectar sistemas que não conversam</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#a78bfa"></span>Importar e exportar dados automaticamente</div>
+            </div>
+            <a href="#contato" class="btn btn-primary">Quero este serviço →</a>
+          </div>
+        </div>
+
+        <!-- Slide 6: Hospedagem e Segurança -->
+        <div class="svc-slide">
+          <div class="svc-slide-label">6 de 6 · Hospedagem e Segurança</div>
+          <div style="text-align:center;max-width:720px;margin:0 auto;">
+            <div style="font-size:3rem;margin-bottom:16px;">☁️</div>
+            <h3 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin-bottom:12px;">Hospedagem e Segurança</h3>
+            <p style="color:var(--text-muted);margin-bottom:32px;font-size:1rem;line-height:1.7;">Seu sistema no ar 24h/dia com backup automático, proteção e atualizações sem interrupção.</p>
+            <div class="tech-row" style="justify-content:center;margin-bottom:40px;">
+              <div class="tech-chip"><span class="tech-dot" style="background:#22c55e"></span>Sistema no ar 24 horas por dia</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#3b82f6"></span>Backup automático dos dados</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#f59e0b"></span>Proteção contra invasões</div>
+              <div class="tech-chip"><span class="tech-dot" style="background:#ec4899"></span>Atualizações sem tirar do ar</div>
+            </div>
+            <a href="#contato" class="btn btn-primary">Quero este serviço →</a>
+          </div>
+        </div>
+
+      </div>
+      <!-- Navegação -->
+      <div class="svc-nav">
+        <button class="svc-btn" onclick="slideGo('servicos', -1)" aria-label="Anterior">←</button>
+        <div class="svc-dots" id="dots-servicos"></div>
+        <button class="svc-btn" onclick="slideGo('servicos', 1)" aria-label="Próximo">→</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════ AGENTES DE IA ══════════════════ -->
+<section id="agentes-ia" class="section" style="background:var(--bg2)">
+  <div class="container">
+
+    <!-- Header (fica fora do carousel) -->
+    <div class="section-header center">
+      <div class="section-tag reveal">🤖 Novo Serviço</div>
+      <h2 class="section-title reveal">Transforme sua empresa com <span>Agentes de IA que trabalham 24h por você</span></h2>
+      <p class="section-sub reveal">Enquanto você dorme, seu agente de IA atende clientes, organiza processos e gera resultados — sem salário fixo, sem erros, sem atrasos.</p>
+    </div>
+
+    <!-- CAROUSEL -->
+    <div class="svc-carousel-wrap" id="carousel-agentes">
+      <div class="svc-slides" id="slides-agentes">
+
+        <!-- Slide 1: Problema/Solução/Impacto -->
+        <div class="svc-slide">
+          <div class="svc-slide-label">1 de 3 · Por que IA?</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+            <div class="service-card reveal" style="border-color:rgba(239,68,68,0.25);background:rgba(239,68,68,0.04);">
+              <div style="font-size:2rem;margin-bottom:16px;">😩</div>
+              <div class="sc-title" style="margin-bottom:14px;">O problema</div>
+              <div class="sc-desc">A maioria das empresas perde dinheiro todo dia com tarefas repetitivas, falta de organização e tempo mal aproveitado.</div>
+              <ul style="color:var(--text-muted);font-size:0.9rem;line-height:2.2;list-style:none;padding:0;">
+                <li>❌ Processos manuais que erram e atrasam</li>
+                <li>❌ Equipe sobrecarregada com operacional</li>
+                <li>❌ Atendimento limitado ao horário comercial</li>
+                <li>❌ Decisões lentas por falta de dados</li>
+              </ul>
+            </div>
+            <div class="service-card reveal" style="border-color:rgba(59,130,246,0.35);background:rgba(59,130,246,0.06);">
+              <div style="font-size:2rem;margin-bottom:16px;">🤖</div>
+              <div class="sc-title" style="margin-bottom:14px;">A solução</div>
+              <div class="sc-desc">Um sistema de Agentes de IA personalizado — integrado com seus canais, seu fluxo de vendas e sua operação interna.</div>
+              <ul style="color:var(--text-muted);font-size:0.9rem;line-height:2.2;list-style:none;padding:0;">
+                <li>✅ Trabalha 24h por dia, 7 dias por semana</li>
+                <li>✅ Implementado sob medida para o seu negócio</li>
+                <li>✅ Aprende e evolui com o tempo</li>
+                <li>✅ Integrado com WhatsApp, e-mail e mais</li>
+              </ul>
+            </div>
+            <div class="service-card reveal" style="border-color:rgba(124,58,237,0.35);background:rgba(124,58,237,0.06);">
+              <div style="font-size:2rem;margin-bottom:16px;">📈</div>
+              <div class="sc-title" style="margin-bottom:14px;">O impacto</div>
+              <div class="sc-desc">Empresas que usam agentes de IA obtêm resultados impossíveis com equipe tradicional no mesmo custo.</div>
+              <ul style="color:var(--text-muted);font-size:0.9rem;line-height:2.2;list-style:none;padding:0;">
+                <li>💰 Economia com contratação de funcionários</li>
+                <li>⏱️ Processos operacionais até 90% mais rápidos</li>
+                <li>📈 Produtividade sem aumentar custo fixo</li>
+                <li>🎯 Atendimento e conversão melhorados</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2: O que o agente faz -->
+        <div class="svc-slide">
+          <div class="svc-slide-label">2 de 3 · O que o agente faz</div>
+          <div class="section-header center" style="margin-bottom:32px;">
+            <h3 class="section-title" style="font-size:clamp(1.5rem,3vw,2.1rem);">O que um agente de IA <span>pode fazer na sua empresa</span></h3>
+            <p class="section-sub">Como ter um time completo trabalhando para você — sem custo fixo alto.</p>
+          </div>
+          <div class="services-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;">
+            <div class="service-card">
+              <div class="sc-icon"><i data-lucide="mail" style="width:22px;height:22px;"></i></div>
+              <div class="sc-title">E-mails automatizados</div>
+              <div class="sc-desc">Lê, responde e organiza e-mails automaticamente, sem intervenção humana.</div>
+            </div>
+            <div class="service-card">
+              <div class="sc-icon"><i data-lucide="calendar" style="width:22px;height:22px;"></i></div>
+              <div class="sc-title">Agenda inteligente</div>
+              <div class="sc-desc">Marca, remarca e lembra compromissos como uma secretária virtual completa.</div>
+            </div>
+            <div class="service-card">
+              <div class="sc-icon"><i data-lucide="bar-chart-2" style="width:22px;height:22px;"></i></div>
+              <div class="sc-title">Relatórios em tempo real</div>
+              <div class="sc-desc">Cria relatórios e dashboards automaticamente com dados sempre atualizados.</div>
+            </div>
+            <div class="service-card">
+              <div class="sc-icon"><i data-lucide="message-circle" style="width:22px;height:22px;"></i></div>
+              <div class="sc-title">Atendimento multicanal</div>
+              <div class="sc-desc">Responde clientes no WhatsApp, Instagram e outros canais 24 horas por dia.</div>
+            </div>
+            <div class="service-card">
+              <div class="sc-icon"><i data-lucide="file-text" style="width:22px;height:22px;"></i></div>
+              <div class="sc-title">Criação de documentos</div>
+              <div class="sc-desc">Gera textos, propostas e documentos automaticamente com qualidade profissional.</div>
+            </div>
+            <div class="service-card">
+              <div class="sc-icon"><i data-lucide="search" style="width:22px;height:22px;"></i></div>
+              <div class="sc-title">Pesquisa de mercado</div>
+              <div class="sc-desc">Monitora concorrentes e tendências do mercado de forma contínua e automática.</div>
+            </div>
+            <div class="service-card">
+              <div class="sc-icon"><i data-lucide="megaphone" style="width:22px;height:22px;"></i></div>
+              <div class="sc-title">Marketing automatizado</div>
+              <div class="sc-desc">Cria conteúdos para redes sociais e gerencia campanhas sem esforço manual.</div>
+            </div>
+            <div class="service-card">
+              <div class="sc-icon"><i data-lucide="database" style="width:22px;height:22px;"></i></div>
+              <div class="sc-title">Organização de dados</div>
+              <div class="sc-desc">Organiza dados da empresa e gera insights para decisões mais rápidas e precisas.</div>
+            </div>
+            <div class="service-card">
+              <div class="sc-icon"><i data-lucide="settings" style="width:22px;height:22px;"></i></div>
+              <div class="sc-title">Processos internos</div>
+              <div class="sc-desc">Automatiza processos repetitivos para que sua equipe foque no que importa.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Urgência + CTA -->
+        <div class="svc-slide">
+          <div class="svc-slide-label">3 de 3 · Comece agora</div>
+          <div style="background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.25);border-radius:var(--radius);padding:40px 32px;text-align:center;margin-bottom:48px;">
+            <div style="font-size:1.8rem;margin-bottom:14px;">⚠️</div>
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:12px;color:var(--text);">A verdade que poucos falam</h3>
+            <p style="color:var(--text-muted);max-width:620px;margin:0 auto;line-height:1.85;font-size:1rem;">
+              Quem não começar a usar IA agora vai competir com quem usa.<br>
+              <strong style="color:var(--text);">E isso não é uma vantagem pequena — é uma diferença brutal de produtividade.</strong>
+            </p>
+          </div>
+          <div style="text-align:center;">
+            <a href="#contato" class="btn btn-primary" style="font-size:1.05rem;padding:16px 36px;">🚀 Quero um Agente de IA na minha empresa →</a>
+            <p style="color:var(--text-dim);font-size:0.85rem;margin-top:16px;">Análise gratuita · Implementação sob medida · Sem contratos longos</p>
+          </div>
+        </div>
+
+      </div>
+      <!-- Navegação -->
+      <div class="svc-nav">
+        <button class="svc-btn" onclick="slideGo('agentes', -1)" aria-label="Anterior">←</button>
+        <div class="svc-dots" id="dots-agentes"></div>
+        <button class="svc-btn" onclick="slideGo('agentes', 1)" aria-label="Próximo">→</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════ LANDING PAGES DEMOS ══════════════════ -->
+<section id="landpages" class="section" style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-tag reveal">🎯 Landing Pages</div>
+      <h2 class="section-title reveal">Veja ao vivo como ficaria a <span>sua landing page</span></h2>
+      <p class="section-sub reveal">Clique em qualquer nicho abaixo e veja um exemplo completo e funcional — pronto para vender.</p>
+    </div>
+
+    <div class="svc-carousel-wrap" id="carousel-landpages">
+      <div class="svc-slides" id="slides-landpages">
+
+        <!-- Slide 1: Dentista + Estética -->
+        <div class="svc-slide">
+          <div class="svc-slide-label">1 de 3 · Saúde & Beleza</div>
+          <div class="niche-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+
+            <!-- Dentista -->
+            <div class="niche-card reveal" data-demo="demos/dentista.html" data-title="Landing Page — Dentista">
+              <div class="niche-thumb">
+                <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&h=380&fit=crop&auto=format&q=80" alt="Clínica Odontológica" loading="lazy">
+                <div class="niche-thumb-overlay">
+                  <div class="niche-preview-btn">▶ Ver Demo ao Vivo</div>
+                </div>
+              </div>
+              <div class="niche-body">
+                <div class="niche-cat" style="color:#38bdf8">🦷 Saúde & Odontologia</div>
+                <div class="niche-title">Landing Page — Dentista</div>
+                <div class="niche-tags">
+                  <span class="niche-tag">Agendamento Online</span>
+                  <span class="niche-tag">WhatsApp</span>
+                  <span class="niche-tag">Alta Conversão</span>
+                </div>
+                <div class="niche-cta" style="color:#38bdf8">▶ Clique para ver o exemplo ao vivo</div>
+              </div>
+            </div>
+
+            <!-- Estética -->
+            <div class="niche-card reveal" data-demo="demos/estetica.html" data-title="Landing Page — Clínica de Estética">
+              <div class="niche-thumb">
+                <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&h=380&fit=crop&auto=format" alt="Harmonização Facial" loading="lazy">
+                <div class="niche-thumb-overlay">
+                  <div class="niche-preview-btn">▶ Ver Demo ao Vivo</div>
+                </div>
+              </div>
+              <div class="niche-body">
+                <div class="niche-cat" style="color:#f0abfc">✨ Beleza & Estética</div>
+                <div class="niche-title">Landing Page — Harmonização Facial</div>
+                <div class="niche-tags">
+                  <span class="niche-tag">Avaliação Grátis</span>
+                  <span class="niche-tag">WhatsApp</span>
+                  <span class="niche-tag">Antes & Depois</span>
+                </div>
+                <div class="niche-cta" style="color:#f0abfc">▶ Clique para ver o exemplo ao vivo</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Slide 2: Personal Trainer + Imobiliária -->
+        <div class="svc-slide">
+          <div class="svc-slide-label">2 de 3 · Fitness & Imóveis</div>
+          <div class="niche-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+
+            <!-- Personal Trainer -->
+            <div class="niche-card reveal" data-demo="demos/personal.html" data-title="Landing Page — Personal Trainer">
+              <div class="niche-thumb">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=380&fit=crop&auto=format" alt="Personal Trainer" loading="lazy">
+                <div class="niche-thumb-overlay">
+                  <div class="niche-preview-btn">▶ Ver Demo ao Vivo</div>
+                </div>
+              </div>
+              <div class="niche-body">
+                <div class="niche-cat" style="color:#fdba74">🏋️ Fitness & Saúde</div>
+                <div class="niche-title">Landing Page — Personal Trainer</div>
+                <div class="niche-tags">
+                  <span class="niche-tag">Avaliação Grátis</span>
+                  <span class="niche-tag">WhatsApp</span>
+                  <span class="niche-tag">Transformação 90 dias</span>
+                </div>
+                <div class="niche-cta" style="color:#fdba74">▶ Clique para ver o exemplo ao vivo</div>
+              </div>
+            </div>
+
+            <!-- Imobiliária -->
+            <div class="niche-card reveal" data-demo="demos/imobiliaria.html" data-title="Landing Page — Imobiliária / Corretor">
+              <div class="niche-thumb">
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=380&fit=crop&auto=format" alt="Imobiliária" loading="lazy">
+                <div class="niche-thumb-overlay">
+                  <div class="niche-preview-btn">▶ Ver Demo ao Vivo</div>
+                </div>
+              </div>
+              <div class="niche-body">
+                <div class="niche-cat" style="color:#93c5fd">🏠 Imóveis & Corretagem</div>
+                <div class="niche-title">Landing Page — Imobiliária / Corretor</div>
+                <div class="niche-tags">
+                  <span class="niche-tag">Captação de Leads</span>
+                  <span class="niche-tag">WhatsApp</span>
+                  <span class="niche-tag">Portfólio</span>
+                </div>
+                <div class="niche-cta" style="color:#93c5fd">▶ Clique para ver o exemplo ao vivo</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Slide 3: Automotiva + Crie o seu -->
+        <div class="svc-slide">
+          <div class="svc-slide-label">3 de 3 · Automotivo & Personalizado</div>
+          <div class="niche-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+
+            <!-- Estética Automotiva -->
+            <div class="niche-card reveal" data-demo="demos/automotiva.html" data-title="Landing Page — Estética Automotiva">
+              <div class="niche-thumb">
+                <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600&h=380&fit=crop&auto=format" alt="Estética Automotiva" loading="lazy">
+                <div class="niche-thumb-overlay">
+                  <div class="niche-preview-btn">▶ Ver Demo ao Vivo</div>
+                </div>
+              </div>
+              <div class="niche-body">
+                <div class="niche-cat" style="color:#fdba74">🚗 Estética Automotiva</div>
+                <div class="niche-title">Landing Page — Detailing & Proteção</div>
+                <div class="niche-tags">
+                  <span class="niche-tag">Agendamento</span>
+                  <span class="niche-tag">WhatsApp</span>
+                  <span class="niche-tag">Portfólio</span>
+                </div>
+                <div class="niche-cta" style="color:#fdba74">▶ Clique para ver o exemplo ao vivo</div>
+              </div>
+            </div>
+
+            <!-- Crie o seu -->
+            <div style="display:flex;align-items:center;justify-content:center;padding:28px;background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.2);border-radius:var(--radius);">
+              <div style="text-align:center;">
+                <p style="font-size:1rem;font-weight:600;margin-bottom:16px;">Não achou o seu nicho? Eu crio para <span class="grad-anim">qualquer segmento.</span></p>
+                <a href="#contato" class="btn btn-primary">Quero minha landing page personalizada →</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <!-- Navegação -->
+      <div class="svc-nav">
+        <button class="svc-btn" onclick="slideGo('landpages', -1)" aria-label="Anterior">←</button>
+        <div class="svc-dots" id="dots-landpages"></div>
+        <button class="svc-btn" onclick="slideGo('landpages', 1)" aria-label="Próximo">→</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="depoimentos" class="section">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-tag reveal">★ Depoimentos</div>
+      <h2 class="section-title reveal">O que acontece depois que <span>você vira meu cliente</span></h2>
+      <p class="section-sub reveal">Não acredite em mim. Acredite em quem já passou pelo processo.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"Jean entregou nosso e-commerce em 3 semanas com qualidade surpreendente. As vendas triplicaram no primeiro mês. Recomendo 100%!"</p>
+        <div class="tc-author">
+          <div class="tc-avatar">RS</div>
+          <div><div class="tc-name">Rafael Santos</div><div class="tc-role">CEO · Fashion Hub</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"O bot de WhatsApp que desenvolveu para nossa clínica reduziu 85% do tempo de agendamento. Nossa equipe ficou muito mais produtiva."</p>
+        <div class="tc-author">
+          <div class="tc-avatar" style="background:linear-gradient(135deg,#22c55e,#16a34a)">AM</div>
+          <div><div class="tc-name">Dra. Ana Moura</div><div class="tc-role">Diretora · Clínica Digital</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"Desenvolveu nossa plataforma EAD do zero e hoje temos mais de 10 mil alunos ativos. Comunicação sempre clara e entrega pontual."</p>
+        <div class="tc-author">
+          <div class="tc-avatar" style="background:linear-gradient(135deg,#a78bfa,#7c3aed)">PL</div>
+          <div><div class="tc-name">Pedro Lima</div><div class="tc-role">Fundador · EduTech BR</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"Nossa automação contábil eliminou 90% do trabalho manual. O ROI veio em menos de 60 dias. Trabalho impecável do início ao fim."</p>
+        <div class="tc-author">
+          <div class="tc-avatar" style="background:linear-gradient(135deg,#f59e0b,#d97706)">MC</div>
+          <div><div class="tc-name">Márcia Costa</div><div class="tc-role">CFO · ContaFácil</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"O app de delivery foi lançado com sucesso e já temos 200+ restaurantes parceiros. Suporte pós-lançamento impecável e rápido."</p>
+        <div class="tc-author">
+          <div class="tc-avatar" style="background:linear-gradient(135deg,#fb923c,#ea580c)">GO</div>
+          <div><div class="tc-name">Gabriel Oliveira</div><div class="tc-role">CTO · Delivery Express</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"Transformou nossa operação com um CRM inteligente. Conversões subiram 250% em 2 meses. Profissional extremamente competente!"</p>
+        <div class="tc-author">
+          <div class="tc-avatar" style="background:linear-gradient(135deg,#60a5fa,#3b82f6)">JR</div>
+          <div><div class="tc-name">Juliana Rocha</div><div class="tc-role">Head de Vendas · CRM Pro</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;max-width:100%;" class="reveal stats-inline-grid">
+      <div style="text-align:center;padding:32px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);">
+        <div style="font-size:2.4rem;font-weight:700;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;">50+</div>
+        <div style="color:var(--text-muted);font-size:0.9rem;">Clientes atendidos</div>
+      </div>
+      <div style="text-align:center;padding:32px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);">
+        <div style="font-size:2.4rem;font-weight:700;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;">4.9★</div>
+        <div style="color:var(--text-muted);font-size:0.9rem;">Avaliação média</div>
+      </div>
+      <div style="text-align:center;padding:32px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);">
+        <div style="font-size:2.4rem;font-weight:700;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;">100%</div>
+        <div style="color:var(--text-muted);font-size:0.9rem;">No prazo prometido</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ CTA FINAL ══════════════════ -->
+<section id="cta-final" class="section" style="background:linear-gradient(135deg,rgba(59,130,246,0.12),rgba(124,58,237,0.12));border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container" style="text-align:center;">
+    <div class="section-tag reveal" style="display:inline-flex;">🚀 Próximo passo</div>
+    <h2 class="section-title reveal" style="font-size:clamp(2rem,5vw,3.2rem);margin-top:16px;">Pronto para parar de perder dinheiro e <span>começar a escalar?</span></h2>
+    <p class="section-sub reveal" style="margin:0 auto 40px;max-width:560px;">Preencha o formulário abaixo. Retorno em até 2 horas no horário comercial. Sem enrolação.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;" class="reveal">
+      <a href="#contato" class="btn btn-primary" style="font-size:1.05rem;padding:16px 36px;">Começar meu projeto agora →</a>
+      <a href="https://wa.me/5551998434163" class="btn btn-secondary" target="_blank" rel="noopener" style="font-size:1.05rem;padding:16px 36px;">💬 Falar no WhatsApp agora</a>
+    </div>
+    <div class="reveal" style="color:var(--text-dim);font-size:0.88rem;">
+      🔴 3 vagas disponíveis · Próxima disponibilidade: 45 dias
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CONTATO ══════════════════ -->
+<section id="contato" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag reveal">📩 Contato</div>
+      <h2 class="section-title reveal">Me conta sobre o <span>seu projeto</span></h2>
+      <p class="section-sub reveal">Respondo em até 2 horas. Briefing gratuito, sem compromisso.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal-left">
+        <div class="ci-item">
+          <div class="ci-icon"><i data-lucide="mail" style="width:20px;height:20px"></i></div>
+          <div>
+            <div class="ci-label">Email</div>
+            <div class="ci-value"><a href="mailto:contato@jeanautomationpro.com.br">contato@jeanautomationpro.com.br</a></div>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon"><i data-lucide="phone" style="width:20px;height:20px"></i></div>
+          <div>
+            <div class="ci-label">Telefone / WhatsApp</div>
+            <div class="ci-value"><a href="https://wa.me/5551998434163">(51) 9 98434163</a></div>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon"><i data-lucide="clock" style="width:20px;height:20px"></i></div>
+          <div>
+            <div class="ci-label">Horário de atendimento</div>
+            <div class="ci-value">Seg–Sex, 9h às 18h</div>
+          </div>
+        </div>
+
+        <div class="faq">
+          <div class="faq-title">Perguntas frequentes</div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              Quanto tempo até eu ver resultado?
+              <i data-lucide="chevron-down" class="arrow" style="width:18px;height:18px"></i>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">A maioria dos projetos é entregue em 2 a 4 semanas. Clientes que implementam automações costumam ver retorno mensurável nas primeiras semanas de uso — menos horas gastas, mais conversões, processos rodando sem intervenção humana.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              E se eu não gostar do resultado?
+              <i data-lucide="chevron-down" class="arrow" style="width:18px;height:18px"></i>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Ofereço garantia de satisfação total. Se após o briefing eu não conseguir resolver o seu problema, você não paga nada. O risco fica todo comigo — não com você.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              Você trabalha com negócios de qual tamanho?
+              <i data-lucide="chevron-down" class="arrow" style="width:18px;height:18px"></i>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Desde empreendedores solo que querem automatizar processos até empresas com times inteiros que precisam de sistemas escaláveis. O que importa é que você tem um problema real para resolver — e eu tenho a solução.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form reveal-right">
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Nome *</label>
+              <input type="text" class="form-input" placeholder="Seu nome completo" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email *</label>
+              <input type="email" class="form-input" placeholder="seu@email.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Telefone / WhatsApp</label>
+            <input type="tel" class="form-input" placeholder="(00) 9 00000-0000" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mensagem *</label>
+            <textarea class="form-textarea" placeholder="Descreva seu projeto ou necessidade..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;border-radius:12px;padding:16px;">
+            <i data-lucide="send" style="width:18px;height:18px"></i>
+            Enviar Mensagem
+          </button>
+          <div id="formSuccess" style="display:none;margin-top:16px;padding:16px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:10px;color:#4ade80;font-size:0.9rem;text-align:center;">
+            ✅ Mensagem enviada! Retornaremos em até 24h.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#inicio" class="nav-logo" style="margin-bottom:0">
+          <div class="nav-logo-icon"><i data-lucide="zap" style="width:20px;height:20px;color:white"></i></div>
+          <span class="nav-logo-text">Inova<span>AutomateTech</span></span>
+        </a>
+        <p class="footer-tagline">Automatizando negócios. Gerando resultados. Entregando no prazo.</p>
+        <div class="footer-social">
+          <a href="https://wa.me/5551998434163" class="fs-link" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a href="https://github.com" class="fs-link" aria-label="GitHub">
+            <i data-lucide="github" style="width:18px;height:18px"></i>
+          </a>
+          <a href="https://linkedin.com" class="fs-link" aria-label="LinkedIn">
+            <i data-lucide="linkedin" style="width:18px;height:18px"></i>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navegação</div>
+        <ul class="footer-links">
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#agentes-ia">Agentes de IA</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Soluções</div>
+        <ul class="footer-links">
+          <li><a href="#agentes-ia">Agentes de IA</a></li>
+          <li><a href="#agentes-ia">Automação com IA</a></li>
+          <li><a href="#agentes-ia">Desenvolvimento Web</a></li>
+          <li><a href="#agentes-ia">Apps Mobile</a></li>
+          <li><a href="#agentes-ia">Chatbots & WhatsApp</a></li>
+          <li><a href="#agentes-ia">Dashboards & CRM</a></li>
+        </ul>
+      </div>
+
+      <div class="newsletter">
+        <div class="footer-col-title">Newsletter</div>
+        <p class="nl-desc">Receba dicas de tecnologia e automação direto no seu email.</p>
+        <div class="nl-form">
+          <input type="email" class="nl-input" placeholder="seu@email.com" />
+          <button class="nl-btn" onclick="handleNewsletter()">Assinar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 InovaAutomateTech. Todos os direitos reservados.</div>
+      <div class="footer-copy">Desenvolvido com ❤️ por Jean | InovaAutomateTech</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════ WHATSAPP FLOAT ══════════════════ -->
+<a href="https://wa.me/5551998434163" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- ═══════════════ PREVIEW MODAL ═══════════════ -->
+<div class="preview-modal" id="previewModal">
+  <div class="pm-overlay"></div>
+  <div class="pm-content">
+    <div class="pm-header">
+      <div class="pm-title" id="pmTitle">Demo</div>
+      <div class="pm-device-bar">
+        <button class="pm-device active" id="btnDesktop" title="Desktop">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          Desktop
+        </button>
+        <button class="pm-device" id="btnMobile" title="Mobile">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1"/></svg>
+          Mobile
+        </button>
+      </div>
+      <div class="pm-actions">
+        <a class="pm-open-full" href="https://wa.me/5511999999999?text=Quero%20uma%20landing%20page%20como%20essa!" target="_blank">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Quero uma assim
+        </a>
+        <button class="pm-close" onclick="closePreviewModal()" title="Fechar">✕</button>
+      </div>
+    </div>
+    <div class="pm-frame-wrap" id="pmFrameWrap">
+      <iframe id="pmFrame" src="" title="Preview"></iframe>
+    </div>
+    <div class="pm-footer">
+      <span class="pm-footer-text">Gostou desse modelo? Crio uma versão personalizada para o seu negócio.</span>
+      <a class="pm-open-full" href="#contato" onclick="closePreviewModal()">Solicitar minha landing page →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Lucide Icons
+  lucide.createIcons();
+
+  // ── Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // ── Mobile menu
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+  hamburgerBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', closeMobile);
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // ── Particles
+  (function createParticles() {
+    const container = document.getElementById('particles');
+    const colors = ['#3b82f6', '#7c3aed', '#60a5fa', '#a78bfa'];
+    for (let i = 0; i < 28; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 4 + 1;
+      p.style.cssText = `
+        width:${size}px; height:${size}px;
+        left:${Math.random() * 100}%;
+        background:${colors[Math.floor(Math.random() * colors.length)]};
+        opacity:${Math.random() * 0.5 + 0.2};
+        animation-duration:${Math.random() * 15 + 10}s;
+        animation-delay:${Math.random() * -20}s;
+      `;
+      container.appendChild(p);
+    }
+  })();
+
+  // ── Portfolio filter
+  const filterBtns = document.querySelectorAll('.pf-btn');
+  const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      portfolioCards.forEach(card => {
+        const match = filter === 'all' || card.dataset.cat === filter;
+        card.classList.toggle('hidden', !match);
+      });
+    });
+  });
+
+  // ── Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const delay = entry.target.closest('.services-grid, .portfolio-grid, .process-steps, .process-metrics')
+          ? Array.from(entry.target.parentElement.children).indexOf(entry.target) * 80
+          : 0;
+        setTimeout(() => entry.target.classList.add('visible'), delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  // ── FAQ accordion
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.faq-q.open').forEach(q => {
+      q.classList.remove('open');
+      q.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      btn.classList.add('open');
+      answer.classList.add('open');
+    }
+  }
+
+  // ── Form → WhatsApp
+  // Cole aqui a URL do seu Google Apps Script após o deploy
+  const SHEET_URL = 'COLE_A_URL_AQUI';
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const nome = form.querySelector('input[type="text"]').value.trim();
+    const email = form.querySelector('input[type="email"]').value.trim();
+    const tel = form.querySelector('input[type="tel"]').value.trim();
+    const msg = form.querySelector('textarea').value.trim();
+    const btn = form.querySelector('button[type="submit"]');
+
+    btn.innerHTML = '<i data-lucide="loader-2" style="width:18px;height:18px"></i> Enviando...';
+    btn.disabled = true;
+    lucide.createIcons();
+
+    // Salva na planilha Google Sheets
+    const salvarNaPlanilha = SHEET_URL !== 'COLE_A_URL_AQUI'
+      ? fetch(SHEET_URL, {
+          method: 'POST',
+          body: JSON.stringify({ nome, email, telefone: tel, mensagem: msg })
+        }).catch(() => {}) // silencia erro para não bloquear o WhatsApp
+      : Promise.resolve();
+
+    salvarNaPlanilha.then(() => {
+      const texto = encodeURIComponent(
+        `Olá! Vim pelo site InovaAutomateTech.\n\n*Nome:* ${nome}\n*Email:* ${email}\n*Telefone:* ${tel || 'Não informado'}\n\n*Mensagem:*\n${msg}`
+      );
+      window.open(`https://wa.me/5551998434163?text=${texto}`, '_blank');
+      btn.innerHTML = '<i data-lucide="send" style="width:18px;height:18px"></i> Enviar Mensagem';
+      btn.disabled = false;
+      lucide.createIcons();
+      form.reset();
+      document.getElementById('formSuccess').style.display = 'block';
+      setTimeout(() => { document.getElementById('formSuccess').style.display = 'none'; }, 5000);
+    });
+  }
+
+  // ── Newsletter
+  function handleNewsletter() {
+    const input = document.querySelector('.nl-input');
+    if (input.value && input.value.includes('@')) {
+      input.value = '';
+      input.placeholder = '✅ Inscrito com sucesso!';
+      setTimeout(() => { input.placeholder = 'seu@email.com'; }, 3000);
+    }
+  }
+
+  // ── Spin animation for loader
+  const style = document.createElement('style');
+  style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+  document.head.appendChild(style);
+
+  // ── Re-init icons after DOM changes
+  window.addEventListener('load', () => lucide.createIcons());
+
+  // ── Scroll Progress Bar
+  const scrollBar = document.querySelector('.scroll-progress');
+  window.addEventListener('scroll', () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    scrollBar.style.width = (window.scrollY / total * 100) + '%';
+  }, { passive: true });
+
+  // ── Animated Counters
+  function animateCounter(el) {
+    const target = parseFloat(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const prefix = el.dataset.prefix || '';
+    const duration = 1600;
+    const start = performance.now();
+    const isDecimal = !Number.isInteger(target);
+    function update(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const value = target * ease;
+      el.textContent = prefix + (isDecimal ? value.toFixed(1) : Math.floor(value)) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+  // ── Skill Bars Animation
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-fill').forEach(fill => {
+          fill.style.width = fill.dataset.width + '%';
+        });
+        skillObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.sobre-skills').forEach(el => skillObserver.observe(el));
+
+  // ══ HERO TITLE ROTATOR ══
+  const heroTitle = document.getElementById('heroTitle');
+  const rotFill   = document.getElementById('rotFill');
+  const rotDots   = document.querySelectorAll('.rdot');
+
+  const phrases = [
+    'Enquanto você ainda faz isso no manual, seu concorrente já está <span class="grad-anim">lucrando com IA</span>',
+    'Você perde clientes toda hora porque não tem um sistema que <span class="grad-anim">trabalha por você 24h</span>',
+    'Cada dia sem automação é <span class="grad-anim">dinheiro saindo pelo ralo</span> sem você perceber',
+    'Seu negócio pode faturar muito mais <span class="grad-anim">sem contratar mais ninguém</span>',
+    'Enquanto você faz planilha, o sistema certo estaria <span class="grad-anim">fechando vendas por você</span>'
+  ];
+  let phraseIdx = 0;
+  let rotTimer;
+
+  function restartFill() {
+    rotFill.classList.remove('running');
+    void rotFill.offsetWidth; // reflow
+    rotFill.classList.add('running');
+  }
+
+  function setPhrase(idx) {
+    phraseIdx = idx;
+    // exit
+    heroTitle.classList.remove('enter');
+    heroTitle.classList.add('exit');
+    setTimeout(() => {
+      heroTitle.innerHTML = phrases[phraseIdx];
+      heroTitle.classList.remove('exit');
+      heroTitle.classList.add('enter');
+      rotDots.forEach((d, i) => d.classList.toggle('active', i === phraseIdx));
+      lucide.createIcons();
+    }, 380);
+    restartFill();
+  }
+
+  function nextPhrase() {
+    setPhrase((phraseIdx + 1) % phrases.length);
+  }
+
+  window.goToPhrase = function(idx) {
+    clearInterval(rotTimer);
+    setPhrase(idx);
+    rotTimer = setInterval(nextPhrase, 5000);
+  };
+
+  rotTimer = setInterval(nextPhrase, 5000);
+
+  // ══ WORD STAGGER on section titles ══
+  function wrapWords(el) {
+    const text = el.innerHTML;
+    // only wrap plain text nodes, skip if has complex HTML
+    if (el.querySelectorAll('span, a, strong').length > 2) return;
+    el.classList.add('words-stagger');
+    const parts = el.innerHTML.split(/(\s+)/);
+    el.innerHTML = parts.map(p =>
+      /\s/.test(p) ? p : `<span class="word">${p}</span>`
+    ).join('');
+  }
+
+  document.querySelectorAll('.section-title.reveal').forEach((el, i) => {
+    wrapWords(el);
+    // stagger each word's delay
+    el.querySelectorAll('.word').forEach((w, j) => {
+      w.style.transitionDelay = (j * 0.055) + 's';
+    });
+  });
+
+  // override the existing reveal observer to also handle words-stagger
+  const mainObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const delay = el.closest('.services-grid, .portfolio-grid, .process-steps, .process-metrics, .testimonials-grid, .pricing-grid')
+          ? Array.from(el.parentElement.children).indexOf(el) * 80
+          : 0;
+        setTimeout(() => {
+          el.classList.add('visible');
+          if (el.classList.contains('words-stagger')) el.classList.add('visible');
+        }, delay);
+        mainObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  // re-observe all reveal elements (catches newly wrapped ones)
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => mainObserver.observe(el));
+
+  // ══ HIGHLIGHT underline on key elements ══
+  const hlObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); hlObserver.unobserve(e.target); } });
+  }, { threshold: 0.8 });
+  document.querySelectorAll('.section-title span').forEach(el => {
+    el.classList.add('hl');
+    hlObserver.observe(el);
+  });
+
+  // ── Page Loader
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('pageLoader').classList.add('gone'), 1500);
+  });
+
+  // ── Custom Cursor
+  const curDot = document.getElementById('curDot');
+  const curRing = document.getElementById('curRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  window.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    curDot.style.left = mx + 'px'; curDot.style.top = my + 'px';
+  });
+  (function trackRing() {
+    rx += (mx - rx) * 0.11; ry += (my - ry) * 0.11;
+    curRing.style.left = rx + 'px'; curRing.style.top = ry + 'px';
+    requestAnimationFrame(trackRing);
+  })();
+  document.querySelectorAll('a, button, .service-card, .portfolio-card, .tech-chip, .pricing-card, .testimonial-card').forEach(el => {
+    el.addEventListener('mouseenter', () => curRing.classList.add('big'));
+    el.addEventListener('mouseleave', () => curRing.classList.remove('big'));
+  });
+
+  // ── Back to Top
+  const backTopBtn = document.getElementById('backTop');
+  window.addEventListener('scroll', () => backTopBtn.classList.toggle('show', window.scrollY > 500), { passive: true });
+  backTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  backTopBtn.addEventListener('click', () => lucide.createIcons());
+
+  // ── Active Nav on Scroll
+  const allSections = document.querySelectorAll('section[id]');
+  const allNavLinks = document.querySelectorAll('.nav-links a');
+  const activeObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        allNavLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+      }
+    });
+  }, { threshold: 0.35, rootMargin: '-5% 0px -60% 0px' });
+  allSections.forEach(s => activeObs.observe(s));
+
+  // ── 3D Card Tilt
+  function addTilt(selector, intensity = 6) {
+    document.querySelectorAll(selector).forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const dx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        const dy = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        card.style.transition = 'none';
+        card.style.transform = `perspective(900px) rotateY(${dx * intensity}deg) rotateX(${-dy * intensity}deg) scale(1.02)`;
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1), border-color 0.35s ease, box-shadow 0.35s ease';
+        card.style.transform = '';
+      });
+    });
+  }
+  addTilt('.service-card', 5);
+  addTilt('.portfolio-card', 4);
+  addTilt('.testimonial-card', 4);
+
+  // ── Magnetic Buttons
+  document.querySelectorAll('.btn-primary').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2) * 0.3;
+      const y = (e.clientY - r.top - r.height / 2) * 0.4;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+  });
+
+  // ── Hero Parallax
+  const _heroBg = document.querySelector('.hero-bg');
+  const _heroGrid = document.querySelector('.hero-grid');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < window.innerHeight * 1.2) {
+      if (_heroBg) _heroBg.style.transform = `translateY(${y * 0.28}px)`;
+      if (_heroGrid) _heroGrid.style.transform = `translateY(${y * 0.14}px)`;
+    }
+  }, { passive: true });
+
+  // ── Staggered reveal delays for grids
+  document.querySelectorAll('.services-grid .service-card').forEach((el, i) => el.style.transitionDelay = (i * 0.08) + 's');
+  document.querySelectorAll('.testimonials-grid .testimonial-card').forEach((el, i) => el.style.transitionDelay = (i * 0.07) + 's');
+  document.querySelectorAll('.pricing-grid .pricing-card').forEach((el, i) => el.style.transitionDelay = (i * 0.1) + 's');
+
+  // ── Preview Modal
+  (function() {
+    var modal = document.getElementById('previewModal');
+    var frame = document.getElementById('pmFrame');
+    var titleEl = document.getElementById('pmTitle');
+    var wrap = document.getElementById('pmFrameWrap');
+
+    window.openPreview = function(src, title) {
+      if (!modal) return;
+      frame.src = src;
+      titleEl.textContent = title;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      if (window.innerWidth <= 640) {
+        wrap.classList.add('mobile');
+        document.getElementById('btnMobile').classList.add('active');
+        document.getElementById('btnDesktop').classList.remove('active');
+      } else {
+        wrap.classList.remove('mobile');
+        document.getElementById('btnDesktop').classList.add('active');
+        document.getElementById('btnMobile').classList.remove('active');
+      }
+    };
+
+    window.closePreviewModal = function() {
+      if (!modal) return;
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(function() { frame.src = ''; }, 400);
+    };
+
+    // Backdrop click
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closePreviewModal();
+    });
+
+    // ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('open')) closePreviewModal();
+    });
+
+    // Device toggle
+    document.getElementById('btnDesktop').addEventListener('click', function() {
+      wrap.classList.remove('mobile');
+      this.classList.add('active');
+      document.getElementById('btnMobile').classList.remove('active');
+    });
+    document.getElementById('btnMobile').addEventListener('click', function() {
+      wrap.classList.add('mobile');
+      this.classList.add('active');
+      document.getElementById('btnDesktop').classList.remove('active');
+    });
+
+    // Niche card clicks
+    document.querySelectorAll('.niche-card').forEach(function(card) {
+      card.addEventListener('click', function() {
+        var src = card.getAttribute('data-demo');
+        var title = card.getAttribute('data-title');
+        if (src) openPreview(src, title);
+      });
+      card.addEventListener('mouseenter', function() { curRing.classList.add('big'); });
+      card.addEventListener('mouseleave', function() { curRing.classList.remove('big'); });
+    });
+  })();
+
+  // ── SERVICE CAROUSELS ──
+  const carousels = {};
+  function initCarousel(id) {
+    const wrap = document.getElementById('carousel-' + id);
+    if (!wrap) return;
+    const slides = document.getElementById('slides-' + id);
+    const dotsEl = document.getElementById('dots-' + id);
+    const count = slides.children.length;
+    carousels[id] = { cur: 0, count };
+
+    // criar dots
+    dotsEl.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      const d = document.createElement('button');
+      d.className = 'svc-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => slideTo(id, i));
+      dotsEl.appendChild(d);
+    }
+    updateCarousel(id);
+  }
+
+  function slideTo(id, idx) {
+    const c = carousels[id];
+    if (!c) return;
+    c.cur = Math.max(0, Math.min(idx, c.count - 1));
+    updateCarousel(id);
+  }
+
+  function slideGo(id, dir) {
+    const c = carousels[id];
+    if (!c) return;
+    slideTo(id, c.cur + dir);
+  }
+
+  function updateCarousel(id) {
+    const c = carousels[id];
+    const slides = document.getElementById('slides-' + id);
+    const dotsEl = document.getElementById('dots-' + id);
+    slides.style.transform = `translateX(-${c.cur * 100}%)`;
+    dotsEl.querySelectorAll('.svc-dot').forEach((d, i) => d.classList.toggle('active', i === c.cur));
+
+    // ajustar altura ao slide ativo
+    const activeSlide = slides.children[c.cur];
+    if (activeSlide) slides.style.height = activeSlide.scrollHeight + 'px';
+
+    // atualizar botões
+    const wrap = document.getElementById('carousel-' + id);
+    const btns = wrap.querySelectorAll('.svc-btn');
+    if (btns[0]) btns[0].disabled = c.cur === 0;
+    if (btns[1]) btns[1].disabled = c.cur === c.count - 1;
+  }
+
+  // swipe touch
+  function addSwipe(id) {
+    const el = document.getElementById('carousel-' + id);
+    if (!el) return;
+    let startX = 0;
+    el.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    el.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) slideGo(id, diff > 0 ? 1 : -1);
+    }, { passive: true });
+  }
+
+  // Inicializar todos carousels
+  ['agentes', 'servicos', 'landpages'].forEach(id => {
+    initCarousel(id);
+    addSwipe(id);
+  });
+</script>
+
+</body>
+</html>
