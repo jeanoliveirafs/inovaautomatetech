@@ -196,12 +196,36 @@
       .hero-btns { justify-content: center; }
       .hero-badge { justify-content: center; }
       .hero-sub { margin-left: auto; margin-right: auto; }
-      .hero-stats { justify-content: center; }
+      .hero-stats { justify-content: center; gap: 10px; }
+      .rotator-progress { margin: 0 auto; }
       /* Grid inline de métricas */
-      .stats-inline-grid { grid-template-columns: 1fr !important; }
-      /* Proteção global de overflow */
-      * { max-width: 100%; }
-      img, video, iframe { max-width: 100%; }
+      .stats-inline-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+      /* Seção padding reduzido em mobile */
+      .section { padding: 64px 0; }
+      .section-header { margin-bottom: 48px; }
+      /* Proteção de overflow — apenas elementos que precisam */
+      body { overflow-x: hidden; }
+      .container, .section, header, footer, nav { overflow-x: hidden; max-width: 100%; }
+      img, video, svg { max-width: 100%; height: auto; }
+      iframe { max-width: 100%; }
+      /* Carousel slide padding menor */
+      .svc-slide { padding: 0 2px; }
+      /* Niche grid 1 coluna */
+      .niche-grid { grid-template-columns: 1fr !important; }
+      /* Service cards padding menor */
+      .service-card { padding: 24px 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .section { padding: 48px 0; }
+      .section-header { margin-bottom: 36px; }
+      .hero-btns { flex-direction: column; align-items: stretch; }
+      .hero-btns .btn { width: 100%; justify-content: center; }
+      .btn { font-size: 0.88rem; padding: 12px 20px; }
+      .btn-sm { padding: 9px 16px; font-size: 0.82rem; }
+      .section-title { font-size: clamp(1.6rem, 5.5vw, 2.2rem); }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .svc-btn { width: 40px; height: 40px; font-size: 1rem; }
     }
 
     /* ── FLOATING CARD (hero visual) ── */
@@ -392,7 +416,7 @@
       transition: opacity 0.2s; white-space: nowrap;
     }
     .nl-btn:hover { opacity: 0.85; }
-    .footer-bottom { border-top: 1px solid var(--border); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; gap: 16px; }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
     .footer-copy { color: var(--text-dim); font-size: 0.85rem; }
 
     /* ── WHATSAPP FLOAT ── */
@@ -583,7 +607,7 @@
     .niche-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 20px; }
     .niche-card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.35s ease, box-shadow 0.35s ease; }
     .niche-card:hover { transform: translateY(-8px); box-shadow: 0 20px 48px rgba(0,0,0,0.4); }
-    .niche-thumb { height: 190px; position: relative; overflow: hidden; }
+    .niche-thumb { aspect-ratio: 16 / 9; height: auto; position: relative; overflow: hidden; }
     .niche-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
     .niche-card:hover .niche-thumb img { transform: scale(1.07); }
     .niche-thumb-overlay { position: absolute; inset: 0; opacity: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 60%); transition: opacity 0.3s ease; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 18px; }
@@ -775,6 +799,101 @@
       margin-bottom: 24px;
       opacity: 0.8;
     }
+
+    /* ── RESPONSIVIDADE EXTRA ── */
+
+    /* Carousel wrap com transição de altura suave */
+    .svc-carousel-wrap {
+      position: relative;
+      overflow: hidden;
+      /* garante visibilidade do conteúdo */
+    }
+    .svc-slides {
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .svc-slide {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar responsiva */
+    @media (max-width: 768px) {
+      .nav-cta .btn:not(.nav-hamburger) { display: none; }
+    }
+    @media (max-width: 400px) {
+      .nav-logo-text { display: none; }
+    }
+
+    /* Hero: separadores de stats somem no mobile */
+    @media (max-width: 480px) {
+      .hero-stats .hero-stat-sep { display: none; }
+    }
+
+    /* Ticker funciona bem em qualquer largura */
+    .ticker-strip { overflow: hidden; }
+
+    /* Process metrics: 2 colunas em tablets */
+    @media (max-width: 768px) and (min-width: 601px) {
+      .process-metrics { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Pricing: 1 coluna em mobile */
+    @media (max-width: 600px) {
+      .pricing-grid { grid-template-columns: 1fr !important; max-width: 360px; margin: 0 auto; }
+    }
+
+    /* Sobre section */
+    @media (max-width: 480px) {
+      .sobre-avatar-box { width: 200px; height: 200px; font-size: 4rem; }
+    }
+
+    /* Contact form ajuste em mobile */
+    @media (max-width: 480px) {
+      .contact-grid { gap: 32px; }
+      .faq-q { padding: 14px 16px; font-size: 0.88rem; }
+    }
+
+    /* Footer ajuste mobile */
+    @media (max-width: 480px) {
+      footer { padding: 48px 0 24px; }
+      .footer-top { gap: 32px; }
+      .nl-form { flex-direction: column; }
+      .nl-btn { width: 100%; padding: 12px; }
+    }
+
+    /* Stats inline grid: 3 → 1 coluna em mobile */
+    @media (max-width: 560px) {
+      .stats-inline-grid { grid-template-columns: 1fr !important; }
+    }
+
+    /* Preservar aspect ratio niche card — img preenche o contêiner 16:9 */
+    .niche-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      position: absolute;
+      top: 0; left: 0;
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    /* Garantir que serviços em carousel não quebrem layout */
+    .svc-slide > div { width: 100%; }
+
+    /* Tornar o scroll de preview modal mais suave */
+    .pm-frame-wrap { overflow: hidden; }
+
+    /* Proteção geral de overflow horizontal */
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* Float buttons não saem da tela em mobile */
+    @media (max-width: 480px) {
+      .wa-float { bottom: 16px; right: 16px; width: 52px; height: 52px; }
+      .back-top { bottom: 80px; right: 16px; }
+    }
   </style>
 </head>
 <body>
@@ -871,11 +990,11 @@
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:20px;font-size:0.85rem;color:var(--text-muted);border-top:1px solid var(--border);padding-top:24px;" class="hero-stats">
         <span style="color:#4ade80;font-weight:600;">✓ 50+ empresas transformadas</span>
-        <span style="color:var(--text-dim);">·</span>
+        <span class="hero-stat-sep" style="color:var(--text-dim);">·</span>
         <span style="color:#4ade80;font-weight:600;">✓ R$2M+ em resultados gerados</span>
-        <span style="color:var(--text-dim);">·</span>
+        <span class="hero-stat-sep" style="color:var(--text-dim);">·</span>
         <span style="color:#4ade80;font-weight:600;">✓ Entrega em 2 a 4 semanas</span>
-        <span style="color:var(--text-dim);">·</span>
+        <span class="hero-stat-sep" style="color:var(--text-dim);">·</span>
         <span style="color:#4ade80;font-weight:600;">✓ 5★ avaliação média</span>
       </div>
     </div>
@@ -1870,8 +1989,20 @@
   style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
   document.head.appendChild(style);
 
-  // ── Re-init icons after DOM changes
-  window.addEventListener('load', () => lucide.createIcons());
+  // ── Re-init icons + recalcular carousels após carregamento completo
+  window.addEventListener('load', () => {
+    lucide.createIcons();
+    // Remede alturas dos carousels depois que imagens/fontes carregarem
+    setTimeout(() => {
+      ['agentes', 'servicos', 'landpages'].forEach(id => {
+        const wrap = document.getElementById('carousel-' + id);
+        if (wrap) wrap.style.minHeight = '';
+        const slides = document.getElementById('slides-' + id);
+        if (slides) slides.style.height = '';
+        updateCarousel(id);
+      });
+    }, 100);
+  });
 
   // ── Scroll Progress Bar
   const scrollBar = document.querySelector('.scroll-progress');
@@ -2206,6 +2337,17 @@
     slideTo(id, c.cur + dir);
   }
 
+  function getMaxSlideHeight(id) {
+    const slides = document.getElementById('slides-' + id);
+    if (!slides) return 0;
+    // Mede todos os slides (estão no DOM mesmo fora do viewport)
+    let maxH = 0;
+    Array.from(slides.children).forEach(slide => {
+      maxH = Math.max(maxH, slide.scrollHeight);
+    });
+    return maxH;
+  }
+
   function updateCarousel(id) {
     const c = carousels[id];
     const slides = document.getElementById('slides-' + id);
@@ -2213,13 +2355,19 @@
     slides.style.transform = `translateX(-${c.cur * 100}%)`;
     dotsEl.querySelectorAll('.svc-dot').forEach((d, i) => d.classList.toggle('active', i === c.cur));
 
-    // ajustar altura ao slide ativo
-    const activeSlide = slides.children[c.cur];
-    if (activeSlide) slides.style.height = activeSlide.scrollHeight + 'px';
+    // Usa a maior altura entre todos os slides para proporções consistentes
+    // Isso evita que o carousel "pule" de tamanho ao navegar entre slides
+    const maxH = getMaxSlideHeight(id);
+    if (maxH > 0) {
+      slides.style.height = maxH + 'px';
+      // Garante que o carousel wrap mostre a altura correta
+      const wrap = document.getElementById('carousel-' + id);
+      if (wrap) wrap.style.minHeight = maxH + 'px';
+    }
 
     // atualizar botões
     const wrap = document.getElementById('carousel-' + id);
-    const btns = wrap.querySelectorAll('.svc-btn');
+    const btns = wrap ? wrap.querySelectorAll('.svc-btn') : [];
     if (btns[0]) btns[0].disabled = c.cur === 0;
     if (btns[1]) btns[1].disabled = c.cur === c.count - 1;
   }
@@ -2241,6 +2389,24 @@
     initCarousel(id);
     addSwipe(id);
   });
+
+  // Recalcular alturas dos carousels ao redimensionar a janela
+  // (importante para mobile/tablet que mudam layout ao girar)
+  let _carouselResizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(_carouselResizeTimer);
+    _carouselResizeTimer = setTimeout(() => {
+      ['agentes', 'servicos', 'landpages'].forEach(id => {
+        // Limpa o min-height para medir de novo
+        const wrap = document.getElementById('carousel-' + id);
+        if (wrap) wrap.style.minHeight = '';
+        const slides = document.getElementById('slides-' + id);
+        if (slides) slides.style.height = '';
+        // Remede e reaplica
+        updateCarousel(id);
+      });
+    }, 250);
+  }, { passive: true });
 </script>
 
 </body>
