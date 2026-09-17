@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jeanoliveirafs.github.io/inovaautomatetech/sitemap.xml
