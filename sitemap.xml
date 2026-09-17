@@ -7,6 +7,42 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://jeanoliveirafs.github.io/inovaautomatetech/#servicos-section</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://jeanoliveirafs.github.io/inovaautomatetech/#crm-inteligente</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://jeanoliveirafs.github.io/inovaautomatetech/#agentes-ia</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://jeanoliveirafs.github.io/inovaautomatetech/#ia-local</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://jeanoliveirafs.github.io/inovaautomatetech/#depoimentos</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jeanoliveirafs.github.io/inovaautomatetech/#contato</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://jeanoliveirafs.github.io/inovaautomatetech/demos/dentista.html</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
