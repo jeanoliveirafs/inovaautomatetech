@@ -719,6 +719,13 @@
 
     /* ── TECNOLOGIAS ── */
     #servicos-section { background: var(--bg3); }
+    /* Mobile: títulos menores e stagger só com fade (sem translate que desalinha) */
+    @media (max-width: 640px) {
+      .section-title { font-size: clamp(1.55rem, 6.5vw, 2rem); line-height: 1.28; }
+      .section-header { margin-bottom: 40px; }
+      .section-sub { font-size: 1rem; }
+      .words-stagger .word { transform: none !important; }
+    }
     /* Serviços (cards estáticos) + detalhes técnicos */
     .svc-list { list-style: none; padding: 0; margin: 16px 0 0; color: var(--text-muted); font-size: 0.92rem; line-height: 2; }
     .services-grid .service-card { display: flex; flex-direction: column; }
@@ -1865,14 +1872,26 @@
 
   // ══ WORD STAGGER on section titles ══
   function wrapWords(el) {
-    const text = el.innerHTML;
-    // only wrap plain text nodes, skip if has complex HTML
-    if (el.querySelectorAll('span, a, strong').length > 2) return;
+    // walk text nodes and wrap each word — never touches HTML structure
+    const walk = node => {
+      if (node.nodeType === 3) { // text node
+        if (!node.textContent.trim()) return;
+        const frag = document.createDocumentFragment();
+        node.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.append(document.createTextNode(part)); return; }
+          const w = document.createElement('span');
+          w.className = 'word';
+          w.textContent = part;
+          frag.append(w);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1) {
+        [...node.childNodes].forEach(walk);
+      }
+    };
+    [...el.childNodes].forEach(walk);
     el.classList.add('words-stagger');
-    const parts = el.innerHTML.split(/(\s+)/);
-    el.innerHTML = parts.map(p =>
-      /\s/.test(p) ? p : `<span class="word">${p}</span>`
-    ).join('');
   }
 
   document.querySelectorAll('.section-title.reveal').forEach((el, i) => {
