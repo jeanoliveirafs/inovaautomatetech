@@ -700,6 +700,7 @@
     .sobre-chips {
       position: absolute; display: flex; flex-direction: column; gap: 10px;
       right: -8px; top: 50%; transform: translateY(-50%);
+      z-index: 3; /* flutua SOBRE a foto do avatar (antes o quadro pintava por cima e cortava os chips) */
     }
     @media (max-width: 900px) { .sobre-chips { display: none; } }
     .sobre-chip {
@@ -1114,7 +1115,7 @@
   <div class="container">
     <div class="sobre-grid">
       <div class="sobre-visual reveal-left">
-        <div class="sobre-avatar-box"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop&auto=format&q=80" alt="Jean, fundador da InovaAutomateTech"></div>
+        <div class="sobre-avatar-box"><img src="jean.jpg" alt="Jean Oliveira, fundador da InovaAutomateTech" width="640" height="640" loading="lazy" decoding="async"></div>
         <div class="sobre-chips">
           <div class="sobre-chip">🎨 6 demos ao vivo</div>
           <div class="sobre-chip">🤖 IA · WhatsApp · Apps</div>
