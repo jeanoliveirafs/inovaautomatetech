@@ -116,7 +116,7 @@
           font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700;
           line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.02em;
         }
-        .section-title span { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .section-title > span:not(.word) { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .section-sub { color: var(--text-muted); font-size: 1.1rem; max-width: 540px; line-height: 1.7; }
         .section-header { margin-bottom: 64px; }
         .section-header.center { text-align: center; }
@@ -581,6 +581,8 @@
     /* ── WORD STAGGER ── */
     .words-stagger .word { display: inline-block; opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16,1,0.3,1); }
     .words-stagger.visible .word { opacity: 1; transform: translateY(0); }
+    /* trecho em destaque (gradiente) NUNCA pode ser transformado: background-clip:text + transform duplica o texto no Chrome */
+    .section-title > span .word { transform: none !important; animation: none !important; }
 
     /* ── ANIMATED GRADIENT TEXT ── */
     .grad-anim {
@@ -1842,6 +1844,7 @@
         });
         node.replaceWith(frag);
       } else if (node.nodeType === 1) {
+        if (node.tagName === 'SPAN') return; // nao envolve o trecho em destaque (gradiente) em .word
         [...node.childNodes].forEach(walk);
       }
     };
@@ -1881,7 +1884,7 @@
   const hlObserver = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); hlObserver.unobserve(e.target); } });
   }, { threshold: 0.8 });
-  document.querySelectorAll('.section-title span').forEach(el => {
+  document.querySelectorAll('.section-title > span:not(.word)').forEach(el => {
     el.classList.add('hl');
     hlObserver.observe(el);
   });
